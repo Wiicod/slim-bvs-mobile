@@ -1,0 +1,116 @@
+<div class="commande-container" id="ii">
+    <div class="row-fluid">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-2 col-sm-2 col-md-2">
+                <button class="btn btn-raised btn-lg btn-default" ui-sref="accueil" style="margin: 0;">
+                    Retour
+                </button>
+            </div>
+            <div class="col-lg-7 col-sm-7 col-md-7">
+                <div class="row entete">
+                    <div class="col-lg-4 col-sm-4 col-md-4">
+                        Client : Edward NANDA
+                    </div>
+                    <div class="col-lg-5 col-md-5 col-sm-5">
+                        Groupe : CHR en compte 10%
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <button class="btn btn-raised btn-sm btn-default" data-toggle="modal" data-target="#ajouter_client" style="margin: 0;">
+                            Ajouter client
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-3 col-sm-3 col-md-3">
+                <form class="navbar-form" style="margin: 0">
+                    <div class="form-group" style="margin: 0;padding-bottom: 0;">
+                        <input class="form-control col-md-8" placeholder="Recherche" type="text">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row-fluid" style="margin-top: 10px;">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-3 col-sm-3 col-md-3" >
+                <fieldset>
+                    <legend>Catégories</legend>
+                    <div class="scroll-categorie">
+                        <div class="categorie" ng-repeat="n in [1,2,3,4,5,6,7,8,9,0,10,11,111,1111,33,44,53]">
+                            Vins internationaux
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-lg-6 col-sm-6 col-md-6">
+                <fieldset>
+                    <legend>Produits</legend>
+                    <div class="scroll-categorie scroll-produit">
+                        <div class="row-fluid">
+                            <div class="col-lg-7 col-sm-7 col-md-7">Libellé</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">U</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">Qte</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3">Prix</div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="produit row" ng-repeat="n in [1,2,3,4,5,6,7,8,9,0,10,11,111,1111]">
+                            <div class="col-lg-7 col-sm-7 col-md-7">
+                                Very pamplemousse
+                            </div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">000</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">00</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3">0 000 000</div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-lg-3 col-sm-3 col-md-3">
+                <fieldset>
+                    <legend>Commande</legend>
+                    <div class="commande">
+                        <div class="scroll-commande">
+                            <div class="row-fluid">
+                                <div class="col-lg-9 col-sm-9 col-md-9">Libellé</div>
+                                <div class="col-lg-3 col-sm-3 col-md-3">Prix</div>
+                            </div>
+                            <div class="clearfix"></div>
+                            <div class="categorie row" ng-repeat="n in [1,2,3,4,5,6,7,8,9,0,10,11,111,1111]" ng-click="detail_produit(n)">
+                                <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{n}} Very pamplemouse</div>
+                                <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">00 000 000</div>
+                            </div>
+                        </div>
+                        <div class="montant">
+                            <div class="row" >
+                                <div class="col-lg-3 col-sm-3 col-md-3">Total</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-lg-3 col-sm-3 col-md-3">Remise</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
+                            </div>
+                            <div class="row" >
+                                <div class="col-lg-3 col-sm-3 col-md-3">Net</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
+                            </div>
+                        </div>
+                        <div class="text-center">
+                            <div class="row-fluid">
+                                <div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+                                    <button ng-click="memoriser_commande()" style="margin-bottom: 2px;" class="btn btn-sm btn-raised btn-default">
+                                        Mémo
+                                    </button>
+                                </div>
+                                <div class="col-lg-6 col-sm-6 col-md-6 no-padding">
+                                    <button data-toggle="modal" style="margin-bottom: 2px;" data-target="#facturer" class="btn btn-sm btn-raised btn-primary">
+                                        Facturer
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>

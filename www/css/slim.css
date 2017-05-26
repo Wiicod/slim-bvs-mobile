@@ -1,0 +1,191 @@
+/* app css stylesheet */
+
+body{
+  background: white;
+}
+
+.logo{
+  padding: 0 15px;
+}
+
+.logo img{
+  width: 35%;
+}
+
+.btn{
+  text-transform: none !important;
+}
+
+.btn-default{
+  background: #ffffff !important;
+}
+
+.md-text{
+  font-size: 12px;
+}
+
+.btn-line{
+  margin-bottom: 15px;
+}
+
+.image_logo{
+  width: 45%;
+}
+
+.search{
+  padding: 7px 5px !important;
+  background: #ffffff !important;
+}
+
+.entete{
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  background-color: #009688;
+  color: rgba(255,255,255, 0.84);
+  padding: 7px 0px;
+}
+
+#ajouter_client .modal-body{
+  padding-top:0;
+}
+
+.modal .form-group{
+  margin: 0;
+}
+
+.modal .navbar-form{
+  padding: 0;
+}
+
+.modal h4, .commande-container h4{
+  text-align: center;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+  background-color: #009688;
+  color: rgba(255,255,255, 0.84);
+  border-radius: 2px;
+  position: relative;
+  padding: 15px 30px;
+  margin: 10px 1px;
+  font-size: 18px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0;
+  will-change: box-shadow, transform;
+  -webkit-transition: -webkit-box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  -o-transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: box-shadow 0.2s cubic-bezier(0.4, 0, 1, 1), background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  outline: 0;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+fieldset
+{
+  margin: 0;
+  xmin-width: 0;
+  padding: 0;
+  padding-top: 10px;
+  position: relative;
+  background-color: #ffffff;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+legend
+{
+  font-size:14px !important;
+  font-weight:bold;
+  margin-bottom: 0px !important;
+  background: #009688;
+  color: #ffffff;
+  width: 65%;
+  padding: 2px 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.no-padding{
+  padding: 0 !important;
+}
+
+.no-padding-lr{
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.scroll-categorie{
+  height: 360px;
+  overflow-y: auto;
+}
+
+.scroll-produit{
+  padding-left: 12px;
+  padding-right: 12px;
+}
+
+.scroll-commande{
+  height: 250px;
+  overflow-y: auto;
+}
+
+.commande{
+  height: 340px;
+  background: #ffffff;
+}
+
+.produit,.categorie{
+  text-transform: uppercase;
+  margin-bottom: 3px;
+  border-top: 1px solid rgba(0, 0, 0, 0.14);
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+.produit{
+  margin-left: -4px;
+  margin-right: -4px;
+}
+
+.produit>div{
+  padding: 5px 10px;
+}
+
+.produit>.col-md-1{
+  text-align: center;
+}
+
+.categorie{
+  padding: 5px 10px;
+  margin-left: 4px;
+  margin-right: 4px;
+}
+
+.categorie:last-child{
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.montant{
+  margin-top:5px;
+  border-width: 3px 0px 3px 0px !important;
+  border-style: solid;
+  border-color: #009688;
+  margin-left: 4px;
+  margin-right: 4px;
+  text-transform: uppercase;
+  padding: 0 5px;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
+}
+
+#detail_produit > .modal-dialog{
+  width: 400px;
+}
+
+.form-control{
+  padding-left: 5px !important;
+  padding-right: 5px !important;
+}
+
+.modal-content .modal-header{
+  padding-top: 5px !important;
+}
+
+.modal-content .modal-body{
+  padding-top:10px !important;
+}
