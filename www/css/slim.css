@@ -29,7 +29,7 @@ body{
 }
 
 .image_logo{
-  width: 45%;
+  width: 64%;
 }
 
 .search{
@@ -41,11 +41,14 @@ body{
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   background-color: #009688;
   color: rgba(255,255,255, 0.84);
-  padding: 7px 0px;
+  padding: 5px 10px;
+  line-height: 28px;
+  font-weight: bold;
 }
 
 #ajouter_client .modal-body{
-  padding-top:0;
+  padding-top:0 !important;
+  padding-bottom:5px !important;
 }
 
 .modal .form-group{
@@ -112,7 +115,7 @@ legend
 }
 
 .scroll-categorie{
-  height: 360px;
+  height: 424px;
   overflow-y: auto;
 }
 
@@ -122,12 +125,12 @@ legend
 }
 
 .scroll-commande{
-  height: 250px;
+  height: 290px;
   overflow-y: auto;
 }
 
 .commande{
-  height: 340px;
+  height: 424px;
   background: #ffffff;
 }
 
@@ -173,6 +176,11 @@ legend
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
 }
 
+.montant .row{
+  margin-left:0;
+  margin-right:0;
+}
+
 #detail_produit > .modal-dialog{
   width: 400px;
 }
@@ -182,10 +190,40 @@ legend
   padding-right: 5px !important;
 }
 
+.navbar{
+  margin-bottom: 5px;
+}
+
+.col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12{
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.panel{
+  margin-bottom: 5px;
+}
+
+.panel-body{
+  padding: 0;
+}
+
+.panel-heading{
+  padding: 5px 15px;
+}
+
 .modal-content .modal-header{
   padding-top: 5px !important;
 }
 
 .modal-content .modal-body{
   padding-top:10px !important;
+}
+
+.modal-body .panel-body{
+  padding: 5px 15px;
+}
+
+.modal-body .scroll{
+  max-height: 300px;
+  overflow-y: auto;
 }

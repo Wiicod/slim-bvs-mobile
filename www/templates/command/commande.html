@@ -1,4 +1,4 @@
-<div class="commande-container" id="ii">
+<div class="commande-container" style="overflow: hidden">
     <div class="row-fluid">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="col-lg-2 col-sm-2 col-md-2">
@@ -21,12 +21,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-lg-3 col-sm-3 col-md-3">
-                <form class="navbar-form" style="margin: 0">
-                    <div class="form-group" style="margin: 0;padding-bottom: 0;">
-                        <input class="form-control col-md-8" placeholder="Recherche" type="text">
-                    </div>
-                </form>
+            <div class="col-lg-3 col-sm-3 col-md-3" style="padding-left: 25px;padding-right: 8px">
+                <input class="form-control" ng-model="search_commande" placeholder="Rechercher un client" type="text">
             </div>
         </div>
     </div>
@@ -37,7 +33,7 @@
                 <fieldset>
                     <legend>Catégories</legend>
                     <div class="scroll-categorie">
-                        <div class="categorie" ng-repeat="n in [1,2,3,4,5,6,7,8,9,0,10,11,111,1111,33,44,53]">
+                        <div class="categorie" ng-repeat="n in [1,2,3,4,5,6,7,8,33,44,53]|filter:search_commande">
                             Vins internationaux
                         </div>
                     </div>
@@ -54,7 +50,7 @@
                             <div class="col-lg-3 col-sm-3 col-md-3">Prix</div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="produit row" ng-repeat="n in [1,2,3,4,5,6,7,8,9,0,10,11,111,1111]">
+                        <div class="produit row" ng-repeat="n in [1,2,3]|filter:search_commande">
                             <div class="col-lg-7 col-sm-7 col-md-7">
                                 Very pamplemousse
                             </div>
@@ -75,7 +71,7 @@
                                 <div class="col-lg-3 col-sm-3 col-md-3">Prix</div>
                             </div>
                             <div class="clearfix"></div>
-                            <div class="categorie row" ng-repeat="n in [1,2,3,4,5,6,7,8,9,0,10,11,111,1111]" ng-click="detail_produit(n)">
+                            <div class="categorie row" ng-repeat="n in [1,2,3]" ng-click="detail_produit(n)">
                                 <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{n}} Very pamplemouse</div>
                                 <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">00 000 000</div>
                             </div>
@@ -95,16 +91,18 @@
                             </div>
                         </div>
                         <div class="text-center">
-                            <div class="row-fluid">
-                                <div class="col-lg-6 col-sm-6 col-md-6 no-padding">
-                                    <button ng-click="memoriser_commande()" style="margin-bottom: 2px;" class="btn btn-sm btn-raised btn-default">
+                            <div class="row" style="margin:5px">
+                                <div class="btn-group hide">
+                                    <button ng-click="memoriser_commande()" style="margin-bottom: 2px;" class="btn btn-lg btn-raised btn-default">
                                         Mémo
                                     </button>
-                                </div>
-                                <div class="col-lg-6 col-sm-6 col-md-6 no-padding">
-                                    <button data-toggle="modal" style="margin-bottom: 2px;" data-target="#facturer" class="btn btn-sm btn-raised btn-primary">
+                                    <button data-toggle="modal" data-target="#facturer" class="btn btn-mg btn-raised btn-primary">
                                         Facturer
                                     </button>
+                                </div>
+                                <div class="btn-group btn-group-justified btn-group-raised">
+                                    <a href="javascript:void(0)" ng-click="memoriser_commande()" class="btn btn-info" style="padding: 8px 12px">MEMO</a>
+                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#facturer" class="btn btn-primary" style="padding: 8px 12px">FACTURER</a>
                                 </div>
                             </div>
                         </div>

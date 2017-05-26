@@ -23,10 +23,6 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 },
                 'modal@accueil': {
                     templateUrl: template_url+'static/modal.html'
-                },
-                'footer@accueil': {
-                    templateUrl: template_url+'static/footer.html',
-                    controller:"FooterCtrl"
                 }
             }
         })
@@ -47,10 +43,6 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 },
                 'modal@commande': {
                     templateUrl: template_url+'static/modal.html'
-                },
-                'footer@commande': {
-                    templateUrl: template_url+'static/footer.html',
-                    controller:"FooterCtrl"
                 }
             }
         })

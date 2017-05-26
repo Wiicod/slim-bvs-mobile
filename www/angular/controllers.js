@@ -21,11 +21,13 @@ controller
     .controller("CommandeCtrl",['$scope','$stateParams','$state',function($scope,$stateParams,$state){
         $scope.current=new Date();
 
+        $scope.produit={remise:0,quantite:5};
+
         $scope.commande=[];
         var mode=$stateParams.mode;
 
         $scope.detail_produit=function(produit){
-            $scope.produit=produit;
+            $scope.produit={remise:0,quantite:5};
             $("#btn_detail_produit").trigger("click");
         };
 
