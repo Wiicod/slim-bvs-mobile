@@ -1,0 +1,73 @@
+<div id="historique">
+    <div class="panel">
+        <div class="panel-body">
+            <h5><span>Historique Facture</span></h5>
+
+            <div class="row-fluid">
+                <div class="col-lg-1 col-sm-1 col-md-1">
+                    <h5>Du</h5>
+                </div>
+                <div class="col-lg-3 col-sm-3 col-md-3">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target=".dropdown-start-parent"
+                           >
+                            <div class="input-group date">
+                                <input type="text" class="form-control" data-ng-model="dateRangeStart">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="dateRangeStart"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed',startView:'day', minView:'day' }"
+                                            data-on-set-time="startDateOnSetTime()"
+                                            data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-1 col-sm-1 col-md-1">
+                    <h5>Au</h5>
+                </div>
+                <div class="col-lg-3 col-sm-3 col-md-3">
+                    <div class="dropdown">
+                        <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target=".dropdown-end-parent"
+                           >
+                            <div class="input-group date">
+                                <input type="text" class="form-control" data-ng-model="dateRangeEnd">
+                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                            </div>
+                        </a>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                            <datetimepicker data-ng-model="dateRangeEnd"
+                                            data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed',startView:'day', minView:'day' }"
+                                            data-on-set-time="endDateOnSetTime()"
+                                            data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-sm-4 col-md-4">
+                    <input class="form-control" ng-model="filtre" placeholder="Filtre" type="text">
+                </div>
+            </div>
+            <div class="clearfix"></div>
+            <div class="scroll-historique">
+                <div class="row categorie" ng-repeat="n in [1,2,3,'2',44,33,55,2222,4444,55555,111,11]|filter:filtre">
+                    <div class="row-fluid">
+                        <div class="col-lg-4 col-sm-4 col-md-4">
+                            Edward NANDA
+                        </div>
+                        <div class="col-lg-2 col-sm-2 col-md-2">
+                            20-05-2017
+                        </div>
+                        <div class="col-lg-4 col-sm-4 col-md-4 text-right">
+                            100 000 000 Fcfa
+                        </div>
+                        <div class="col-lg-2 col-sm-2 col-md-2 text-right">
+                            <span class="" data-toggle="modal" data-target="#detail_facture"><i class="fa fa-bars"></i></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
