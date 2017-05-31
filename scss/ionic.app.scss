@@ -26,6 +26,11 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   padding-right: 5px;
 }
 
-.slim{
-  background:red;
+#facturer{
+  .modal-dialig{
+    width:800px;
+  }
+  .scroll-command{
+    height: 400px;
+  }
 }
