@@ -9,7 +9,7 @@
                 <p class="text-center">
                     Veuillez vous authentifier pour ouvrir la caisse.
                     <br>
-                    Personnes habilités à ouvrir la caisse : Area Manager et Chef Boutique
+                    Personnes habilitées à ouvrir la caisse : Area Manager et Chef Boutique
                 </p>
                 <form class="form-horizontal">
                     <div class="form-group text-center">
@@ -278,8 +278,41 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-raised" ng-click="notifier_client()">Imprimer</button>
                 <button type="button" class="btn btn-raised btn-info" ng-click="notifier_client()">Notifier client</button>
-                <button type="button" class="btn btn-raised btn-danger" ng-click="notifier_client()">Extourner</button>
+                <button type="button" class="btn btn-raised btn-danger" data-toggle="modal" data-target="#extourne">Extourner</button>
                 <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Fermer</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="extourne">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Extourner facture</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">
+                    Veuillez vous authentifier pour extourner cette facture.
+                    <br>
+                    Personnes habilitées à ouvrir la caisse : Area Manager et Chef Boutique
+                </p>
+                <form class="form-horizontal">
+                    <div class="form-group text-center">
+                        <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-md-4 col-lg-4 col-sm-4">
+                            <input type="text" class="form-control text-center" ng-model="code" placeholder="Motif de l'extourne">
+                        </div>
+                    </div>
+                    <div class="form-group text-center">
+                        <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-md-4 col-lg-4 col-sm-4">
+                            <input type="password" class="form-control text-center" ng-model="code" placeholder="Votre mot de passe">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-raised" id="close_extourne" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-raised btn-primary" ng-click="auth_extourne(code)">Connexion</button>
             </div>
         </div>
     </div>
