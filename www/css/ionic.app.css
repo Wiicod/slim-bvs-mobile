@@ -30,3 +30,8 @@ $dark:                            #444 !default;
 
 #detail_facture .scroll-commande {
   max-height: 220px; }
+
+.detail .row {
+  margin-bottom: 7px; }
+  .detail .row .col-md-6:first-child {
+    font-weight: bold; }

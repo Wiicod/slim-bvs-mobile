@@ -45,3 +45,14 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
     max-height: 220px;
   }
 }
+
+.detail{
+  .row{
+    margin-bottom: 7px;
+    .col-md-6{
+      &:first-child{
+        font-weight: bold;
+      }
+    }
+  }
+}

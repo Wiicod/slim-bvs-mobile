@@ -58,13 +58,86 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 }
             }
         })
+        .state('rapport',{
+            url:"/rapport",
+            title:"Rapports",
+            views:{
+                '':{
+                    templateUrl: template_url + 'index.html',
+                    controller:'RapportsCtrl'
+                },
+                'header@rapport': {
+                    templateUrl: template_url + 'static/header.html',
+                    controller: "HeaderCtrl"
+                },
+                'body@rapport': {
+                    templateUrl: template_url+'rapport/liste_rapports.html'
+                },
+                'modal@rapport': {
+                    templateUrl: template_url+'static/modal.html'
+                }
+            }
+        })
+        .state('formulaire_rapport',{
+            url:"/formulaire_rapport",
+            title:"Rapports",
+            views:{
+                '':{
+                    templateUrl: template_url + 'index.html',
+                    controller:'RapportsFormulaireCtrl'
+                },
+                'header@formulaire_rapport': {
+                    templateUrl: template_url + 'static/header.html',
+                    controller: "HeaderCtrl"
+                },
+                'body@formulaire_rapport': {
+                    templateUrl: template_url+'rapport/formulaire_rapport.html'
+                },
+                'modal@rapport': {
+                    templateUrl: template_url+'static/modal.html'
+                }
+            }
+        })
         .state('historique',{
             url:"/historique",
             parent:"app",
             title:"Historique",
             views:{
                 'vue@app': {
-                    templateUrl: template_url+'facture/historique.html'
+                    templateUrl: template_url+'facture/historique.html',
+                    controller:'HistoriqueCtrl'
+                }
+            }
+        })
+        .state('statistique',{
+            url:"/statisique",
+            parent:"app",
+            title:"Statisitque",
+            views:{
+                'vue@app': {
+                    templateUrl: template_url+'statistique/statistiques.html',
+                    controller:'StatistiqueCtrl'
+                }
+            }
+        })
+
+        .state('univers_client',{
+            url:"/univers_client",
+            title:"Univers Client",
+            views:{
+                '':{
+                    templateUrl: template_url + 'index.html',
+                    controller:'UniversCtrl'
+                },
+                'header@univers_client': {
+                    templateUrl: template_url + 'static/header.html',
+                    controller: "HeaderCtrl"
+                },
+                'body@univers_client': {
+                    templateUrl: template_url+'client/univers_client.html'
+                },
+                'modal@univers_client': {
+                    templateUrl: template_url+'static/modal.html'
                 }
             }
         })

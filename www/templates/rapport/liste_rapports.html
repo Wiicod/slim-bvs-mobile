@@ -1,0 +1,87 @@
+<div class="commande-container" style="overflow: hidden">
+    <div class="row-fluid hide">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-2 col-sm-2 col-md-2">
+                <button class="btn btn-raised btn-lg btn-default" ui-sref="accueil" style="margin: 0;">
+                    Retour
+                </button>
+            </div>
+            <div class="col-lg-8 col-sm-8 col-md-8">
+                <h3 style="margin: 5px;text-align: center;">
+                    <span style="padding-bottom: 8px;border-bottom: 2px dotted #009688;">Statistiques</span>
+                </h3>
+            </div>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    <div class="row-fluid" style="margin-top: 10px;">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+            <div class="col-lg-3 col-sm-3 col-md-3" >
+                <fieldset>
+                    <legend>Calendrier</legend>
+                    <div class="row-fluid">
+                        <div class="col-lg-3 col-sm-3 col-md-3">
+                            <h5>Date</h5>
+                        </div>
+                        <div class="col-lg-9 col-sm-9 col-md-9">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target=".dropdown-start-parent"
+                                        >
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control" data-ng-model="dateRangeStart">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="dateRangeStart"
+                                                    data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed',startView:'day', minView:'day' }"
+                                                    data-on-set-time="startDateOnSetTime()"
+                                                    data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row-fluid clearfix">
+                        <div class="col-lg-12 col-sm-12 col-md-12">
+                            <div class="btn btn-primary btn-raised btn-sm pull-right">Actualiser</div>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="row-fluid btn-line">
+                    <button class="btn btn-raised btn-lg btn-block btn-primary" ui-sref="accueil">
+                        Ajouter un visite
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-9 col-sm-9 col-md-9">
+                <fieldset>
+                    <div class="row-fluid">
+                        <div class="col-lg-12 col-md-12 col-sm-12">
+                            <div class="col-lg-4 col-sm-4 col-md-4 pull-right" style="padding-left: 25px;padding-right: 8px">
+                                <input class="form-control" ng-model="search_commande" placeholder="Rechercher rapport" type="text">
+                            </div>
+                        </div>
+                    </div>
+                    <legend>Liste des rapports</legend>
+                    <div class="scroll-categorie scroll-produit">
+                        <div class="row-fluid">
+                            <div class="col-lg-7 col-sm-7 col-md-7">Libellé</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">U</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">Qte</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3">Prix</div>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="produit row" ng-repeat="n in [1,2,3]|filter:search_commande">
+                            <div class="col-lg-7 col-sm-7 col-md-7">
+                                Very pamplemousse
+                            </div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">000</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">00</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3">0 000 000</div>
+                        </div>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+</div>
