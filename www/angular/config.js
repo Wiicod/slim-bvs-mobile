@@ -3,26 +3,38 @@
  */
 
 config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$urlRouterProvider){
-    $urlRouterProvider.otherwise( '/accueil');
+    $urlRouterProvider.otherwise( 'app/accueil');
 
     $stateProvider
-        .state('accueil',{
-            url:"/accueil",
-            title:"accueil",
+        .state('app',{
+            url:"/app",
+            loginRequired:false,
+            title:"",
             views:{
                 '':{
-                    templateUrl: template_url + 'index.html',
-                    controller:'AccueilCtrl'
+                    templateUrl: template_url + 'index.html'
                 },
-                'header@accueil': {
+                'header@app': {
                     templateUrl: template_url + 'static/header.html',
                     controller: "HeaderCtrl"
                 },
-                'body@accueil': {
-                    templateUrl: template_url+'accueil/content.html'
+                'body@app': {
+                    templateUrl: template_url+'static/squellete.html',
+                    controller:"AppCtrl"
                 },
-                'modal@accueil': {
+                'modal@app': {
                     templateUrl: template_url+'static/modal.html'
+                }
+            }
+        })
+        .state('accueil',{
+            url:"/accueil",
+            parent:"app",
+            title:"accueil",
+            views:{
+                'vue@app': {
+                    templateUrl: template_url+'accueil/content.html',
+                    controller:'AccueilCtrl'
                 }
             }
         })
@@ -43,6 +55,16 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 },
                 'modal@commande': {
                     templateUrl: template_url+'static/modal.html'
+                }
+            }
+        })
+        .state('historique',{
+            url:"/historique",
+            parent:"app",
+            title:"Historique",
+            views:{
+                'vue@app': {
+                    templateUrl: template_url+'facture/historique.html'
                 }
             }
         })

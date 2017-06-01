@@ -30,7 +30,18 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
   .modal-dialig{
     width:800px;
   }
-  .scroll-command{
-    height: 400px;
+}
+
+.scroll-historique{
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+#detail_facture{
+  .commande{
+    max-height: 300px;
+  }
+  .scroll-commande{
+    max-height: 220px;
   }
 }
