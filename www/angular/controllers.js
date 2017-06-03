@@ -178,10 +178,10 @@ controller
                     $scope.ventes[0].besoins[0]={quantite:0};
                 }
                 else{
-                    alert("Aucun client sélectionné");
+                    alert("Aucun client sï¿½lectionnï¿½");
                 }
             });
-            alert("Rapports enregistré");
+            alert("Rapports enregistrï¿½");
         };
     }])
 
@@ -234,6 +234,8 @@ controller
     }])
     .controller("UniversCtrl",['$scope',function($scope){
         $scope.current=new Date();
+
+        $scope.plan=true;
     }])
 
 ;

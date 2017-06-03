@@ -22,7 +22,7 @@ $dark:                            #444 !default;
   width: 800px; }
 
 .scroll-historique {
-  max-height: 300px;
+  max-height: 350px;
   overflow-y: auto; }
 
 #detail_facture .commande {
@@ -35,3 +35,22 @@ $dark:                            #444 !default;
   margin-bottom: 7px; }
   .detail .row .col-md-6:first-child {
     font-weight: bold; }
+
+.scroll-univers {
+  height: 465px;
+  overflow-y: auto; }
+  .scroll-univers .scroll-historique {
+    max-height: 353px; }
+
+.scroll-categorie {
+  max-height: 420px; }
+
+fieldset {
+  margin-bottom: 5px; }
+
+.well {
+  background: #ffffff;
+  border-radius: 0; }
+
+#map {
+  height: 350px; }

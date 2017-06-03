@@ -33,7 +33,7 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
 }
 
 .scroll-historique{
-  max-height: 300px;
+  max-height: 350px;
   overflow-y: auto;
 }
 
@@ -55,4 +55,30 @@ $ionicons-font-path: "../lib/ionic/fonts" !default;
       }
     }
   }
+}
+
+.scroll-univers{
+  height: 465px;
+  overflow-y: auto;
+
+  .scroll-historique{
+    max-height: 353px;
+  }
+}
+
+.scroll-categorie{
+  max-height: 420px;
+}
+
+fieldset{
+  margin-bottom: 5px;
+}
+
+.well{
+  background: #ffffff;
+  border-radius: 0;
+}
+
+#map{
+  height: 350px;
 }
