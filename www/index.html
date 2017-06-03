@@ -15,7 +15,6 @@
   <link rel="stylesheet" href="lib/font-awesome/css/font-awesome.min.css">
 
   <link rel="stylesheet" href="css/bootstrap-material-design.css">
-  <link rel="stylesheet" href="css/slim.css">
   <link rel="stylesheet" href="css/ripples.css">
   <script src="lib/html5-boilerplate/dist/js/vendor/modernizr-2.8.3.min.js"></script>
   <link rel="stylesheet" href="lib/angular-bootstrap-datetimepicker/src/css/datetimepicker.css">
@@ -24,18 +23,13 @@
 
 
   <script src="cordova.js"></script>
-</head>
-<body>
 
-  <div ui-view>
-
-  </div>
-
+  <!-- build:js dist_js/vendor.js -->
   <!-- In production use:
-  <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
-  -->
-  <script src="js/jquery.js"></script>
-  <script src="lib/ionic/js/ionic.bundle.min.js"></script>
+   <script src="//ajax.googleapis.com/ajax/libs/angularjs/x.x.x/angular.min.js"></script>
+   -->
+  <script src="lib/jquery/dist/jquery.min.js"></script>
+  <script src="lib/ionic/js/ionic.bundle.js"></script>
   <script src="lib/moment/moment.js"></script>
   <script src="lib/moment/locale/fr-ch.js"></script>
   <script src="lib/angular-ui-router/release/angular-ui-router.min.js"></script>
@@ -43,14 +37,47 @@
   <script src="lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.js"></script>
   <script src="lib/angular-bootstrap-datetimepicker/src/js/datetimepicker.templates.js"></script>
   <script src="lib/angular-cookies/angular-cookies.min.js"></script>
-  <script src="lib/underscore/underscore-min.js"></script>
+  <!--<script src="lib/underscore/underscore-min.js"></script>-->
+  <script src="lib/lodash/dist/lodash.min.js"></script>
   <script src="lib/restangular/src/restangular.js"></script>
   <script src="js/material.js"></script>
   <script src="js/ripples.js"></script>
+  <script src="lib/satellizer/dist/satellizer.min.js"></script>
+  <script src="lib/angular-translate/angular-translate.min.js"></script>
+  <script src="lib/angular-translate-loader-static-files/angular-translate-loader-static-files.min.js"></script>
+  <script src="lib/angular-translate-once/src/translate-once.js"></script>
+  <script src="lib/ngstorage/ngStorage.js"></script>
+  <!-- endbuild -->
 
-  <script src="angular/app.js"></script>
-  <script src="angular/controllers.js"></script>
-  <script src="angular/service.js"></script>
-  <script src="angular/config.js"></script>
+  <!-- your app's js -->
+  <!-- build:js dist_js/app.js -->
+  <script src="dist/dist_js/app/app.js"></script>
+  <script src="dist/dist_js/app/constant.js"></script>
+  <script src="dist/dist_js/app/config.js"></script>
+  <script src="dist/dist_js/app/filter.js"></script>
+  <script src="dist/dist_js/app/service.js"></script>
+  <script src="dist/dist_js/app/resource.js"></script>
+  <script src="dist/dist_js/app/auth.js"></script>
+  <script src="dist/dist_js/app/route.js"></script>
+  <script src="dist/dist_js/app/directive.js"></script>
+
+
+  <script src="dist/dist_js/app/accueil/accueil.js"></script>
+  <script src="dist/dist_js/app/client/client.js"></script>
+  <script src="dist/dist_js/app/commande/commande.js"></script>
+  <script src="dist/dist_js/app/facture/facture.js"></script>
+  <script src="dist/dist_js/app/main/main.js"></script>
+  <script src="dist/dist_js/app/rapport/rapport.js"></script>
+  <script src="dist/dist_js/app/statistique/statistique.js"></script>
+
+  <script src="dist/dist_js/templates.js"></script>
+  <!-- endbuild -->
+</head>
+<body>
+
+  <div ui-view>
+
+  </div>
+
 </body>
 </html>
