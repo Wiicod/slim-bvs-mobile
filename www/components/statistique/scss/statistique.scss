@@ -1,0 +1,16 @@
+#statistiques{
+  .scroll-historique{
+    max-height: 373px;
+    overflow-y: auto;
+  }
+
+  h5{
+    text-align: center;
+    margin-bottom: 20px;
+
+    span{
+      border-bottom:2px dotted $slim_primary;
+      padding-bottom: 5px;
+    }
+  }
+}

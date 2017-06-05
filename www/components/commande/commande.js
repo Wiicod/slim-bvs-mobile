@@ -2,8 +2,9 @@
  * Created by Ets Simon on 03/06/2017.
  */
 
-controller
+app
     .controller("CommandeCtrl",function($scope,$stateParams,$state){
+        console.log("edw");
         $scope.current=new Date();
 
         $scope.produit={remise:0,quantite:5};

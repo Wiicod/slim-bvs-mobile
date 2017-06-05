@@ -2,7 +2,7 @@
  * Created by Ets Simon on 03/06/2017.
  */
 
-controller
+app
 
     .controller("HistoriqueCtrl",['$scope',function($scope){
         $scope.endDateBeforeRender = endDateBeforeRender;

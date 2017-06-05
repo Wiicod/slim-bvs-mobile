@@ -2,7 +2,7 @@
  * Created by Edward NANDA on 17/02/2017.
  */
 
-controller
+app
     .controller("AppCtrl",['$scope',function($scope){
         $scope.current=new Date();
     }])

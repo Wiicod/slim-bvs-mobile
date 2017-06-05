@@ -6,7 +6,8 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
 
     $stateProvider
         .state('app',{
-            url:"/app",
+            url:"/",
+            abstract: true,
             loginRequired:false,
             title:"",
             views:{
@@ -17,21 +18,28 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                     templateUrl: 'main/header.html',
                     controller: "HeaderCtrl"
                 },
-                'body@app': {
-                    templateUrl: 'main/squellete.html',
-                    controller:"AppCtrl"
-                },
-                'modal@app': {
-                    templateUrl:'auth/modal/modal.html'
-                }
+                'body@app': {}
             }
         })
-        .state('accueil',{
-            url:"/accueil",
+        .state('squellete',{
+            url:"",
+            //abstract: true,
             parent:"app",
             title:"accueil",
             views:{
-                'vue@app': {
+                'body@app': {
+                    templateUrl: 'main/squellete.html',
+                    controller:"AppCtrl"
+                } ,
+                'vue@squellete': {}
+            }
+        })
+        .state('accueil',{
+            url:"accueil",
+            parent:"squellete",
+            title:"accueil",
+            views:{
+                'vue@squellete': {
                     templateUrl: 'accueil/content.html',
                     controller:'AccueilCtrl'
                 }
@@ -51,9 +59,6 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 },
                 'body@commande': {
                     templateUrl: 'commande/commande.html'
-                },
-                'modal@commande': {
-                    templateUrl: 'auth/modal/modal.html'
                 }
             }
         })
@@ -71,9 +76,6 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 },
                 'body@rapport': {
                     templateUrl: 'rapport/liste_rapports.html'
-                },
-                'modal@rapport': {
-                    templateUrl: 'auth/modal/modal.html'
                 }
             }
         })
@@ -91,9 +93,6 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 },
                 'body@formulaire_rapport': {
                     templateUrl: 'rapport/formulaire_rapport.html'
-                },
-                'modal@rapport': {
-                    templateUrl: 'auth/modal/modal.html'
                 }
             }
         })
@@ -134,13 +133,13 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 },
                 'body@univers_client': {
                     templateUrl: 'client/univers_client.html'
-                },
-                'modal@univers_client': {
-                    templateUrl: 'auth/modal/modal.html'
                 }
             }
         })
 
-    $urlRouterProvider.otherwise( 'app/accueil');
+
+    ;
+
+    $urlRouterProvider.otherwise( 'accueil');
 
 }]);

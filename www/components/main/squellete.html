@@ -5,7 +5,7 @@
                 <div class="panel-heading">Service du 22 Mai 2017</div>
                 <div class="panel-body">
                     <button class="btn btn-raised btn-lg btn-primary" data-toggle="modal" data-target="#authentification">
-                        Ouvrir caisse
+                        Ouvrir caisse {{statutAuth}}
                     </button>
                 </div>
             </div>
@@ -76,6 +76,59 @@
         </div>
         <div class="col-lg-9 col-sm-9 col-md-9">
             <div ui-view="vue"></div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="authentification">
+    <div class="modal-dialog">
+        <div class="modal-content" ng-if="statutAuth">
+            <div class="modal-header">
+                <h4 class="modal-title">Authentification</h4>
+            </div>
+            <div class="modal-body">
+                <p class="text-center">
+                    Veuillez vous authentifier pour ouvrir la caisse.
+                    <br>
+                    Personnes habilitées à ouvrir la caisse : Area Manager et Chef Boutique
+                </p>
+                <form class="form-horizontal">
+                    <div class="form-group text-center">
+                        <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-md-4 col-lg-4 col-sm-4">
+                            <input type="password" class="form-control text-center" ng-model="code" placeholder="Votre mot de passe">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-raised" id="closeAuthentification" data-dismiss="modal">Fermer</button>
+                <button type="button" class="btn btn-raised btn-primary" ng-click="authentification(code)">Connexion</button>
+            </div>
+        </div>
+        <div class="modal-content" ng-if="!statutAuth">
+            <div class="modal-header">
+                <h4 class="modal-title">Ouvrir Caisse</h4>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-lg-7 col-sm-7 col-md-7">
+                        <datetimepicker data-ng-model="data.embeddedDate"
+                                        data-datetimepicker-config="{ startView:'day', minView:'day',modelType:'moment' }" />
+                    </div>
+                    <div class="col-lg-5 col-sm-5 col-md-5">
+                        <div class="" style="margin-top:30%">
+                            <button class="btn btn-block btn-primary btn-raised">Ouvrir Caisse</button>
+                        </div>
+                        <div class="">
+                            <button class="btn btn-block btn-danger btn-raised" data-dismiss="modal">Annuler</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer hide">
+                <button type="button" class="btn btn-default btn-raised" data-dismiss="modal">Annuler</button>
+                <button type="button" class="btn btn-default btn-raised btn-primary" ng-click="authentification(code)">Ouvrir</button>
+            </div>
         </div>
     </div>
 </div>
