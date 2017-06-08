@@ -6,7 +6,6 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
 
     $stateProvider
         .state('app',{
-            url:"/",
             abstract: true,
             loginRequired:false,
             title:"",
@@ -22,14 +21,14 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
             }
         })
         .state('squellete',{
-            url:"",
             //abstract: true,
+            url:"/",
             parent:"app",
             title:"accueil",
             views:{
                 'body@app': {
                     templateUrl: 'main/squellete.html',
-                    controller:"AppCtrl"
+                    controller: "AppCtrl"
                 } ,
                 'vue@squellete': {}
             }
@@ -140,6 +139,6 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
 
     ;
 
-    $urlRouterProvider.otherwise( 'accueil');
+    $urlRouterProvider.otherwise( '/accueil');
 
 }]);
