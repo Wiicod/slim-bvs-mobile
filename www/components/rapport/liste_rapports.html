@@ -58,26 +58,24 @@
                     <div class="row-fluid">
                         <div class="col-lg-12 col-md-12 col-sm-12">
                             <div class="col-lg-4 col-sm-4 col-md-4 pull-right" style="padding-left: 25px;padding-right: 8px">
-                                <input class="form-control" ng-model="search_commande" placeholder="Rechercher rapport" type="text">
+                                <input class="form-control" ng-model="search_rapport" placeholder="Rechercher rapport" type="text">
                             </div>
                         </div>
                     </div>
                     <legend>Liste des rapports</legend>
                     <div class="scroll-categorie scroll-produit">
                         <div class="row-fluid">
-                            <div class="col-lg-7 col-sm-7 col-md-7">Libellé</div>
-                            <div class="col-lg-1 col-sm-1 col-md-1">U</div>
-                            <div class="col-lg-1 col-sm-1 col-md-1">Qte</div>
-                            <div class="col-lg-3 col-sm-3 col-md-3">Prix</div>
+                            <div class="col-lg-7 col-sm-7 col-md-7">Client</div>
+                            <div class="col-lg-2 col-sm-2 col-md-2 text-right">Date visite</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 text-right">Chiffre d'affaire</div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="produit row" ng-repeat="n in [1,2,3]|filter:search_commande">
+                        <div class="produit row" ng-repeat="n in [1,2,3]|filter:search_rapport">
                             <div class="col-lg-7 col-sm-7 col-md-7">
                                 Very pamplemousse
                             </div>
-                            <div class="col-lg-1 col-sm-1 col-md-1">000</div>
-                            <div class="col-lg-1 col-sm-1 col-md-1">00</div>
-                            <div class="col-lg-3 col-sm-3 col-md-3">0 000 000</div>
+                            <div class="col-lg-2 col-sm-2 col-md-2 text-right">00/00/0000</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 text-right">0 000 000 Fcfa</div>
                         </div>
                     </div>
                 </fieldset>

@@ -25,6 +25,7 @@
     "angular-translate-once": "^1.0.3",
     "ngstorage": "^0.3.11",
     "ionic-toast": "^0.4.1",
-    "bootstrap-material-design": "^4.0.2"
+    "bootstrap-material-design": "^4.0.2",
+    "ngmap": "^1.18.4"
   }
 }

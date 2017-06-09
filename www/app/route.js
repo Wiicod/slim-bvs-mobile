@@ -95,25 +95,51 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 }
             }
         })
+
         .state('historique',{
-            url:"/historique",
-            parent:"app",
+            url:"historique",
+            parent:"squellete",
             title:"Historique",
             views:{
-                'vue@app': {
+                'vue@squellete': {
                     templateUrl: 'facture/historique.html',
                     controller:'HistoriqueCtrl'
                 }
             }
         })
-        .state('statistique',{
-            url:"/statisique",
-            parent:"app",
-            title:"Statisitque",
+
+        .state('facture_memo',{
+            url:"facture_memo",
+            parent:"squellete",
+            title:"Facture en mémo",
             views:{
-                'vue@app': {
+                'vue@squellete': {
+                    templateUrl: 'facture/memo.html',
+                    controller:'FactureMemoCtrl'
+                }
+            }
+        })
+
+        .state('statistique',{
+            url:"statistique",
+            parent:"squellete",
+            title:"statistique",
+            views:{
+                'vue@squellete': {
                     templateUrl: 'statistique/statistiques.html',
                     controller:'StatistiqueCtrl'
+                }
+            }
+        })
+
+        .state('alertes',{
+            url:"alertes",
+            parent:"squellete",
+            title:"alertes",
+            views:{
+                'vue@squellete': {
+                    templateUrl: 'alertes/alertes.html',
+                    controller:'AlertesCtrl'
                 }
             }
         })

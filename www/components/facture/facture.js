@@ -44,3 +44,7 @@ app
             }
         }
     }])
+
+    .controller("FactureMemoCtrl",function($scope){
+        $scope.current=new Date();
+    })

@@ -17,6 +17,7 @@ var app = angular.module('slim', [
     'slim.config',
     'slim.service',
     'ngCookies',
+    'ngMap',
     'restangular',
     'ui.bootstrap.datetimepicker',
     'ngStorage',
