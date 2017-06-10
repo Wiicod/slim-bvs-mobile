@@ -132,11 +132,25 @@
                                     <div class="row-fluid" ng-if="plan!=false">
                                         <div id="map" class="col-lg-12 col-sm-12 col-md-12">
 
-                                        </div>
-                                        <div class="col-lg-12 col-sm-12 col-md-12">
-                                            <div class="btn btn-raised btn-primary btn-sm pull-right">
-                                                M'y rendre
-                                            </div>
+                                            <ng-map zoom="20"
+                                                    center="{{position}}"
+                                                    style="height:90%" >
+                                                <directions
+                                                        draggable="false"
+                                                        panel="directions-panel"
+                                                        travel-mode="DRIVING"
+                                                        origin="{{position}}"
+                                                        destination="4.0365026,9.7221316">
+                                                </directions>
+                                                <custom-marker id="start"
+                                                               position="{{lat}},{{lng}}">
+                                                    <div> Vous </div>
+                                                </custom-marker>
+                                                <custom-marker id="end"
+                                                               position="4.0365026,9.7221316">
+                                                    <div> Le client </div>
+                                                </custom-marker>
+                                            </ng-map>
                                         </div>
                                     </div>
                                     <div class="row-fluid" ng-if="plan==false">
