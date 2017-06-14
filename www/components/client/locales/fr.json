@@ -1,3 +1,35 @@
 {
-
+  "UNIVERS_CLIENT":{
+    "TITRE_1" :"Clients",
+    "TITRE_2" :"Informations sur le client",
+    "ARG_1":"Détails",
+    "ARG_2":"Plan",
+    "ARG_3":"Historique compte",
+    "ARG_4":"Partage",
+    "ARG_5":"Nom :",
+    "ARG_6":"Prénom :",
+    "ARG_7":"Email :",
+    "ARG_8":"Téléphone :",
+    "ARG_9":"Adresse :",
+    "ARG_10":"Boite postale :",
+    "ARG_11":"Ville :",
+    "ARG_12":"Pays :",
+    "ARG_13":"Groupe Client :",
+    "ARG_14":"Date de naissance :",
+    "ARG_15":"Nom de la société :",
+    "ARG_16":"RCCM :",
+    "ARG_17":"NIU :",
+    "ARG_18":"Vous",
+    "ARG_19":"Le client",
+    "ARG_20":"Aucune coordonnées enregistrées",
+    "ARG_21":"Veuiller vous rendre chez le client et cliquer sur ",
+    "ARG_22":"Enregistrer",
+    "ARG_23":" pour recuperer automatiquement ses coordonnées",
+    "ARG_24":"Date",
+    "ARG_25":"Chiffre d'affaire",
+    "ARG_26":"Solde du compte",
+    "ARG_27":"Factures echues",
+    "ARG_28":"Bientôt disponible",
+    "ARG_29":"Patager les informations telles que les promotions, les images des produits et bien d'autre avec les clients"
+  }
 }

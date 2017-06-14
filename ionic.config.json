@@ -1,6 +1,6 @@
 {
   "name": "slim_bvs_app",
-  "app_id": "",
+  "app_id": "5319fd22",
   "gulpStartupTasks": [
     "sass",
     "watch"

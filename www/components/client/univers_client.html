@@ -1,24 +1,10 @@
 <div class="commande-container" style="overflow: hidden">
-    <div class="row-fluid hide">
-        <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="col-lg-2 col-sm-2 col-md-2">
-                <button class="btn btn-raised btn-lg btn-default" ui-sref="accueil" style="margin: 0;">
-                    Retour
-                </button>
-            </div>
-            <div class="col-lg-8 col-sm-8 col-md-8">
-                <h3 style="margin: 5px;text-align: center;">
-                    <span style="padding-bottom: 8px;border-bottom: 2px dotted #009688;">Statistiques</span>
-                </h3>
-            </div>
-        </div>
-    </div>
     <div class="clearfix"></div>
     <div class="row-fluid" style="margin-top: 10px;">
         <div class="col-lg-12 col-md-12 col-sm-12" style="margin-bottom: 5px">
             <div class="col-lg-3 col-sm-3 col-md-3" >
                 <fieldset>
-                    <legend>Clients</legend>
+                    <legend translate>UNIVERS_CLIENT.TITRE_1</legend>
                     <div class="col-lg-12 col-md-12 col-sm-12">
                         <input class="form-control" ng-model="search_client" placeholder="Rechercher client" type="text">
                     </div>
@@ -32,98 +18,98 @@
             </div>
             <div class="col-lg-9 col-sm-9 col-md-9">
                 <fieldset>
-                    <legend>Informations sur le client</legend>
+                    <legend translate>UNIVERS_CLIENT.TITRE_2</legend>
                     <div class="scroll-univers scroll-produit" >
                         <div class="">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
-                                    <a href="/#detail" aria-controls="detail" role="tab" data-toggle="tab">Détails</a>
+                                    <a href="/#detail" aria-controls="detail" role="tab" data-toggle="tab" translate>UNIVERS_CLIENT.ARG_1</a>
                                 </li>
                                 <li role="presentation">
-                                    <a href="/#plan" aria-controls="plan" role="tab" data-toggle="tab">Plan</a>
+                                    <a href="/#plan" aria-controls="plan" role="tab" data-toggle="tab" translate>UNIVERS_CLIENT.ARG_2</a>
                                 </li>
-                                <li role="presentation"><a href="/#historique" aria-controls="historique" role="tab" data-toggle="tab">Historique compte</a></li>
-                                <li role="presentation"><a href="/#partage" aria-controls="partage" role="tab" data-toggle="tab">Partage</a></li>
+                                <li role="presentation"><a href="/#historique" aria-controls="historique" role="tab" data-toggle="tab" translate>UNIVERS_CLIENT.ARG_3</a></li>
+                                <li role="presentation"><a href="/#partage" aria-controls="partage" role="tab" data-toggle="tab" translate>UNIVERS_CLIENT.ARG_4</a></li>
                             </ul>
 
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane" id="detail">
+                                <div role="tabpanel" class="tab-pane " id="detail">
                                     <div class="row-fluid detail">
                                         <div class="col-lg-6 col-sm-6 col-md-6">
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Nom :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_5</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">NANDA</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Prénom :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_6</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">Edward</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Email :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_7</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">enanda@bvssas.com</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Téléphone :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_8</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">690613323</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Adresse :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_9</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">Bassa</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Boite postale :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_10</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">1352</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Ville :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_11</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">Douala</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Pays :</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">enanda@bvssas.com</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_12</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">Cameroun</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Groupe Client :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_13</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">CHR en compte 10%</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Date d'anniversaire :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_14</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">XX/XX/XXXX</div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-sm-6 col-md-6">
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Nom Société :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_15</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">Wiicod</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">RCCM :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_16</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">XXX</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">NIU :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_17</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">XXX</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Téléphone :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_8</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">690613323</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Adresse :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_9</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">Bassa</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Boite postale :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_10</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">1352</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Ville :</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_11</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">Douala</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Pays :</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">enanda@bvssas.com</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_12</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">Cameroun</div>
                                             </div>
                                         </div>
                                     </div>
@@ -144,21 +130,21 @@
                                                 </directions>
                                                 <custom-marker id="start"
                                                                position="{{lat}},{{lng}}">
-                                                    <div> Vous </div>
+                                                    <div translate>UNIVERS_CLIENT.ARG_18 </div>
                                                 </custom-marker>
                                                 <custom-marker id="end"
                                                                position="4.0365026,9.7221316">
-                                                    <div> Le client </div>
+                                                    <div translate>UNIVERS_CLIENT.ARG_19 </div>
                                                 </custom-marker>
                                             </ng-map>
                                         </div>
                                     </div>
                                     <div class="row-fluid" ng-if="plan==false">
                                         <div class="col-lg-6 col-sm-6 col-md-6 col-lg-offset-3 col-sm-offset-3 col-md-offset-3 text-center" style="padding-top: 50px">
-                                            <p>Aucune coordonnées enregistrées</p>
-                                            <p>Veuiller vous rendre chez le client et cliquer sur <strong>Enregistrer</strong> pour recuperer automatiquement ses coordonnées</p>
-                                            <div class="btn btn-primary btn-raised">
-                                                Enregistrer
+                                            <p translate>UNIVERS_CLIENT.ARG_20</p>
+                                            <p translate>UNIVERS_CLIENT.ARG_21<strong translate>UNIVERS_CLIENT.ARG_22</strong> <span translate>UNIVERS_CLIENT.ARG_23</span></p>
+                                            <div class="btn btn-primary btn-raised" translate>
+                                                UNIVERS_CLIENT.ARG_22
                                             </div>
                                         </div>
                                     </div>
@@ -166,9 +152,9 @@
                                 <div role="tabpanel" class="tab-pane" id="historique">
                                     <div class="row-fluid">
                                         <div class="col-lg-1 col-sm-1 col-md-1">
-                                            <h5>Date</h5>
+                                            <h5 translate>UNIVERS_CLIENT.ARG_24</h5>
                                         </div>
-                                        <div class="col-lg-3 col-sm-3 col-md-3">
+                                        <div class="col-lg-5 col-sm-5 col-md-5">
                                             <div class="dropdown">
                                                 <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target=".dropdown-start-parent"
                                                         >
@@ -206,19 +192,19 @@
                                     </div>
                                     <div class="col-lg-3 col-sm-4 col-md-3">
                                         <fieldset style="margin-bottom: 10%">
-                                            <legend>Chiffre d'affaire</legend>
+                                            <legend translate>UNIVERS_CLIENT.ARG_25</legend>
                                             <div class="text-center">
                                                 <h3>4323 fcfa</h3>
                                             </div>
                                         </fieldset>
                                         <fieldset style="margin-bottom: 10%">
-                                            <legend>Solde du compte</legend>
+                                            <legend translate>UNIVERS_CLIENT.ARG_26</legend>
                                             <div class="text-center">
                                                 <h3>3E390293090 Fcfa</h3>
                                             </div>
                                         </fieldset>
                                         <fieldset>
-                                            <legend>Factures echues</legend>
+                                            <legend translate>UNIVERS_CLIENT.ARG_27</legend>
                                             <div class="text-center">
                                                 <h3>100 Factures</h3>
                                             </div>
@@ -227,8 +213,8 @@
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="partage">
                                     <div class="col-lg-6 col-sm-6 col-md-6 col-lg-offset-3 col-sm-offset-3 col-md-offset-3 text-center" style="padding-top: 50px">
-                                        <h3>Bientôt disponible</h3>
-                                        <p>Patager les informations telles que les promotions, les images des produits et bien d'autre avec les clients</p>
+                                        <h3 translate>UNIVERS_CLIENT.ARG_28</h3>
+                                        <p translate>UNIVERS_CLIENT.ARG_29</p>
                                     </div>
                                 </div>
                             </div>

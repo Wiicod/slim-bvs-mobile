@@ -1,3 +1,34 @@
 {
-
+  "HISTORIQUE":{
+    "TITRE_1" :"Historique Facture",
+    "TITRE_2" :"Commande",
+    "TITRE_3" :"Statut Facture",
+    "TITRE_4" :"Extourner facture",
+    "TITRE_5" :"Factures en mémo",
+    "ARG_1":"Du",
+    "ARG_2":"Au",
+    "ARG_3":"Filtre",
+    "ARG_4":"Libellé",
+    "ARG_5":"Prix",
+    "ARG_6":"Total",
+    "ARG_7":"Remise",
+    "ARG_8":"Net",
+    "ARG_9":"Etat :",
+    "ARG_10":"Montant à payer :",
+    "ARG_11":"Echéance :",
+    "ARG_12":"Date facture ;",
+    "ARG_13":"Imprimer",
+    "ARG_14":"Notifier client",
+    "ARG_15":"Extourner",
+    "ARG_16":"Fermer",
+    "ARG_17":"Payer",
+    "ARG_18":"Veuillez vous authentifier pour extourner cette facture.",
+    "ARG_19":"Personnes habilitées à ouvrir la caisse : Area Manager et Chef Boutique",
+    "ARG_20":"Motif de l'extourne",
+    "ARG_21":"Votre mot de passe",
+    "ARG_22":"Annuler"
+  },
+  "MEMO":{
+    "TITRE_1" :"Factures en mémo"
+  }
 }

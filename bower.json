@@ -26,6 +26,7 @@
     "ngstorage": "^0.3.11",
     "ionic-toast": "^0.4.1",
     "bootstrap-material-design": "^4.0.2",
-    "ngmap": "^1.18.4"
+    "ngmap": "^1.18.4",
+    "angular-acl": "^0.1.9"
   }
 }

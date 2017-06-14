@@ -1,11 +1,11 @@
 <div id="historique">
     <div class="panel">
         <div class="panel-body">
-            <h5><span>Historique Facture</span></h5>
+            <h5><span translate>HISTORIQUE.TITRE_1</span></h5>
 
             <div class="row-fluid">
                 <div class="col-lg-1 col-sm-1 col-md-1">
-                    <h5>Du</h5>
+                    <h5 translate>HISTORIQUE.ARG_1</h5>
                 </div>
                 <div class="col-lg-3 col-sm-3 col-md-3">
                     <div class="dropdown">
@@ -25,7 +25,7 @@
                     </div>
                 </div>
                 <div class="col-lg-1 col-sm-1 col-md-1">
-                    <h5>Au</h5>
+                    <h5 translate>HISTORIQUE.ARG_2</h5>
                 </div>
                 <div class="col-lg-3 col-sm-3 col-md-3">
                     <div class="dropdown">
@@ -51,8 +51,8 @@
             <div class="clearfix"></div>
             <div class="scroll-historique">
                 <div class="row categorie" ng-repeat="n in [1,2,3,'2',44,33,55,2222,4444,55555,111,11]|filter:filtre">
-                    <div class="row-fluid">
-                        <div class="col-lg-4 col-sm-4 col-md-4">
+                    <div class="row-fluid" data-toggle="modal" data-target="#detail_facture">
+                        <div class="col-lg-6 col-sm-6 col-md-6">
                             Edward NANDA
                         </div>
                         <div class="col-lg-2 col-sm-2 col-md-2">
@@ -60,9 +60,6 @@
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4 text-right">
                             100 000 000 Fcfa
-                        </div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 text-right">
-                            <span class="" data-toggle="modal" data-target="#detail_facture"><i class="fa fa-bars"></i></span>
                         </div>
                     </div>
                 </div>
@@ -82,12 +79,12 @@
                     <div class="row">
                         <div class="col-lg-6 col-sm-6 col-md-6">
                             <fieldset>
-                                <legend>Commande</legend>
+                                <legend translate>HISTORIQUE.TITRE_2</legend>
                                 <div class="commande">
                                     <div class="scroll-commande">
                                         <div class="row-fluid">
-                                            <div class="col-lg-9 col-sm-9 col-md-9">Libellé</div>
-                                            <div class="col-lg-3 col-sm-3 col-md-3">Prix</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9" translate>HISTORIQUE.ARG_4</div>
+                                            <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_5</div>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="categorie row" ng-repeat="n in [1,2,3,4,5,6,11,22,33]" ng-click="detail_produit(n)">
@@ -97,15 +94,15 @@
                                     </div>
                                     <div class="montant">
                                         <div class="row" >
-                                            <div class="col-lg-3 col-sm-3 col-md-3">Total</div>
+                                            <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_6</div>
                                             <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
                                         </div>
                                         <div class="row" >
-                                            <div class="col-lg-3 col-sm-3 col-md-3">Remise</div>
+                                            <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_7</div>
                                             <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
                                         </div>
                                         <div class="row" >
-                                            <div class="col-lg-3 col-sm-3 col-md-3">Net</div>
+                                            <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_8</div>
                                             <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
                                         </div>
                                     </div>
@@ -114,34 +111,30 @@
                         </div>
                         <div class="col-lg-6 col-sm-6 col-md-6">
                             <fieldset style="margin-bottom: 20%">
-                                <legend>Statut Facture</legend>
+                                <legend translate>HISTORIQUE.TITRE_3</legend>
                                 <div class="row-fluid">
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        Etat :
+                                    <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_9
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
                                         Impayée
                                     </div>
                                 </div>
                                 <div class="row-fluid">
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        Montant à payer :
+                                    <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_10
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
                                         100 000 000 Fcfa
                                     </div>
                                 </div>
                                 <div class="row-fluid">
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        Echéance :
+                                    <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_11
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
                                         2017-06-17
                                     </div>
                                 </div>
                                 <div class="row-fluid">
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        Date facture :
+                                    <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_12
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
                                         2017-06-17
@@ -152,10 +145,10 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-raised" ng-click="notifier_client()">Imprimer</button>
-                    <button type="button" class="btn btn-raised btn-info" ng-click="notifier_client()">Notifier client</button>
-                    <button type="button" class="btn btn-raised btn-danger" data-toggle="modal" data-target="#extourne">Extourner</button>
-                    <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Fermer</button>
+                    <button type="button" class="btn btn-raised" ng-click="notifier_client()" translate>HISTORIQUE.ARG_13</button>
+                    <button type="button" class="btn btn-raised btn-info" ng-click="notifier_client()" translate>HISTORIQUE.ARG_14</button>
+                    <button type="button" class="btn btn-raised btn-danger" data-toggle="modal" data-target="#extourne" translate>HISTORIQUE.ARG_15</button>
+                    <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal" translate>HISTORIQUE.ARG_16</button>
                 </div>
             </div>
         </div>
@@ -165,30 +158,30 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Extourner facture</h4>
+                    <h4 class="modal-title" translate>HISTORIQUE.TITRE_4</h4>
                 </div>
                 <div class="modal-body">
                     <p class="text-center">
-                        Veuillez vous authentifier pour extourner cette facture.
+                        <span translate>HISTORIQUE.ARG_18</span>
                         <br>
-                        Personnes habilitées à ouvrir la caisse : Area Manager et Chef Boutique
+                        <span translate>HISTORIQUE.ARG_19</span>
                     </p>
                     <form class="form-horizontal">
                         <div class="form-group text-center">
                             <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-md-6 col-lg-6 col-sm-6">
-                                <input type="text" class="form-control text-center" ng-model="motif" placeholder="Motif de l'extourne">
+                                <input type="text" class="form-control text-center" ng-model="motif" placeholder="Motif de l'extourne" translate>
                             </div>
                         </div>
                         <div class="form-group text-center">
                             <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-md-6 col-lg-6 col-sm-6">
-                                <input type="password" class="form-control text-center" ng-model="code" placeholder="Votre mot de passe">
+                                <input type="password" class="form-control text-center" ng-model="code" placeholder="Votre mot de passe" translate>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-raised" id="close_extourne" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-raised btn-primary" ng-click="extourner_facture(code,motif)">Extourner</button>
+                    <button type="button" class="btn btn-raised" id="close_extourne" data-dismiss="modal" translate>HISTORIQUE.ARG_22</button>
+                    <button type="button" class="btn btn-raised btn-primary" ng-click="extourner_facture(code,motif)" translate>HISTORIQUE.ARG_15</button>
                 </div>
             </div>
         </div>

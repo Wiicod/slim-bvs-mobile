@@ -3,9 +3,15 @@
  */
 
 app
-    .controller("CommandeCtrl",function($scope,$stateParams,$state){
-        console.log("edw");
+    .controller("CommandeCtrl",function($scope,$stateParams,$state,Products){
         $scope.current=new Date();
+/*/ tous les produits
+        Products.getList().then(function(data){
+            console.log();
+        });
+// post
+        Products.post({});*/
+
 
         $scope.produit={remise:0,quantite:5};
 

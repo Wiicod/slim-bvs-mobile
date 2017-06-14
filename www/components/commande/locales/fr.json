@@ -1,3 +1,32 @@
 {
-
+  "COMMANDE":{
+    "TITRE_1" :"Catégories",
+    "TITRE_2" :"Produits",
+    "TITRE_3" :"Commande",
+    "TITRE_4" :"Actions",
+    "TITRE_5" :"Selectionner le client",
+    "TITRE_6" :"Mode de paiement",
+    "ARG_1":"Retour",
+    "ARG_2":"Client",
+    "ARG_3":"Groupe",
+    "ARG_4":"Ajouter client",
+    "ARG_5":"Libellé",
+    "ARG_6":"U",
+    "ARG_7":"Qte",
+    "ARG_8":"Prix",
+    "ARG_9":"Total",
+    "ARG_10":"Remise",
+    "ARG_11":"Net",
+    "ARG_12":"Quantité",
+    "ARG_13":"Offir",
+    "ARG_14":"Supprimer",
+    "ARG_15":"Annuler",
+    "ARG_16":"Enregistrer",
+    "ARG_17":"Ajouter",
+    "ARG_18":"Solde compte client",
+    "ARG_19":"Net à payer",
+    "ARG_20":"Payer",
+    "ARG_21":"MEMO",
+    "ARG_22":"FACTURER"
+  }
 }

@@ -1,7 +1,7 @@
 <div id="memo">
     <div class="panel">
         <div class="panel-body">
-            <h5><span>Factures en mémo</span></h5>
+            <h5><span translate>MEMO.TITRE_1</span></h5>
 
             <div class="clearfix"></div>
             <div class="scroll-historique">
@@ -18,130 +18,6 @@
                             100 000 000 Fcfa
                         </div>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="detail_facture">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">
-                        Client : Edward NANDA (CHR en compte 10%)
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-lg-6 col-sm-6 col-md-6">
-                            <fieldset>
-                                <legend>Commande</legend>
-                                <div class="commande">
-                                    <div class="scroll-commande">
-                                        <div class="row-fluid">
-                                            <div class="col-lg-9 col-sm-9 col-md-9">Libellé</div>
-                                            <div class="col-lg-3 col-sm-3 col-md-3">Prix</div>
-                                        </div>
-                                        <div class="clearfix"></div>
-                                        <div class="categorie row" ng-repeat="n in [1,2,3,4,5,6,11,22,33]" ng-click="detail_produit(n)">
-                                            <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{n}} Very pamplemouse</div>
-                                            <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">00 000 000</div>
-                                        </div>
-                                    </div>
-                                    <div class="montant">
-                                        <div class="row" >
-                                            <div class="col-lg-3 col-sm-3 col-md-3">Total</div>
-                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
-                                        </div>
-                                        <div class="row" >
-                                            <div class="col-lg-3 col-sm-3 col-md-3">Remise</div>
-                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
-                                        </div>
-                                        <div class="row" >
-                                            <div class="col-lg-3 col-sm-3 col-md-3">Net</div>
-                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-md-6">
-                            <fieldset style="margin-bottom: 20%">
-                                <legend>Statut Facture</legend>
-                                <div class="row-fluid">
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        Etat :
-                                    </div>
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        Impayée
-                                    </div>
-                                </div>
-                                <div class="row-fluid">
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        Montant à payer :
-                                    </div>
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        100 000 000 Fcfa
-                                    </div>
-                                </div>
-                                <div class="row-fluid">
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        Echéance :
-                                    </div>
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        2017-06-17
-                                    </div>
-                                </div>
-                                <div class="row-fluid">
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        Date facture :
-                                    </div>
-                                    <div class="col-lg-6 col-sm-6 col-md-6">
-                                        2017-06-17
-                                    </div>
-                                </div>
-                            </fieldset>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-raised" ng-click="notifier_client()">Imprimer</button>
-                    <button type="button" class="btn btn-raised btn-info" ng-click="notifier_client()">Notifier client</button>
-                    <button type="button" class="btn btn-raised btn-danger" data-toggle="modal" data-target="#extourne">Extourner</button>
-                    <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal">Fermer</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal" id="extourne">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Extourner facture</h4>
-                </div>
-                <div class="modal-body">
-                    <p class="text-center">
-                        Veuillez vous authentifier pour extourner cette facture.
-                        <br>
-                        Personnes habilitées à ouvrir la caisse : Area Manager et Chef Boutique
-                    </p>
-                    <form class="form-horizontal">
-                        <div class="form-group text-center">
-                            <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-md-6 col-lg-6 col-sm-6">
-                                <input type="text" class="form-control text-center" ng-model="motif" placeholder="Motif de l'extourne">
-                            </div>
-                        </div>
-                        <div class="form-group text-center">
-                            <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-md-6 col-lg-6 col-sm-6">
-                                <input type="password" class="form-control text-center" ng-model="code" placeholder="Votre mot de passe">
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-raised" id="close_extourne" data-dismiss="modal">Annuler</button>
-                    <button type="button" class="btn btn-raised btn-primary" ng-click="extourner_facture(code,motif)">Extourner</button>
                 </div>
             </div>
         </div>

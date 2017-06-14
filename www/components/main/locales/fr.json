@@ -1,3 +1,27 @@
 {
-
+  "SQUELLETE":{
+    "TITRE_1" :"Authentification",
+    "ARG_1" :"Ouvrir caisse",
+    "ARG_2" :"Chiffre d'affaire",
+    "ARG_3" :"Alerte(s)",
+    "ARG_4" :"Consulter",
+    "ARG_5" :"Factures en mémo",
+    "ARG_6" :"Mode de vente",
+    "ARG_7" :"Historique factue",
+    "ARG_8" :"Statistiques",
+    "ARG_9" :"Rapports de visite",
+    "ARG_10" :"Univers clients",
+    "ARG_11" :"Agenda",
+    "ARG_12" :"Veuillez vous authentifier pour ouvrir la caisse.",
+    "ARG_13" :"Personnes habilitées à ouvrir la caisse : Area Manager et Chef Boutique",
+    "ARG_14" :"Fermer",
+    "ARG_15" :"Connexion",
+    "ARG_16" :"Annuler"
+  },
+  "HEADER":{
+    "TITRE_1" :"",
+    "ARG_1":"Suggestions",
+    "ARG_2":"Deconnexion",
+    "ARG_3":"A propos"
+  }
 }

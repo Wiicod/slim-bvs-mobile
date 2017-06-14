@@ -5,6 +5,7 @@
 var config = angular.module('slim.config',["ui.router",'ionic','pascalprecht.translate', 'satellizer']);
 var filter =  angular.module('slim.filter',["ui.router"]);
 var service=angular.module('slim.service',["ui.router"]);
+var resources=angular.module('slim.resources',["ui.router"]);
 var height=$(window).height();
 var ratio=540/720;
 var tab_w=962;
@@ -16,15 +17,18 @@ var app = angular.module('slim', [
     'slim.filter',
     'slim.config',
     'slim.service',
+    'slim.resources',
+    'ionic-toast',
     'ngCookies',
     'ngMap',
     'restangular',
     'ui.bootstrap.datetimepicker',
     'ngStorage',
-    'templates'
+    'templates',
+    'mm.acl'
 ])
 
-    .run(function($ionicPlatform,$localStorage,$state,$rootScope) {
+    .run(function($ionicPlatform,$localStorage,$state,$rootScope,AclService) {
 
         $ionicPlatform.ready(function() {
             // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard
