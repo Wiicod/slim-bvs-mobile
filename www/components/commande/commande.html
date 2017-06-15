@@ -33,8 +33,11 @@
                 <fieldset>
                     <legend translate>COMMANDE.TITRE_1</legend>
                     <div class="scroll-categorie">
-                        <div class="categorie" ng-repeat="n in [1,2,3,4,5,6,7,8,33,44,53]|filter:search_commande">
-                            Vins internationaux
+                        <div class="categorie" ng-click="filtrer_categories('tout')">
+                            TOUS
+                        </div>
+                        <div class="categorie" ng-repeat="c in categories|filter:search_commande" ng-click="filtrer_categories(c)">
+                            {{c.name}}
                         </div>
                     </div>
                 </fieldset>
@@ -50,13 +53,13 @@
                             <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_8</div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="produit row" ng-repeat="n in [1,2,3]|filter:search_commande">
+                        <div class="produit row" ng-repeat="p in produits|filter:search_commande" ng-click="ajouter_produit(p)">
                             <div class="col-lg-7 col-sm-7 col-md-7">
-                                Very pamplemousse
+                                {{p.name}}
                             </div>
-                            <div class="col-lg-1 col-sm-1 col-md-1">000</div>
-                            <div class="col-lg-1 col-sm-1 col-md-1">00</div>
-                            <div class="col-lg-3 col-sm-3 col-md-3">0 000 000</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">{{p.stock.unity}}</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">{{p.stock.quantity}}</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3">{{p.product_saletypes.price}}</div>
                         </div>
                     </div>
                 </fieldset>
@@ -71,23 +74,23 @@
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_8</div>
                             </div>
                             <div class="clearfix"></div>
-                            <div class="categorie row" ng-repeat="n in [1,2,3]" ng-click="detail_produit(n)">
-                                <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{n}} Very pamplemouse</div>
-                                <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">00 000 000</div>
+                            <div class="categorie row" ng-repeat="p in commande.produits" ng-click="detail_produit(p)">
+                                <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.command_quantity}} {{p.name}}</div>
+                                <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.command_quantity*p.product_saletypes.price}}</div>
                             </div>
                         </div>
                         <div class="montant">
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_9</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{commande.total}} Fcfa</div>
                             </div>
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_10</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{commande.total*remise}} Fcfa</div>
                             </div>
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_11</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">000 000 000 Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{commande.total*(1+remise)}} Fcfa</div>
                             </div>
                         </div>
                         <div class="text-center">
@@ -104,14 +107,13 @@
         </div>
     </div>
 
-
     <button id="btn_detail_produit" data-toggle="modal" data-target="#detail_produit" class="hide"></button>
 
     <div class="modal" id="detail_produit">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Very pamplemousse</h4>
+                    <h4 class="modal-title">{{produit.name}}</h4>
                 </div>
                 <div class="modal-body">
                     <fieldset>
@@ -119,13 +121,13 @@
                         <div class="row-fluid">
                             <div class="col-lg-3 col-md-3 col-sm-3" translate>COMMANDE.ARG_12</div>
                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                <input type="number" class="form-control" ng-model="produit.quantite" min="1" max="{{produit.quantite_stock}}">
+                                <input type="number" class="form-control" ng-model="produit.command_quantity" min="1" max="{{produit.stock.quantity}}">
                             </div>
                         </div>
                         <div class="row-fluid">
                             <div class="col-lg-3 col-md-3 col-sm-3" translate>COMMANDE.ARG_10</div>
                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                <input type="number" class="form-control" ng-model="produit.remise" min="1" max="10" step="1">
+                                <input type="number" class="form-control" ng-model="remise" min="0.01" max="0.1" step="0.01">
                             </div>
                         </div>
                         <div class="row-fluid">
