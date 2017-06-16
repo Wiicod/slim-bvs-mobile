@@ -5,17 +5,17 @@
 
             <div class="clearfix"></div>
             <div class="scroll-historique">
-                <div class="row categorie" ng-repeat="n in [1,2,3,'2',44,33,55,2222,4444,55555,111,11]"
+                <div class="row categorie" ng-repeat="c in commande_memo |orderBy:'-date':true"
                      ui-sref="commande({mode:'T5'})">
                     <div class="row-fluid">
                         <div class="col-lg-6 col-sm-6 col-md-6">
-                            Edward NANDA
+                            {{c.id}} {{c.client.name}}
                         </div>
                         <div class="col-lg-2 col-sm-2 col-md-2 text-right">
-                            T5
+                            {{c.mode_vente}}
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4 text-right">
-                            100 000 000 Fcfa
+                            {{c.total*(1-c.remise)}} Fcfa
                         </div>
                     </div>
                 </div>

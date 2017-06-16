@@ -45,6 +45,9 @@ app
         }
     }])
 
-    .controller("FactureMemoCtrl",function($scope){
+    .controller("FactureMemoCtrl",function($scope,$cookies){
+        // facture en mémo
+        $scope.commande_memo=$cookies.getObject("commande_memo");
+        console.log($scope.commande_memo);
         $scope.current=new Date();
-    })
+    });

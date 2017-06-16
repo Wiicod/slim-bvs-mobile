@@ -11,3 +11,4 @@ config
     .constant('APP_KEY', {
 
     })
+    .constant('TVA', 0.1925)

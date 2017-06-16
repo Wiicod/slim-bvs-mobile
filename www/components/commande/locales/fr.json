@@ -22,11 +22,16 @@
     "ARG_14":"Supprimer",
     "ARG_15":"Annuler",
     "ARG_16":"Enregistrer",
-    "ARG_17":"Ajouter",
+    "ARG_17":"Supprimer client",
     "ARG_18":"Solde compte client",
     "ARG_19":"Net à payer",
     "ARG_20":"Payer",
     "ARG_21":"MEMO",
-    "ARG_22":"FACTURER"
+    "ARG_22":"FACTURER",
+    "ARG_23":"Vous ne disposez pas de stock supplémentaire pour ce produit",
+    "ARG_24":"Produit supprimé",
+    "ARG_25":"Modifier client",
+    "ARG_26":"Aucun client associé",
+    "ARG_26":"Aucun produit associé"
   }
 }
