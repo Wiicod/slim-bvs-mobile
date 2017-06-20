@@ -4,14 +4,10 @@
 
 app
 
-    .controller("AccueilCtrl",function($scope){
-        $scope.current=new Date();
-
-        console.log("ede");
-
-        // recuperation des modes de ventes
-        $scope.saletypes=[
-            {id:1,name:"Promo",description:"Mode de vente promotionel"},
-            {id:2,name:"T5",description:"Mode de vente habituel"}
-        ]
+    .controller("AccueilCtrl",function($scope,Depots){
+        $scope.current=new Date()
+        Depots.get(3,{_includes:"saletypes"}).then(function(d){
+            console.log(d);
+            $scope.saletypes= d.saletypes;
+        });
     });

@@ -16,19 +16,28 @@
     "ARG_9":"Etat :",
     "ARG_10":"Montant à payer :",
     "ARG_11":"Echéance :",
-    "ARG_12":"Date facture ;",
+    "ARG_12":"Date facture :",
     "ARG_13":"Imprimer",
     "ARG_14":"Notifier client",
     "ARG_15":"Extourner",
     "ARG_16":"Fermer",
     "ARG_17":"Payer",
     "ARG_18":"Veuillez vous authentifier pour extourner cette facture.",
-    "ARG_19":"Personnes habilitées à ouvrir la caisse : Area Manager et Chef Boutique",
+    "ARG_19":"Personnes habilitées à ouvrir la caisse : Area Manager et Chef Boutique.",
     "ARG_20":"Motif de l'extourne",
     "ARG_21":"Votre mot de passe",
-    "ARG_22":"Annuler"
+    "ARG_22":"Annuler",
+    "ARG_23":"N°",
+    "ARG_24":"Veuillez selectionner une date de debut et de fin avant d'actualiser?",
+    "ARG_25":"OUPS!",
+    "ARG_26":"Aucune factures dans cette plage.",
+    "ARG_27":"Impossible d'effectuer cette action, veuillez contacter le support. Erreur : ",
+    "ARG_28":"Payée",
+    "ARG_29":"Echue"
   },
   "MEMO":{
-    "TITRE_1" :"Factures en mémo"
+    "TITRE_1" :"Factures en mémo",
+    "ARG_1":"OUPS!",
+    "ARG_2":"Aucune factures en mémo."
   }
 }

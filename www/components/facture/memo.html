@@ -5,8 +5,8 @@
 
             <div class="clearfix"></div>
             <div class="scroll-historique">
-                <div class="row categorie" ng-repeat="c in commande_memo |orderBy:'-date':true"
-                     ui-sref="commande({mode:'T5'})">
+                <div ng-if="commande_memo.length!=undefined && commande_memo.length>0" class="row categorie" ng-repeat="c in commande_memo |orderBy:'-date':true"
+                     ui-sref="commande({mode:'c.mode_vente',commande_memo_id:c.id})">
                     <div class="row-fluid">
                         <div class="col-lg-6 col-sm-6 col-md-6">
                             {{c.id}} {{c.client.name}}
@@ -18,6 +18,10 @@
                             {{c.total*(1-c.remise)}} Fcfa
                         </div>
                     </div>
+                </div>
+                <div class="text-center" ng-if="commande_memo.length==undefined">
+                    <h3 translate>MEMO.ARG_1</h3>
+                    <h5 translate>MEMO.ARG_2</h5>
                 </div>
             </div>
         </div>

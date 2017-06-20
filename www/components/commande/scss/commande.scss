@@ -9,4 +9,10 @@
       color: $slim_active_color;
     }
   }
+  .liste-categorie{
+    &.active{
+      background: $slim_primary;
+      color: $slim_active_color;
+    }
+  }
 }

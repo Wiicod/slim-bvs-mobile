@@ -45,7 +45,7 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
             }
         })
         .state('commande',{
-            url:"/commande/:mode",
+            url:"/commande/:mode/:commande_memo_id?",
             title:"commande",
             views:{
                 '':{
@@ -75,6 +75,19 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 },
                 'body@rapport': {
                     templateUrl: 'rapport/liste_rapports.html'
+                }
+            }
+        })
+        .state('login',{
+            url:"/login",
+            title:"Rapports",
+            views:{
+                '':{
+                    templateUrl:   'main/index.html',
+                    controller:'LoginCtrl'
+                },
+                'body@login': {
+                    templateUrl: 'auth/login.html'
                 }
             }
         })

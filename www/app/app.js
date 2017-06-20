@@ -2,7 +2,7 @@
 
 // Declare app level module which depends on views, and components
 
-var config = angular.module('slim.config',["ui.router",'ionic','pascalprecht.translate', 'satellizer']);
+var config = angular.module('slim.config',["ui.router",'ionic','pascalprecht.translate', 'satellizer','restangular']);
 var filter =  angular.module('slim.filter',["ui.router"]);
 var service=angular.module('slim.service',["ui.router"]);
 var resources=angular.module('slim.resources',["ui.router"]);
