@@ -4,11 +4,11 @@
 
 app
 
-    .controller("AppCtrl",function($scope){
+    .controller("AppCtrl",function($scope,$cookies){
         $scope.current=new Date();
         $scope.statutAuth=true;
         $scope.code="0000";
-        console.log("ed");
+        $scope.commande_memo=$cookies.getObject("commande_memo");
 
         //authentification pour ouverture de la caisse
         $scope.authentification=function(code){

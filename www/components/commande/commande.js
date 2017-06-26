@@ -3,106 +3,103 @@
  */
 
 app
-    .controller("CommandeCtrl",function($scope,$stateParams,$state,Products){
+    .controller("CommandeCtrl",function($scope,$stateParams,$state,DepotSaletypes,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
         $scope.current=new Date();
-        $scope.commande=[];
-        $scope.remise=0;
-// tous les produits
-        Products.getList().then(function(data){
-            console.log(data);
-        },function(a){
-            console.log(a);
-        });
-// post
-        Products.post({});
-
-        $scope.clients=[
-            {
-
-            }
-        ];
-
-        $scope.categories=[
-            {
-                id:1,
-                name:"Very"
-            },
-            {
-                id:2,
-                name:"MAISON CASTEL"
-            }
-        ];
-
-        $scope.produits=[
-            {
-                id:1,
-                name:"Very Pamplemousse",
-                category_id:1,
-                categorie:{
-                    id:1,
-                    name:"Very"
-                },
-                product_saletypes_id:1,
-                product_saletypes:{
-                    id:1,
-                    product_id:1,
-                    price:15000,
-                    saletype_id:1
-                },
-                stock_id:1,
-                stock:{
-                    id:1,
-                    quantity:2,
-                    product_id:1,
-                    depot_id:1,
-                    max_quantity:2,
-                    unity:"C6"
-                },
-                vintage:2015,
-                bar_code:"x"
-            },
-            {
-                id:2,
-                name:"Chateau l'évangile",
-                category_id:2,
-                categorie:{
-                    id:2,
-                    name:"MAison castel"
-                },
-                product_saletypes_id:2,
-                product_saletypes:{
-                    id:2,
-                    product_id:2,
-                    price:51000,
-                    saletype_id:1
-                },
-                stock_id:2,
-                stock:{
-                    id:1,
-                    quantity:5,
-                    product_id:2,
-                    depot_id:1,
-                    max_quantity:20,
-                    unity:"C6"
-                },
-                vintage:2015,
-                bar_code:"x"
-            }
-        ];
-
-        $scope.old_produits=$scope.produits;
-
-        $scope.produit={remise:0,quantite:5};
-
-        $scope.commande={total:0,produits:[]};
         var mode=$stateParams.mode;
+        $scope.commande={total:0,produits:[],mode_vente:mode};
+        $scope.remise=0;
+        $scope.F={c_id:undefined};
+        if($stateParams.commande_memo_id!=undefined){
+            var commande_memo_id=parseInt($stateParams.commande_memo_id);
+        }
+        // depot_saletypes?_includes=depot,saletype.products
+        DepotSaletypes.get(mode,{"_includes":"depot.product_saletypes.product"}).then(function(p){
+            console.log("Produits", p.depot.product_saletypes);
+            $scope.produits= p.depot.product_saletypes;
+        },function(q){
+            console.log(q);
+        });
+        /*DepotSaletypes.getList({"depot_id":1,"saletype_id":1,"_includes":"depot.product_saletypes.product"}).then(function(p){
+            console.log("Produits",p[0].depot.product_saletypes);
+            $scope.produits=p[0].depot.product_saletypes;
+        },function(q){
+            console.log(q);
+        });*/
+        Categories.getList().then(function(c){
+            console.log("categories",c);
+            $scope.categories=c;
+        },function(q){
+            console.log(q);
+        });
+        Customers.getList({"_includes":"customer_type"}).then(function(c){
+            console.log("clients",c);
+            $scope.clients=c;
+        },function(q){
+            console.log(q);
+        });
+        PaymentMethods.getList().then(function(p){
+            //console.log("mode de paiement",p);
+            $scope.mode_paiements=p;
+        },function(q){
+            console.log(q);
+        });
+
+        if(commande_memo_id>0){
+            //recuperation de la facture en mémo
+            var commande_memo=$cookies.getObject("commande_memo");
+            $scope.commande= _.find(commande_memo,function(c){
+                if(c.id==commande_memo_id){
+                    return c;
+                }
+            });
+            $scope.remise= $scope.commande.remise;
+        }
+
+        $scope.$watch('produit.command_quantity',function(q){
+            $scope.commande.total=prix_total($scope.commande.produits);
+        });
+        $scope.$watch('commande',function(q){
+            $scope.commande.total=prix_total($scope.commande.produits);
+        });
+
 
         $scope.detail_produit=function(p){
             $scope.produit=p;
             $("#btn_detail_produit").trigger("click");
         };
 
+        $scope.supprimer_produit=function(p) {
+            $("#close_detail_produit").trigger("click");
+            var index= _.indexOf($scope.commande.produits,p);
+            $scope.commande.produits.splice(index,1);
+            $scope.commande.total=prix_total($scope.commande.produits);
+            ToastApi.success({msg:$translate.instant("COMMANDE.ARG_24")});
+        };
+
         $scope.memoriser_commande=function(){
+            var commande_memo=$cookies.getObject("commande_memo");
+            if($scope.commande.id==undefined){
+                if(commande_memo==undefined){
+                    commande_memo=[];
+                }
+                $scope.commande.date=new Date();
+                if(commande_memo.length==0){
+                    $scope.commande.id=1;
+                }
+                else{
+                    $scope.commande.id=commande_memo[commande_memo.length-1].id+1;
+                }
+                commande_memo.push($scope.commande);
+                $cookies.putObject("commande_memo",commande_memo);
+            }
+            else{
+                _.find(commande_memo,function(c){
+                    if(c.id==commande_memo_id){
+                        c=$scope.commande;
+                        return c;
+                    }
+                });
+            }
             $state.go("accueil");
         };
 
@@ -114,31 +111,67 @@ app
             });
 
             if(t==null){
-                // nouveau produits
+                //nouveau produits comme
                 p.command_quantity=1;
                 $scope.commande.produits.push(p);
-                $scope.commande.total+= p.command_quantity*p.product_saletypes.price;
             }
             else{
-                if(t.stock.quantity>t.command_quantity)
+                if(t.pivot.quantity>t.command_quantity)
                 {
                     t.command_quantity+=1;
-                    $scope.commande.total+= p.command_quantity*p.product_saletypes.price;
                 }
+                else{
+                    ToastApi.error({msg:$translate.instant("COMMANDE.ARG_23")});
+                }
+            }
+            $scope.commande.total=prix_total($scope.commande.produits);
+        };
+
+        $scope.choix_client=function(c){
+            $scope.commande.client=c;
+            $scope.remise= c.customer_type.discount/100;
+            $scope.commande.remise= c.customer_type.discount/100;
+            $("#close_ajouter_client").trigger("click");
+        };
+
+        $scope.supprimer_client=function(){
+            $scope.commande.client=undefined;
+            $scope.remise=0;
+            $scope.commande.remise=0;
+            $("#close_ajouter_client").trigger("click");
+        };
+
+        $scope.choix_mode_paiement=function(mode){
+            $scope.commande.mode_paiement=mode;
+            $scope.mode_paiement=mode.name;
+        };
+
+        $scope.facturer=function(){
+            var c=$scope.commande;
+            if(c.client!=undefined){
+                if(c.produits.length>0){
+                    // impression du bon de preparation identique à la facture mais avec la mention bon de preparation
+                    $("#btn_facturer").trigger("click");
+                }
+                else{
+                    ToastApi.error({msg:$translate.instant("COMMANDE.ARG_27")});
+                }
+            }
+            else{
+                ToastApi.error({msg:$translate.instant("COMMANDE.ARG_26")});
             }
         };
 
-        $scope.filtrer_categories=function(c){
-            if(c=="tout"){
-                $scope.produits=$scope.old_produits;
-            }
-            else{
-                $scope.produits= _.filter($scope.old_produits,function(p){
-                    if(p.category_id== c.id){
-                        return p;
-                    }
-                })
-            }
-        }
-
+        $scope.payer=function(){
+            // enregistrement dans le serveur
+            // impression des factures
+        };
     });
+
+function prix_total(produits){
+    var total=0;
+    _.each(produits,function(p){
+        total+= p.command_quantity* p.price;
+    });
+    return total;
+}

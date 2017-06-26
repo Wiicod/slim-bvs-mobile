@@ -1,0 +1,18 @@
+#commande{
+  .mode{
+    padding: 9px;
+    text-align: center;
+    font-size: 15px;
+
+    &.active{
+      background: $slim_primary;
+      color: $slim_active_color;
+    }
+  }
+  .liste-categorie{
+    &.active{
+      background: $slim_primary;
+      color: $slim_active_color;
+    }
+  }
+}

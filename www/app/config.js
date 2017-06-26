@@ -42,11 +42,26 @@ config
 
         $authProvider.loginUrl = BASE_URL.apiEndpoint + 'signin';
         $authProvider.signupUrl = BASE_URL.apiEndpoint + 'signup';
-        $authProvider.tokenRoot = ''  // compensates success response macro
+        $authProvider.tokenRoot = ''; // compensates success response macro
     })
 
 
     .config(function ($urlRouterProvider, $httpProvider) {
         $httpProvider.interceptors.push('customeInterceptor');
         $urlRouterProvider.otherwise('/');
+    })
+
+    .config(function (RestangularProvider) {
+        RestangularProvider.addResponseInterceptor(parseApiResponse);
+
+        function parseApiResponse(data, operation) {
+            var response = data;
+
+            if (operation === 'getList' && data.data) {
+                response = data.data;
+                response.metadata = _.omit(data, 'data');
+            }
+
+            return response;
+        }
     })

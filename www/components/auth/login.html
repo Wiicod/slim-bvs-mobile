@@ -1,0 +1,62 @@
+<div id="login">
+    <div class="login-box ng-scope">
+        <div class="login-logo">
+            <a ui-sref="login" href="#/login"><b>Admin</b>LTE</a>
+        </div>
+        <div class="login-box-body">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="text-center">
+                        <h3>Sign in</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-12">
+                    <login-form class="ng-isolate-scope"><form ng-submit="vm.login()" method="post" name="vm.loginForm" class="ng-pristine ng-valid-email ng-invalid ng-invalid-required ng-valid-pattern">
+                        <div class="form-group has-feedback">
+                            <input class="form-control ng-pristine ng-untouched ng-empty ng-valid-email ng-invalid ng-invalid-required ng-valid-pattern" placeholder="Email" name="email" ng-model="vm.email" ng-required="true" ng-pattern="/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/" required="required" type="email">
+                            <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input class="form-control ng-pristine ng-untouched ng-empty ng-invalid ng-invalid-required" placeholder="Password" name="password" ng-model="vm.password" ng-required="true" required="required" type="password">
+                            <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-12">
+                                <button type="submit" class="btn btn-primary btn-block btn-flat">
+                                    Sign In
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                        <div class="social-auth-links text-center">
+                            <p>- OR -</p>
+                            <a href="/auth/github" class="btn btn-block btn-social btn-github btn-flat">
+                                <i class="fa fa-github"></i> Sign in using Github
+                            </a>
+                            <a href="/auth/google" class="btn btn-block btn-social btn-google btn-flat">
+                                <i class="fa fa-google"></i> Sign in using Google+
+                            </a>
+                            <a href="/auth/facebook" class="btn btn-block btn-social btn-facebook btn-flat">
+                                <i class="fa fa-facebook"></i> Sign in using Facebook
+                            </a>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6">
+                                <div class="pull-left">
+                                    <a ui-sref="forgot_password" href="#/forgot-password">Forgot your password?</a>
+                                </div>
+                            </div>
+                            <div class="col-xs-6">
+                                <div class="pull-right">
+                                    <a ui-sref="register" class="text-center" href="#/register">Create an account</a>
+                                </div>
+                            </div>
+                        </div>
+                    </login-form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

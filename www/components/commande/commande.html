@@ -1,4 +1,4 @@
-<div class="commande-container" style="overflow: hidden">
+<div id="commande" class="commande-container" style="overflow: hidden">
     <div class="row-fluid">
         <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="col-lg-2 col-sm-2 col-md-2">
@@ -7,12 +7,22 @@
                 </button>
             </div>
             <div class="col-lg-7 col-sm-7 col-md-7">
-                <div class="row entete">
-                    <div class="col-lg-4 col-sm-4 col-md-4">
-                        <span translate>COMMANDE.ARG_2</span> : Edward NANDA
+                <div class="row entete" ng-if="commande.client!=undefined">
+                    <div class="col-lg-5 col-sm-5 col-md-5">
+                        <span translate>COMMANDE.ARG_2</span> : {{commande.client.name |limitTo: 30}}
                     </div>
-                    <div class="col-lg-5 col-md-5 col-sm-5">
-                        <span translate>COMMANDE.ARG_3</span> : CHR en compte 10%
+                    <div class="col-lg-4 col-md-4 col-sm-4">
+                        <span translate>COMMANDE.ARG_3</span> : {{commande.client.customer_type.name|limitTo: 15}} {{commande.client.customer_type.discount}}%
+                    </div>
+                    <div class="col-lg-3 col-md-3 col-sm-3">
+                        <button class="btn btn-raised btn-sm btn-default" data-toggle="modal" data-target="#ajouter_client" style="margin: 0;" translate>
+                            COMMANDE.ARG_25
+                        </button>
+                    </div>
+                </div>
+                <div class="row entete" ng-if="commande.client==undefined">
+                    <div class="col-lg-9 col-sm-9 col-md-9">
+                        <span translate>COMMANDE.ARG_26</span>
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3">
                         <button class="btn btn-raised btn-sm btn-default" data-toggle="modal" data-target="#ajouter_client" style="margin: 0;" translate>
@@ -33,10 +43,11 @@
                 <fieldset>
                     <legend translate>COMMANDE.TITRE_1</legend>
                     <div class="scroll-categorie">
-                        <div class="categorie" ng-click="filtrer_categories('tout')">
+                        <div class="categorie liste-categorie" ng-class="{'active':F.c_id==undefined}" ng-click="F.c_id=undefined;">
                             TOUS
                         </div>
-                        <div class="categorie" ng-repeat="c in categories|filter:search_commande" ng-click="filtrer_categories(c)">
+                        <div class="categorie liste-categorie" ng-class="{'active':F.c_id==c.id}"
+                             ng-repeat="c in categories|filter:search_commande" ng-click="F.c_id= c.id">
                             {{c.name}}
                         </div>
                     </div>
@@ -53,13 +64,13 @@
                             <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_8</div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="produit row" ng-repeat="p in produits|filter:search_commande" ng-click="ajouter_produit(p)">
+                        <div class="produit row" ng-repeat="p in produits|filter:search_commande|filter:{product:{category_id:F.c_id}}:true" ng-click="ajouter_produit(p)">
                             <div class="col-lg-7 col-sm-7 col-md-7">
-                                {{p.name}}
+                                {{p.product.name}}
                             </div>
-                            <div class="col-lg-1 col-sm-1 col-md-1">{{p.stock.unity}}</div>
-                            <div class="col-lg-1 col-sm-1 col-md-1">{{p.stock.quantity}}</div>
-                            <div class="col-lg-3 col-sm-3 col-md-3">{{p.product_saletypes.price}}</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">{{p.unit}}</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">{{p.pivot.quantity}}</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3">{{p.price}}</div>
                         </div>
                     </div>
                 </fieldset>
@@ -75,8 +86,8 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="categorie row" ng-repeat="p in commande.produits" ng-click="detail_produit(p)">
-                                <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.command_quantity}} {{p.name}}</div>
-                                <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.command_quantity*p.product_saletypes.price}}</div>
+                                <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.command_quantity}} {{p.product.name}}</div>
+                                <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.command_quantity*p.price}}</div>
                             </div>
                         </div>
                         <div class="montant">
@@ -90,14 +101,14 @@
                             </div>
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_11</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{commande.total*(1+remise)}} Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{commande.total*(1-remise)}} Fcfa</div>
                             </div>
                         </div>
                         <div class="text-center">
                             <div class="row" style="margin:5px">
                                 <div class="btn-group btn-group-justified btn-group-raised">
                                     <a href="javascript:void(0)" ng-click="memoriser_commande()" class="btn btn-info" style="padding: 8px 12px" translate>COMMANDE.ARG_21</a>
-                                    <a href="javascript:void(0)" data-toggle="modal" data-target="#facturer" class="btn btn-primary" style="padding: 8px 12px" translate>COMMANDE.ARG_22</a>
+                                    <a href="javascript:void(0)" ng-click="facturer()" class="btn btn-primary" style="padding: 8px 12px" translate>COMMANDE.ARG_22</a>
                                 </div>
                             </div>
                         </div>
@@ -108,12 +119,13 @@
     </div>
 
     <button id="btn_detail_produit" data-toggle="modal" data-target="#detail_produit" class="hide"></button>
+    <button id="btn_facturer" data-toggle="modal" data-target="#facturer" class="hide"></button>
 
     <div class="modal" id="detail_produit">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">{{produit.name}}</h4>
+                    <h4 class="modal-title">{{produit.product.name}}</h4>
                 </div>
                 <div class="modal-body">
                     <fieldset>
@@ -121,13 +133,13 @@
                         <div class="row-fluid">
                             <div class="col-lg-3 col-md-3 col-sm-3" translate>COMMANDE.ARG_12</div>
                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                <input type="number" class="form-control" ng-model="produit.command_quantity" min="1" max="{{produit.stock.quantity}}">
+                                <input type="number" class="form-control" ng-model="produit.command_quantity" min="1" max="{{produit.pivot.quantity}}">
                             </div>
                         </div>
                         <div class="row-fluid">
                             <div class="col-lg-3 col-md-3 col-sm-3" translate>COMMANDE.ARG_10</div>
                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                <input type="number" class="form-control" ng-model="remise" min="0.01" max="0.1" step="0.01">
+                                <input type="number" class="form-control" ng-model="remise" min="0" max="0.1" step="0.01">
                             </div>
                         </div>
                         <div class="row-fluid">
@@ -139,7 +151,7 @@
                     </fieldset>
                 </div>
                 <div class="modal-footer" style="text-align: center">
-                    <button type="button" class="btn btn-raised btn-danger" translate>COMMANDE.ARG_14</button>
+                    <button type="button" class="btn btn-raised btn-danger" translate ng-click="supprimer_produit(produit)">COMMANDE.ARG_14</button>
                     <button type="button" class="btn btn-raised" id="close_detail_produit" data-dismiss="modal" translate>COMMANDE.ARG_15</button>
                     <button type="button" class="btn btn-raised btn-primary" ng-click="authentification(code)" translate>COMMANDE.ARG_16</button>
                 </div>
@@ -160,20 +172,20 @@
                         </div>
                     </div>
                     <div class="row scroll">
-                        <div class="col-lg-4 col-md-4 col-sm-4" ng-repeat="n in ['edward','nanda','zjdbqkdbqksdkqj sdkqjsndkqjsndkqjsnd',1,11,111,1111,4,5,56]|filter:search_client">
+                        <div class="col-lg-4 col-md-4 col-sm-4" ng-repeat="c in clients|filter:search_client" ng-click="choix_client(c)">
                             <div class="panel panel-default">
                                 <div class="panel-body">
-                                    {{n | limitTo:32}}
+                                    {{c.name | limitTo:20}}
                                     <br>
-                                    <span class="pull-right md-text text-primary">CHR en compte 10%</span>
+                                    <span class="pull-right md-text text-primary">{{c.customer_type.name}} {{c.customer_type.discount}}%</span>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-raised btn-danger" data-dismiss="modal" translate>COMMANDE.ARG_15</button>
-                    <button type="button" class="btn btn-raised btn-primary" ng-click="ajouter_client(code)" translate>COMMANDE.ARG_17</button>
+                    <button type="button" class="btn btn-raised btn-danger" data-dismiss="modal" id="close_ajouter_client" translate>COMMANDE.ARG_15</button>
+                    <button type="button" class="btn btn-raised btn-primary" ng-click="supprimer_client()" translate>COMMANDE.ARG_17</button>
                 </div>
             </div>
         </div>
@@ -184,7 +196,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        Client : Edward NANDA (CHR en compte 10%)
+                        {{commande.client.name}} | {{commande.client.customer_types.name}}  | {{commande.client.customer_types.discount}}
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -196,12 +208,12 @@
                                     <div class="scroll-commande">
                                         <div class="row-fluid">
                                             <div class="col-lg-9 col-sm-9 col-md-9" translate>COMMANDE.ARG_5</div>
-                                            <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_8</div>
+                                            <div class="col-lg-3 col-sm-3 col-md-3 text-right" translate>COMMANDE.ARG_8</div>
                                         </div>
                                         <div class="clearfix"></div>
-                                        <div class="categorie row" ng-repeat="n in [1,2,3,4,5,6,11,22,33]" ng-click="detail_produit(n)">
-                                            <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{n}} Very pamplemouse</div>
-                                            <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">00 000 000</div>
+                                        <div class="categorie row" ng-repeat="p in commande.produits">
+                                            <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.name}}</div>
+                                            <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.price}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -211,30 +223,22 @@
                             <fieldset style="margin-bottom: 20%">
                                 <legend translate>COMMANDE.ARG_18</legend>
                                 <div class="text-center">
-                                    <h3>4323 fcfa</h3>
+                                    <h3 style="margin-top: 5px">{{commande.client.account}}</h3>
                                 </div>
                             </fieldset>
                             <fieldset>
                                 <legend translate>COMMANDE.ARG_19</legend>
                                 <div class="text-center">
-                                    <h3>3E390293090 Fcfa</h3>
+                                    <h3 style="margin-top: 5px">{{commande.total*(1-remise)}} Fcfa</h3>
                                 </div>
                             </fieldset>
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
                             <fieldset>
                                 <legend translate>COMMANDE.TITRE_6</legend>
-                                <div class="categorie mode">
-                                    CHEQUE
-                                </div>
-                                <div class="categorie mode">
-                                    Virement
-                                </div>
-                                <div class="categorie mode">
-                                    compte client
-                                </div>
-                                <div class="categorie mode">
-                                    Espece
+                                <div class="categorie mode" ng-repeat="m in mode_paiements" ng-class="{'active':mode_paiement==m.name}"
+                                     ng-click="choix_mode_paiement(m)">
+                                    {{m.name}}
                                 </div>
                             </fieldset>
                         </div>
@@ -242,7 +246,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-raised btn-danger" data-dismiss="modal" translate>COMMANDE.ARG_1</button>
-                    <button type="button" class="btn btn-raised btn-primary" ng-click="facturer(code)" translate>COMMANDE.ARG_20</button>
+                    <button type="button" class="btn btn-raised btn-primary" ng-click="payer(code)" translate>COMMANDE.ARG_20</button>
                 </div>
             </div>
         </div>
