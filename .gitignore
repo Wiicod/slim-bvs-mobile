@@ -16,3 +16,4 @@ debug.log
 www/js/
 www/dist/
 www/dist_locales/
+www/css/ionic.app.css
