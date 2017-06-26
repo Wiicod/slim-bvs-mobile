@@ -17,3 +17,4 @@ www/js/
 www/dist/
 www/dist_locales/
 www/css/ionic.app.css
+www/css/ionic.app.min.css
