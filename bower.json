@@ -28,6 +28,8 @@
     "bootstrap-material-design": "^4.0.2",
     "ngmap": "^1.18.4",
     "angular-acl": "^0.1.9",
-    "lodash": "^4.17.4"
+    "lodash": "^4.17.4",
+    "bootstrap-waitingfor": "^1.2.4",
+    "ngCordova": "^0.1.27-alpha"
   }
 }
