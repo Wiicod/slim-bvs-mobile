@@ -3,7 +3,7 @@
  */
 
 app
-    .controller("CommandeCtrl",function($scope,$stateParams,$state,DepotSaletypes,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
+    .controller("CommandeCtrl",function($scope,$stateParams,$state,Bills,BillProductSaleTypes,DepotSaletypes,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
         $scope.current=new Date();
         var mode=$stateParams.mode;
         $scope.commande={total:0,produits:[],mode_vente:mode};
@@ -38,7 +38,7 @@ app
             console.log(q);
         });
         PaymentMethods.getList().then(function(p){
-            //console.log("mode de paiement",p);
+            console.log("mode de paiements",p);
             $scope.mode_paiements=p;
         },function(q){
             console.log(q);
@@ -143,7 +143,7 @@ app
 
         $scope.choix_mode_paiement=function(mode){
             $scope.commande.mode_paiement=mode;
-            $scope.mode_paiement=mode.name;
+            $scope.mode_paiement=mode.title;
         };
 
         $scope.facturer=function(){
@@ -163,9 +163,30 @@ app
         };
 
         $scope.payer=function(){
-            // enregistrement dans le serveur
+            console.log($scope.commande,$scope.echeance);
+            var c=$scope.commande;
+            var bill={};
+            var d =new Date();
+            bill.deadline= $scope.echeance==undefined?1900+ d.getYear()+"-"+(1+ d.getMonth())+"-"+ d.getDate()+" 00:00:00":$scope.echeance;
+            bill.discount= c.remise;
+            bill.customer_id= c.client.id;
+            bill.paymentmethod_id= c.mode_paiement.id;
+            bill.user_id=1;
+            bill.statut=$scope.echeance==undefined?1:0;
+
+            // enregistrement de la facture
+            console.log(bill);
+            Bills.post(bill).then(function(f){
+                console.log(f);
+            },function(q){
+                console.log(q);
+            });
             // impression des factures
         };
+
+        $scope.arrondi=function(x){
+            return Math.round(x);
+        }
     });
 
 function prix_total(produits){

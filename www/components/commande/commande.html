@@ -8,11 +8,8 @@
             </div>
             <div class="col-lg-7 col-sm-7 col-md-7">
                 <div class="row entete" ng-if="commande.client!=undefined">
-                    <div class="col-lg-5 col-sm-5 col-md-5">
-                        <span translate>COMMANDE.ARG_2</span> : {{commande.client.name |limitTo: 30}}
-                    </div>
-                    <div class="col-lg-4 col-md-4 col-sm-4">
-                        <span translate>COMMANDE.ARG_3</span> : {{commande.client.customer_type.name|limitTo: 15}} {{commande.client.customer_type.discount}}%
+                    <div class="col-lg-9 col-sm-9 col-md-9">
+                        <span translate>COMMANDE.ARG_2</span> : {{commande.client.name |limitTo: 30}} | {{commande.client.customer_type.name|limitTo: 15}} {{commande.client.customer_type.discount}}%
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3">
                         <button class="btn btn-raised btn-sm btn-default" data-toggle="modal" data-target="#ajouter_client" style="margin: 0;" translate>
@@ -59,9 +56,9 @@
                     <div class="scroll-categorie scroll-produit">
                         <div class="row-fluid">
                             <div class="col-lg-7 col-sm-7 col-md-7" translate>COMMANDE.ARG_5</div>
-                            <div class="col-lg-1 col-sm-1 col-md-1" translate>COMMANDE.ARG_6</div>
-                            <div class="col-lg-1 col-sm-1 col-md-1" translate>COMMANDE.ARG_7</div>
-                            <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_8</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1 text-center" translate>COMMANDE.ARG_6</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1 text-center" translate>COMMANDE.ARG_7</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 text-center" translate>COMMANDE.ARG_8</div>
                         </div>
                         <div class="clearfix"></div>
                         <div class="produit row" ng-repeat="p in produits|filter:search_commande|filter:{product:{category_id:F.c_id}}:true" ng-click="ajouter_produit(p)">
@@ -70,7 +67,7 @@
                             </div>
                             <div class="col-lg-1 col-sm-1 col-md-1">{{p.unit}}</div>
                             <div class="col-lg-1 col-sm-1 col-md-1">{{p.pivot.quantity}}</div>
-                            <div class="col-lg-3 col-sm-3 col-md-3">{{p.price}}</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 text-right">{{p.price}}</div>
                         </div>
                     </div>
                 </fieldset>
@@ -82,7 +79,7 @@
                         <div class="scroll-commande">
                             <div class="row-fluid">
                                 <div class="col-lg-9 col-sm-9 col-md-9" translate>COMMANDE.ARG_5</div>
-                                <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_8</div>
+                                <div class="col-lg-3 col-sm-3 col-md-3 text-center" translate>COMMANDE.ARG_8</div>
                             </div>
                             <div class="clearfix"></div>
                             <div class="categorie row" ng-repeat="p in commande.produits" ng-click="detail_produit(p)">
@@ -97,11 +94,11 @@
                             </div>
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_10</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{commande.total*remise}} Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{arrondi(commande.total*remise)}} Fcfa</div>
                             </div>
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_11</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{commande.total*(1-remise)}} Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{arrondi(commande.total*(1-remise))}} Fcfa</div>
                             </div>
                         </div>
                         <div class="text-center">
@@ -212,7 +209,7 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="categorie row" ng-repeat="p in commande.produits">
-                                            <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.name}}</div>
+                                            <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.product.name}}</div>
                                             <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.price}}</div>
                                         </div>
                                     </div>
@@ -223,22 +220,42 @@
                             <fieldset style="margin-bottom: 20%">
                                 <legend translate>COMMANDE.ARG_18</legend>
                                 <div class="text-center">
-                                    <h3 style="margin-top: 5px">{{commande.client.account}}</h3>
+                                    <h3 style="margin-top: 5px">{{commande.client.account}} Fcfa</h3>
                                 </div>
                             </fieldset>
-                            <fieldset>
+                            <fieldset style="margin-bottom: 20%">
                                 <legend translate>COMMANDE.ARG_19</legend>
                                 <div class="text-center">
-                                    <h3 style="margin-top: 5px">{{commande.total*(1-remise)}} Fcfa</h3>
+                                    <h3 style="margin-top: 5px">{{arrondi(commande.total*(1-remise))}} Fcfa</h3>
+                                </div>
+                            </fieldset>
+
+                            <fieldset ng-if="commande.mode_paiement.title=='Compte client'">
+                                <legend translate>COMMANDE.ARG_30</legend>
+                                <div class="">
+                                    <div class="dropdown">
+                                        <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target=".dropdown-start-parent"
+                                                >
+                                            <div class="input-group date">
+                                                <input type="text" class="form-control" data-ng-model="echance">
+                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                            </div>
+                                        </a>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                            <datetimepicker data-ng-model="echance"
+                                                            data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed',startView:'day', minView:'day' }"
+                                                            ></datetimepicker>
+                                        </ul>
+                                    </div>
                                 </div>
                             </fieldset>
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
                             <fieldset>
                                 <legend translate>COMMANDE.TITRE_6</legend>
-                                <div class="categorie mode" ng-repeat="m in mode_paiements" ng-class="{'active':mode_paiement==m.name}"
+                                <div class="categorie mode" ng-repeat="m in mode_paiements" ng-class="{'active':mode_paiement==m.title}"
                                      ng-click="choix_mode_paiement(m)">
-                                    {{m.name}}
+                                    {{m.title}}
                                 </div>
                             </fieldset>
                         </div>

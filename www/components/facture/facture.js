@@ -12,6 +12,7 @@ app
         var j=new Date();
         var deb= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-01';
         var fin= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-'+ j.getDate()+" 23:59:59";
+        var user_id=1;
 
         function startDateOnSetTime () {
             $scope.$broadcast('start-date-changed');
@@ -47,20 +48,23 @@ app
 
         $scope.actualiser_facture=function(){
             if($scope.dateRangeStart!=undefined && $scope.dateRangeEnd!=undefined){
-                charger_factures(format_date("d",$scope.dateRangeStart)+","+format_date("f",$scope.dateRangeEnd),$scope,Bills,ToastApi,$translate);
+                charger_factures(format_date("d",$scope.dateRangeStart)+","+format_date("f",$scope.dateRangeEnd),$scope,Bills,ToastApi,$translate,user_id);
             }
             else{
                 ToastApi.error({msg:$translate.instant("HISTORIQUE.ARG_24")});
             }
         };
 
-        charger_factures(deb+","+fin,$scope,Bills,ToastApi,$translate);
+        charger_factures(deb+","+fin,$scope,Bills,ToastApi,$translate,user_id);
 
         $scope.detail_facture=function(f){
             console.log(f);
             $scope.facture=f;
             $("#btn_detail_facture").trigger("click");
-        }
+        };
+        $scope.arrondi=function(x){
+            return Math.round(x);
+        };
     })
 
     .controller("FactureMemoCtrl",function($scope,$cookies){
@@ -76,16 +80,11 @@ function format_date(e,d){
         return 1900+ d.getYear()+"-"+(1+ d.getMonth())+"-"+ d.getDate()+" 23:59:59";
 }
 
-function charger_factures(date,scope,service,toast,translate){
-    service.getList({"created_at-bt": date,_includes: 'product_saletypes.product,customer.customer_type'}).then(function(res) {
+function charger_factures(date,scope,service,toast,translate,user_id){
+    service.getList({"created_at-bt": date,"seller_id":user_id,_includes: 'product_saletypes.product,customer.customer_type,seller'}).then(function(res) {
         scope.factures=res;
-        _.each(res,function (b) {
-            b.sum=0;
-             _.each(b.product_saletypes, function (p) {
-                 b.sum+=p.pivot.quantity * p.price;
-            });
-            b.sum_dis= Math.round(b.sum*(1-(b.discount/100)));
-        });
+        console.log(res,"");
+
     },function(q){
         toast.error({msg:translate.instant("HISTORIQUE.ARG_27")+ q.data.error+"  |   "+ q.data.reason});
         console.log(q);

@@ -33,7 +33,8 @@
     "ARG_26":"Aucune factures dans cette plage.",
     "ARG_27":"Impossible d'effectuer cette action, veuillez contacter le support. Erreur : ",
     "ARG_28":"Payée",
-    "ARG_29":"Echue"
+    "ARG_29":"Echue",
+    "ARG_30":"Echeance de la facture"
   },
   "MEMO":{
     "TITRE_1" :"Factures en mémo",

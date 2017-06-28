@@ -3,14 +3,11 @@
  */
 resources
 
-    .factory('Products',function(API){
-        return API.service('products');
-    })
     .factory('Bills',function(API){
         return API.service('bills');
     })
-    .factory('BillProducts',function(API){
-        return API.service('bill_products');
+    .factory('BillProductSaleTypes',function(API){
+        return API.service('bill_product_saletypes');
     })
     .factory('Categories',function(API){
         return API.service('categories');
@@ -18,15 +15,21 @@ resources
     .factory('Customers',function(API){
         return API.service('customers');
     })
-    .factory('PaymentMethods',function(API){
-        return API.service('paymentmethods');
-    })
-    .factory('Stocks',function(API){
-        return API.service('stocks');
+    .factory('Depots',function(API){
+        return API.service('depots');
     })
     .factory('DepotSaletypes',function(API){
         return API.service('depot_saletypes');
     })
-    .factory('Depots',function(API){
-        return API.service('depots');
+    .factory('PaymentMethods',function(API){
+        return API.service('paymentmethods');
+    })
+    .factory('Products',function(API){
+        return API.service('products');
+    })
+    .factory('SaleTargets',function(API){
+        return API.service('saletargets');
+    })
+    .factory('Stocks',function(API){
+        return API.service('stocks');
     })

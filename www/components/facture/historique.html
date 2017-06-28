@@ -39,7 +39,7 @@
                                 <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
                             </div>
                         </a>
-                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                        <ul class="dropdown-menu" style="left: -50%;" role="menu" aria-labelledby="dLabel">
                             <datetimepicker data-ng-model="dateRangeEnd"
                                             data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed',startView:'day', minView:'day' }"
                                             data-on-set-time="endDateOnSetTime()"
@@ -67,7 +67,7 @@
                             {{f.created_at}}
                         </div>
                         <div class="col-lg-2 col-sm-2 col-md-2 text-right">
-                            {{f.sum_dis}} Fcfa
+                            {{f.amount}} Fcfa
                         </div>
                     </div>
                 </div>
@@ -97,26 +97,24 @@
                                     <div class="scroll-commande">
                                         <div class="row-fluid">
                                             <div class="col-lg-9 col-sm-9 col-md-9" translate>HISTORIQUE.ARG_4</div>
-                                            <div class="col-lg-3 col-sm-3 col-md-3 text-right" translate>HISTORIQUE.ARG_5</div>
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="categorie row" ng-repeat="p in facture.product_saletypes" ng-click="detail_produit(n)">
-                                            <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.pivot.quantity}} {{p.product.name}}</div>
-                                            <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.price}}</div>
+                                            <div class="col-lg-12 col-sm-12 col-md-12 no-padding-lr">{{p.pivot.quantity}} {{p.product.name}}</div>
                                         </div>
                                     </div>
                                     <div class="montant">
                                         <div class="row" >
                                             <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_6</div>
-                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.sum}} Fcfa</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.amount}} Fcfa</div>
                                         </div>
                                         <div class="row" >
                                             <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_7</div>
-                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.sum*(facture.discount/100)}} Fcfa</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{arrondi(facture.amount*(facture.discount/100))}} Fcfa</div>
                                         </div>
                                         <div class="row" >
                                             <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_8</div>
-                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.sum_dis}} Fcfa</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{arrondi(facture.amount*(1-(facture.discount/100)))}} Fcfa</div>
                                         </div>
                                     </div>
                                 </div>
@@ -137,7 +135,7 @@
                                     <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_10
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
-                                        {{facture.sum_dis}} Fcfa
+                                        {{arrondi(facture.amount*(1-(facture.discount/100)))}} Fcfa
                                     </div>
                                 </div>
                                 <div class="row-fluid clearfix">

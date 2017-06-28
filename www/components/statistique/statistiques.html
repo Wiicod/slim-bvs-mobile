@@ -1,20 +1,20 @@
 <div id="statistiques">
     <div class="panel">
         <div class="panel-body">
-            <h5><span>Statistiques</span></h5>
+            <h5><span translate>STATISTIQUES.TITRE_1</span></h5>
 
             <div class="clearfix"></div>
             <div class="scroll-historique">
-                <div class="row categorie" ng-repeat="n in [1,2,3,'2',44,33,55,2222,4444,55555,111,11]|filter:filtre">
+                <div class="row categorie" ng-repeat="o in objectifs|orderBy:'-name':true">
                     <div class="row-fluid">
                         <div class="col-lg-4 col-sm-4 col-md-4">
-                            Champagne
+                            {{o.category.name}}
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
-                            Vendu : 100 000 000 Fcfa
+                            <span translate>STATISTIQUES.ARG_1</span> : 100 000 000 Fcfa
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
-                            Objectif : 100 000 000 Fcfa
+                            <span translate>STATISTIQUES.ARG_2</span> : {{o.value}} Fcfa
                         </div>
                     </div>
                 </div>
