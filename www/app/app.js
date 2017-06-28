@@ -25,7 +25,8 @@ var app = angular.module('slim', [
     'ui.bootstrap.datetimepicker',
     'ngStorage',
     'templates',
-    'mm.acl'
+    'mm.acl',
+    'ngCordova'
 ])
 
     .run(function($ionicPlatform,$localStorage,$state,$rootScope,AclService) {

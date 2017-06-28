@@ -6,7 +6,7 @@ config
 
     .constant('BASE_URL', {
         url: 'http://localhost:3000/',
-        apiEndpoint:'http://server.slim.app/api/'
+        apiEndpoint:'http://server.bvs.local/api'
     })
     .constant('APP_KEY', {
 

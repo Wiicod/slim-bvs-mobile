@@ -118,21 +118,12 @@ service
         var requestInitiated;
 
         function showLoadingText() {
-            $injector.get("$ionicLoading").show({
-                template: '<div class="loader">' +
-                '<svg class="circular">' +
-                '<circle class="path" cx="15" cy="15" r="10" fill="none" stroke-width="2" stroke-miterlimit="10"/>' +
-                '</svg>' +
-                '</div>',
-                // template: '<ion-spinner icon="ripple" class="spinner-balanced">',
-                // template: '<ion-spinner icon="bubbles spiral" class="spinner-balanced">',
-                animation: 'fade-in',
-                showBackdrop: true
-            });
+            waitingDialog.show('Loading');
+
         };
 
         function hideLoadingText() {
-            $injector.get("$ionicLoading").hide();
+           waitingDialog.hide();
         };
 
         return {

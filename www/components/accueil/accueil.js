@@ -6,7 +6,7 @@ app
 
     .controller("AccueilCtrl",function($scope,Depots){
         $scope.current=new Date()
-        Depots.get(3,{_includes:"saletypes"}).then(function(d){
+        Depots.get(1,{_includes:"saletypes"}).then(function(d){
             console.log(d);
             $scope.saletypes= d.saletypes;
         });
