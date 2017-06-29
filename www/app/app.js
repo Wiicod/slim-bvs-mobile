@@ -20,7 +20,6 @@ var app = angular.module('slim', [
     'slim.resources',
     'ionic-toast',
     'ngCookies',
-    'ngMap',
     'restangular',
     'ui.bootstrap.datetimepicker',
     'ngStorage',

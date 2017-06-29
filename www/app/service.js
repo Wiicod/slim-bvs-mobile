@@ -8,7 +8,7 @@ service
         var headers = {
             'Content-Type': 'application/json',
             'Accept': 'application/x.laravel.v1+json',
-            'show_loading':true
+            'show_loading':false
         }
 
         return Restangular.withConfig(function (RestangularConfigurer) {

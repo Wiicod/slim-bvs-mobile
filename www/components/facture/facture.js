@@ -62,9 +62,6 @@ app
             $scope.facture=f;
             $("#btn_detail_facture").trigger("click");
         };
-        $scope.arrondi=function(x){
-            return Math.round(x);
-        };
     })
 
     .controller("FactureMemoCtrl",function($scope,$cookies){

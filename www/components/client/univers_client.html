@@ -10,7 +10,7 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="scroll-categorie">
-                        <div class="categorie" ng-repeat="c in clients|filter:search_client" ng-click="choix_client(c)">
+                        <div class="categorie" ng-repeat="c in clients|filter:search_client|orderBy:'-name':true" ng-click="choix_client(c)">
                             {{c.name}}
                         </div>
                     </div>
@@ -51,7 +51,7 @@
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_9</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.adress}}</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.address}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_10</div>
@@ -92,20 +92,8 @@
                                                 <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.phone}}</div>
                                             </div>
                                             <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_9</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.adress}}</div>
-                                            </div>
-                                            <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_10</div>
                                                 <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.post_box}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_11</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.town.name}}</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_12</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.town.country.name}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -169,7 +157,7 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-lg-9 col-sm-8 col-md-9 scroll-historique">
-                                        <div class="row categorie" ng-repeat="f in client.bills|filter:filtre">
+                                        <div class="row categorie" ng-repeat="f in client.bills">
                                             <div class="row-fluid">
                                                 <div class="col-lg-4 col-sm-4 col-md-4">
                                                     N° {{f.id}}

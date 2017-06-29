@@ -10,8 +10,8 @@
                         <div class="col-lg-4 col-sm-4 col-md-4">
                             {{o.category.name}}
                         </div>
-                        <div class="col-lg-4 col-sm-4 col-md-4">
-                            <span translate>STATISTIQUES.ARG_1</span> : 100 000 000 Fcfa
+                            <div class="col-lg-4 col-sm-4 col-md-4">
+                            <span translate>STATISTIQUES.ARG_1</span> : {{o.objectif | roundCoin : 1 : true}} Fcfa ({{(o.objectif/o.value)*100 |roundCoin : 1: true}}%)
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
                             <span translate>STATISTIQUES.ARG_2</span> : {{o.value}} Fcfa

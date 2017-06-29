@@ -183,10 +183,6 @@ app
             });
             // impression des factures
         };
-
-        $scope.arrondi=function(x){
-            return Math.round(x);
-        }
     });
 
 function prix_total(produits){

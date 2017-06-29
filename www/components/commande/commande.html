@@ -94,11 +94,11 @@
                             </div>
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_10</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{arrondi(commande.total*remise)}} Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{acommande.total*remise| roundCoin : 1 : true}} Fcfa</div>
                             </div>
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_11</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{arrondi(commande.total*(1-remise))}} Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{commande.total*(1-remise)| roundCoin : 1 : true}} Fcfa</div>
                             </div>
                         </div>
                         <div class="text-center">
@@ -226,7 +226,7 @@
                             <fieldset style="margin-bottom: 20%">
                                 <legend translate>COMMANDE.ARG_19</legend>
                                 <div class="text-center">
-                                    <h3 style="margin-top: 5px">{{arrondi(commande.total*(1-remise))}} Fcfa</h3>
+                                    <h3 style="margin-top: 5px">{{commande.total*(1-remise)| roundCoin : 1 : true}} Fcfa</h3>
                                 </div>
                             </fieldset>
 

@@ -1,6 +1,7 @@
 {
   "STATISTIQUES":{
     "TITRE_1" :"Statistiques",
-    "ARG_1" :"Vendu"
+    "ARG_1" :"Vendu",
+    "ARG_2" :"Objectif"
   }
 }
