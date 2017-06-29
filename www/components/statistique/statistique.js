@@ -4,12 +4,12 @@
 
 app
 
-    .controller("StatistiqueCtrl",function($scope,SaleTargets){
+    .controller("StatistiqueCtrl",function($scope,Bills){
         var d=new Date();
         var user_id=1;
         // recuperation des objectifs de l'utilisateur
-        SaleTargets.getList({"user_id":user_id,"_includes":"category"}).then(function(o){
-            $scope.objectifs=o;
+        Bills.getList({"seller_id":user_id,"should_paginate":false}).then(function(o){
+            console.log(o);
         },function(q){
             console.log(q);
         });

@@ -10,8 +10,8 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="scroll-categorie">
-                        <div class="categorie" ng-repeat="n in [1,2,3,4,5]|filter:search_client">
-                            Vins internationaux
+                        <div class="categorie" ng-repeat="c in clients|filter:search_client" ng-click="choix_client(c)">
+                            {{c.name}}
                         </div>
                     </div>
                 </fieldset>
@@ -20,7 +20,7 @@
                 <fieldset>
                     <legend translate>UNIVERS_CLIENT.TITRE_2</legend>
                     <div class="scroll-univers scroll-produit" >
-                        <div class="">
+                        <div ng-if="choix==true" class="">
                             <ul class="nav nav-tabs" role="tablist">
                                 <li role="presentation" class="active">
                                     <a href="/#detail" aria-controls="detail" role="tab" data-toggle="tab" translate>UNIVERS_CLIENT.ARG_1</a>
@@ -39,77 +39,73 @@
                                         <div class="col-lg-6 col-sm-6 col-md-6">
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_5</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">NANDA</div>
-                                            </div>
-                                            <div class="row">
-                                                <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_6</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Edward</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.name}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_7</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">enanda@bvssas.com</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.email}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_8</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">690613323</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.phone}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_9</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Bassa</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.adress}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_10</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">1352</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.post_box}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_11</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Douala</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.town.name}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_12</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Cameroun</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.town.country.name}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_13</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">CHR en compte 10%</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.customertype.name}} | {{client.customertype.discount}}%</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_14</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">XX/XX/XXXX</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.birthname}}</div>
                                             </div>
                                         </div>
                                         <div class="col-lg-6 col-sm-6 col-md-6">
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_15</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Wiicod</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.name}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_16</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">XXX</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.rccm}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_17</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">XXX</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.taxpayer_number}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_8</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">690613323</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.phone}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_9</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Bassa</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.adress}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_10</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">1352</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.post_box}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_11</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Douala</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.town.name}}</div>
                                             </div>
                                             <div class="row">
                                                 <div class="col-lg-6 col-sm-6 col-md-6" translate>UNIVERS_CLIENT.ARG_12</div>
-                                                <div class="col-lg-6 col-sm-6 col-md-6">Cameroun</div>
+                                                <div class="col-lg-6 col-sm-6 col-md-6">{{client.company.town.country.name}}</div>
                                             </div>
                                         </div>
                                     </div>
@@ -126,14 +122,14 @@
                                                         panel="directions-panel"
                                                         travel-mode="DRIVING"
                                                         origin="{{position}}"
-                                                        destination="4.0365026,9.7221316">
+                                                        destination="{{client.latitude}},{{client.longitude}}">
                                                 </directions>
                                                 <custom-marker id="start"
                                                                position="{{lat}},{{lng}}">
                                                     <div translate>UNIVERS_CLIENT.ARG_18 </div>
                                                 </custom-marker>
                                                 <custom-marker id="end"
-                                                               position="4.0365026,9.7221316">
+                                                               position="{{client.latitude}},{{client.longitude}}">
                                                     <div translate>UNIVERS_CLIENT.ARG_19 </div>
                                                 </custom-marker>
                                             </ng-map>
@@ -173,16 +169,16 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-lg-9 col-sm-8 col-md-9 scroll-historique">
-                                        <div class="row categorie" ng-repeat="n in [1,2,3,'2',44,33,55,2222,4444,55555,111,11]|filter:filtre">
+                                        <div class="row categorie" ng-repeat="f in client.bills|filter:filtre">
                                             <div class="row-fluid">
                                                 <div class="col-lg-4 col-sm-4 col-md-4">
-                                                    Numero facture
+                                                    N° {{f.id}}
                                                 </div>
                                                 <div class="col-lg-2 col-sm-2 col-md-2">
-                                                    20-05-2017
+                                                    {{f.created_at}}
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-md-4 text-right">
-                                                    100 000 000 Fcfa
+                                                    {{f.amount}} Fcfa
                                                 </div>
                                                 <div class="col-lg-2 col-sm-2 col-md-2 text-right">
                                                     <span class="" data-toggle="modal" data-target="#detail_facture"><i class="fa fa-bars"></i></span>
@@ -200,7 +196,7 @@
                                         <fieldset style="margin-bottom: 10%">
                                             <legend translate>UNIVERS_CLIENT.ARG_26</legend>
                                             <div class="text-center">
-                                                <h3>3E390293090 Fcfa</h3>
+                                                <h3>{{client.account}} Fcfa</h3>
                                             </div>
                                         </fieldset>
                                         <fieldset>
@@ -216,6 +212,13 @@
                                         <h3 translate>UNIVERS_CLIENT.ARG_28</h3>
                                         <p translate>UNIVERS_CLIENT.ARG_29</p>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div ng-if="choix==false">
+                            <div class="row-fluid">
+                                <div class="col-lg-6 col-sm-6 col-md-6 col-lg-offset-3 col-sm-offset-3 col-md-offset-3 text-center" style="padding-top: 50px">
+                                    <p translate>UNIVERS_CLIENT.ARG_30</p>
                                 </div>
                             </div>
                         </div>

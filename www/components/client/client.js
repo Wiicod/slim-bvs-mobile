@@ -4,15 +4,29 @@
 
 app
 
-    .controller("UniversCtrl",function($scope,NgMap,$rootScope,$cordovaGeolocation){
+    .controller("UniversCtrl",function($scope,NgMap,$rootScope,$cordovaGeolocation,Customers){
         $scope.current=new Date();
         // douala 4.0526383,9.6973306
         $scope.position=null;
         $scope.lat=null;
         $scope.lng=null;
+        $scope.choix=false;
+
+        // recuperation des clients
+        Customers.getList({_includes:"customertypes,town.country,bills",town_id:2}).then(function(c){
+           console.log(c);
+            $scope.clients=c;
+        },function(q){
+            console.log(q);
+        });
+
+        $scope.choix_client=function(c){
+            $scope.choix=true;
+            $scope.client=c;
+        };
 
         $cordovaGeolocation
-            .getCurrentPosition(posOptions)
+            .getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
             .then(function (position) {
                 var pos = {
                     lat: position.coords.latitude,
@@ -21,11 +35,7 @@ app
                 $scope.position=pos;
                 $scope.lat=pos.lat;
                 $scope.lng=pos.lng;
-                console.log($scope.lng,$scope.lat);
-                map.setCenter(pos);
-                var center = map.getCenter();
-                google.maps.event.trigger(map, "resize");
-                map.setCenter(center);
+
             }, function(err) {
                 // error
             });
