@@ -25,6 +25,7 @@ var app = angular.module('slim', [
     'ngStorage',
     'templates',
     'mm.acl',
+    'ngMap',
     'ngCordova'
 ])
 

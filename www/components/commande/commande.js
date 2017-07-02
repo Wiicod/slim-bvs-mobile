@@ -14,31 +14,21 @@ app
         }
         // depot_saletypes?_includes=depot,saletype.products
         DepotSaletypes.get(mode,{"_includes":"depot.product_saletypes.product"}).then(function(p){
-            console.log("Produits", p.depot.product_saletypes);
             $scope.produits= p.depot.product_saletypes;
         },function(q){
             console.log(q);
         });
-        /*DepotSaletypes.getList({"depot_id":1,"saletype_id":1,"_includes":"depot.product_saletypes.product"}).then(function(p){
-            console.log("Produits",p[0].depot.product_saletypes);
-            $scope.produits=p[0].depot.product_saletypes;
-        },function(q){
-            console.log(q);
-        });*/
         Categories.getList().then(function(c){
-            console.log("categories",c);
             $scope.categories=c;
         },function(q){
             console.log(q);
         });
-        Customers.getList({"_includes":"customer_type"}).then(function(c){
-            console.log("clients",c);
+        Customers.getList({"_includes":"customer_type","town_id":2}).then(function(c){
             $scope.clients=c;
         },function(q){
             console.log(q);
         });
         PaymentMethods.getList().then(function(p){
-            console.log("mode de paiements",p);
             $scope.mode_paiements=p;
         },function(q){
             console.log(q);
@@ -171,13 +161,19 @@ app
             bill.discount= c.remise;
             bill.customer_id= c.client.id;
             bill.paymentmethod_id= c.mode_paiement.id;
-            bill.user_id=1;
+            bill.seller_id=1;
             bill.statut=$scope.echeance==undefined?1:0;
 
             // enregistrement de la facture
-            console.log(bill);
+            console.log("Facture",bill);
             Bills.post(bill).then(function(f){
                 console.log(f);
+                // enregistrement du bill_product_saletype
+                angular.forEach($scope.commande.produits,function(v,k){
+                    BillProductSaleTypes.post({quantity:v.command_quantity,bill_id:f.id,product_saletype_id:v.pivot.product_saletype_id}).then(function(b){
+                        console.log(b);
+                    },function(q){console.log(q)});
+                })
             },function(q){
                 console.log(q);
             });

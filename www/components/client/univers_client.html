@@ -67,7 +67,7 @@
                                             </div>
                                             <div class="row-fliud clearfix">
                                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>UNIVERS_CLIENT.ARG_13</div>
-                                                <div class="col-lg-9 col-sm-9 col-md-9">{{client.customer_type.name}} | {{client.customertype.discount}}%</div>
+                                                <div class="col-lg-9 col-sm-9 col-md-9">{{client.customer_type.name}} | {{client.customer_type.discount}}%</div>
                                             </div>
                                             <div class="row-fliud clearfix">
                                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>UNIVERS_CLIENT.ARG_14</div>
@@ -101,7 +101,6 @@
                                 <div role="tabpanel" class="tab-pane" id="plan">
                                     <div class="row-fluid" ng-if="plan!=false">
                                         <div id="map" class="col-lg-12 col-sm-12 col-md-12">
-
                                             <ng-map zoom="20"
                                                     center="{{position}}"
                                                     style="height:90%" >
@@ -134,7 +133,7 @@
                                     </div>
                                 </div>
                                 <div role="tabpanel" class="tab-pane" id="historique">
-                                    <div class="row-fluid">
+                                    <div class="row-fluid hide">
                                         <div class="col-lg-1 col-sm-1 col-md-1">
                                             <h5 translate>UNIVERS_CLIENT.ARG_24</h5>
                                         </div>
@@ -157,19 +156,20 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-lg-9 col-sm-8 col-md-9 scroll-historique">
-                                        <div class="row categorie" ng-repeat="f in client.bills">
+                                        <div class="row categorie" ng-repeat="f in client.bills | orderBy : '-created_at':true">
                                             <div class="row-fluid">
-                                                <div class="col-lg-4 col-sm-4 col-md-4">
-                                                    N° {{f.id}}
+                                                <div class="col-lg-1 col-sm-1 col-md-1">
+                                                    {{f.id}}
                                                 </div>
-                                                <div class="col-lg-2 col-sm-2 col-md-2">
+                                                <div class="col-lg-2 col-sm-2 col-md-2 value">
+                                                    <span translate ng-if="f.status=='paided'">HISTORIQUE.ARG_28</span>
+                                                    <span translate ng-if="f.status=='not_paided'">HISTORIQUE.ARG_29</span>
+                                                </div>
+                                                <div class="col-lg-5 col-sm-5 col-md-5">
                                                     {{f.created_at}}
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-md-4 text-right">
-                                                    {{f.amount}} Fcfa
-                                                </div>
-                                                <div class="col-lg-2 col-sm-2 col-md-2 text-right">
-                                                    <span class="" data-toggle="modal" data-target="#detail_facture"><i class="fa fa-bars"></i></span>
+                                                    {{f.amount|roundCoin : 1 : true}} Fcfa
                                                 </div>
                                             </div>
                                         </div>
@@ -178,19 +178,19 @@
                                         <fieldset style="margin-bottom: 10%">
                                             <legend translate>UNIVERS_CLIENT.ARG_25</legend>
                                             <div class="text-center">
-                                                <h3>4323 fcfa</h3>
+                                                <h3 class="value">{{client.ca |roundCoin : 1 : true}} Fcfa</h3>
                                             </div>
                                         </fieldset>
                                         <fieldset style="margin-bottom: 10%">
                                             <legend translate>UNIVERS_CLIENT.ARG_26</legend>
                                             <div class="text-center">
-                                                <h3>{{client.account}} Fcfa</h3>
+                                                <h3 class="value">{{client.account|roundCoin : 1 : true}} Fcfa</h3>
                                             </div>
                                         </fieldset>
                                         <fieldset>
                                             <legend translate>UNIVERS_CLIENT.ARG_27</legend>
                                             <div class="text-center">
-                                                <h3>100 Factures</h3>
+                                                <h3 class="value">{{client.echue}}</h3>
                                             </div>
                                         </fieldset>
                                     </div>

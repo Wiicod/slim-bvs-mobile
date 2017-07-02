@@ -15,7 +15,7 @@
                             {{c.mode_vente}}
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4 text-right">
-                            {{c.total*(1-c.remise)}} Fcfa
+                            {{c.total*(1-c.remise)|roundCoin : 1 : true}} Fcfa
                         </div>
                     </div>
                 </div>

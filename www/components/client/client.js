@@ -4,7 +4,8 @@
 
 app
 
-    .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Customers){
+    .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Customers,NgMap){
+
         $scope.current=new Date();
         // douala 4.0526383,9.6973306
         $scope.position=null;
@@ -22,23 +23,43 @@ app
 
         $scope.choix_client=function(c){
             $scope.choix=true;
-            $scope.client=c;
+            c.echue=0;
+            c.ca=0;
             console.log(c);
+
+            // recuperation des factures echues et du chiffre d'affaire
+            angular.forEach(c.bills,function(v,k){
+                if(v.status=='not_paided'){
+                    c.echue++;
+                }
+                c.ca+= v.amount;
+            });
+            // recuperation du ciffre d'affaire
+            $scope.client=c;
         };
 
-        $cordovaGeolocation
-            .getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
-            .then(function (position) {
-                var pos = {
-                    lat: position.coords.latitude,
-                    lng: position.coords.longitude
-                };
-                $scope.position=pos;
-                console.log($scope.position);
-                $scope.lat=pos.lat;
-                $scope.lng=pos.lng;
+        NgMap.getMap().then(function(map) {
+            $rootScope.map = map;
 
-            }, function(err) {
-                // error
-            });
+            $cordovaGeolocation
+                .getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
+                .then(function (position) {
+                    var pos = {
+                        lat: position.coords.latitude,
+                        lng: position.coords.longitude
+                    };
+                    $scope.position=pos;
+                    $scope.lat=pos.lat;
+                    $scope.lng=pos.lng;
+                    map.setCenter(pos);
+
+
+                }, function(err) {
+                    // error
+                });
+
+            var center = map.getCenter();
+            google.maps.event.trigger(map, "resize");
+            map.setCenter(center);
+        });
     });
