@@ -1,0 +1,20 @@
+#client{
+  .detail{
+    .col-md-3{
+      &:first-child{
+        font-weight: bold;
+      }
+    }
+    .col-md-9{
+      color:$slim_text_color_2;
+    }
+    .row-fluid{
+      margin-bottom: 7px;
+      .col-md-3{
+        &:first-child{
+          font-weight: bold;
+        }
+      }
+    }
+  }
+}

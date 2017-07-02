@@ -6,13 +6,13 @@
 
     &.active{
       background: $slim_primary;
-      color: $slim_active_color;
+      color: $slim_text_color;
     }
   }
   .liste-categorie{
     &.active{
       background: $slim_primary;
-      color: $slim_active_color;
+      color: $slim_text_color;
     }
   }
 }

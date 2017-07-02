@@ -57,13 +57,13 @@
                       ng-repeat="f in factures|filter:filtre|orderBy:'-created_at':false"
                       ng-click="detail_facture(f)">
                     <div class="row-fluid">
-                        <div class="col-lg-2 col-sm-2 col-md-2">
-                            <span translate>HISTORIQUE.ARG_23</span>{{f.id}}
+                        <div class="col-lg-1 col-sm-1 col-md-1">
+                            {{f.id}}
                         </div>
                         <div class="col-lg-6 col-sm-6 col-md-6">
                             {{f.customer.name}}
                         </div>
-                        <div class="col-lg-2 col-sm-2 col-md-2">
+                        <div class="col-lg-3 col-sm-3 col-md-3">
                             {{f.created_at}}
                         </div>
                         <div class="col-lg-2 col-sm-2 col-md-2 text-right">

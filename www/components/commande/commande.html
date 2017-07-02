@@ -90,21 +90,21 @@
                         <div class="montant">
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_9</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{commande.total}} Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right value">{{commande.total}} Fcfa</div>
                             </div>
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_10</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{acommande.total*remise| roundCoin : 1 : true}} Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right value">{{commande.total*remise| roundCoin : 1 : true}} Fcfa</div>
                             </div>
                             <div class="row" >
                                 <div class="col-lg-3 col-sm-3 col-md-3" translate>COMMANDE.ARG_11</div>
-                                <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{commande.total*(1-remise)| roundCoin : 1 : true}} Fcfa</div>
+                                <div class="col-lg-9 col-sm-9 col-md-9 text-right value">{{commande.total*(1-remise)| roundCoin : 1 : true}} Fcfa</div>
                             </div>
                         </div>
                         <div class="text-center">
                             <div class="row" style="margin:5px">
                                 <div class="btn-group btn-group-justified btn-group-raised">
-                                    <a href="javascript:void(0)" ng-click="memoriser_commande()" class="btn btn-info" style="padding: 8px 12px" translate>COMMANDE.ARG_21</a>
+                                    <a href="javascript:void(0)" ng-click="memoriser_commande()" class="btn btn-default" style="padding: 8px 12px" translate>COMMANDE.ARG_21</a>
                                     <a href="javascript:void(0)" ng-click="facturer()" class="btn btn-primary" style="padding: 8px 12px" translate>COMMANDE.ARG_22</a>
                                 </div>
                             </div>
@@ -174,7 +174,7 @@
                                 <div class="panel-body">
                                     {{c.name | limitTo:20}}
                                     <br>
-                                    <span class="pull-right md-text text-primary">{{c.customer_type.name}} {{c.customer_type.discount}}%</span>
+                                    <span class="pull-right md-text text-grey">{{c.customer_type.name}} {{c.customer_type.discount}}%</span>
                                 </div>
                             </div>
                         </div>
@@ -220,13 +220,13 @@
                             <fieldset style="margin-bottom: 20%">
                                 <legend translate>COMMANDE.ARG_18</legend>
                                 <div class="text-center">
-                                    <h3 style="margin-top: 5px">{{commande.client.account}} Fcfa</h3>
+                                    <h3 style="margin-top: 5px" class="value">{{commande.client.account}} Fcfa</h3>
                                 </div>
                             </fieldset>
                             <fieldset style="margin-bottom: 20%">
                                 <legend translate>COMMANDE.ARG_19</legend>
                                 <div class="text-center">
-                                    <h3 style="margin-top: 5px">{{commande.total*(1-remise)| roundCoin : 1 : true}} Fcfa</h3>
+                                    <h3 style="margin-top: 5px" class="value">{{commande.total*(1-remise)| roundCoin : 1 : true}} Fcfa</h3>
                                 </div>
                             </fieldset>
 
