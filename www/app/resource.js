@@ -15,6 +15,9 @@ resources
     .factory('Customers',function(API){
         return API.service('customers');
     })
+    .factory('Diaries',function(API){
+        return API.service('diaries');
+    })
     .factory('Depots',function(API){
         return API.service('depots');
     })
@@ -32,4 +35,7 @@ resources
     })
     .factory('Stocks',function(API){
         return API.service('stocks');
+    })
+    .factory('Suggestions',function(API){
+        return API.service('suggestions');
     })

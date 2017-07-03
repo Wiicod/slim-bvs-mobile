@@ -153,7 +153,6 @@ app
         };
 
         $scope.payer=function(){
-            console.log($scope.commande,$scope.echeance);
             var c=$scope.commande;
             var bill={};
             var d =new Date();
@@ -173,11 +172,14 @@ app
                     BillProductSaleTypes.post({quantity:v.command_quantity,bill_id:f.id,product_saletype_id:v.pivot.product_saletype_id}).then(function(b){
                         console.log(b);
                     },function(q){console.log(q)});
-                })
+                });
+                $scope.commande={total:0,produits:[],mode_vente:mode};
+                $("#btn-facturer-close").trigger("click");
+                ToastApi.success({msg:$translate.instant("COMMANDE.ARG_28")});
             },function(q){
                 console.log(q);
             });
-            // impression des factures
+            // TODO: impression des factures e tenvoi des mail
         };
     });
 

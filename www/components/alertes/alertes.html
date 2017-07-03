@@ -2,15 +2,16 @@
     <div class="well">
         <h5><span translate>ALERTES.TITRE</span></h5>
         <div class="list-group scroll-alertes">
-            <div ng-repeat="n in [1,2,3,4,5,6]">
+            <div ng-repeat="a in alertes|orderBy:'-start_at':true">
                 <div class="list-group-item">
                     <div class="row-content">
-                        <div class="least-content">15m</div>
-                        <h4 class="list-group-item-heading">Aller au Pull Man</h4>
-
-                        <blockquote>
-                            <p class="list-group-item-text">Recouvrement des factures Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ea facere inventore magnam minus perferendis. Aliquid, commodi dolorem mollitia non obcaecati porro quibusdam rerum. Aliquid cupiditate eaque esse nesciunt quae veniam..</p>
+                        <h4 class="list-group-item-heading">{{a.title}}</h4>
+                        <blockquote class="value">
+                            <p class="list-group-item-text">{{a.description}}</p>
                         </blockquote>
+                        <div class="least-contents">
+                            <span translate>ALERTES.ARG_1</span> {{a.start_at}} <span translate>ALERTES.ARG_2</span> {{a.end_at}} <span ng-if="a.periodicity" translate>ALERTES.ARG_3</span>
+                        </div>
                     </div>
                 </div>
                 <div class="list-group-separator"></div>
