@@ -4,15 +4,18 @@
 
 app
 
-    .controller("AppCtrl",function($scope,$cookies){
+    .controller("AppCtrl",function($scope,$cookies,Diaries,Bills){
         $scope.current=new Date();
+        var user_id=1;
+        var j=new Date();
+        var now=(j.getYear()+1900)+'-'+(j.getMonth()+1);
+        var today=now+"-"+ j.getDate()+" 00:00:00,"+now+"-"+j.getDate()+" 23:59:59";
         $scope.statutAuth=true;
         $scope.code="0000";
         $scope.commande_memo=$cookies.getObject("commande_memo");
 
         //authentification pour ouverture de la caisse
         $scope.authentification=function(code){
-            console.log(code);
             if(code=="0000"){
                 $scope.statutAuth=false;
             }
@@ -21,15 +24,40 @@ app
                 console.log(code);
             }
         };
+
+        // calcul du chiffre d'affaire de la journée
+        Bills.getList({seller_id:user_id,"created_at-bt":today}).then(function(f){
+            $scope.ca= _.reduce(f,function(memo, num){
+                return memo+num.amount;
+            },0);
+            $cookies.putObject("facture",f);
+        });
+
+        // recuperation des agendas du mois
+
+        var deb= now+'-01 00:00:00';
+        var fin= now+'-30 23:59:59';
+        Diaries.getList({seller_id:user_id,"start_at-bt":deb+","+fin}).then(function(d){
+            $cookies.putObject("agenda",d);
+            $scope.alertes=d;
+        },function(q){console.log(q)});
     })
 
-    .controller("HeaderCtrl",function($scope){
+    .controller("HeaderCtrl",function($scope,Suggestions,ToastApi){
         $scope.current=new Date();
+        var user_id=1;
+        $scope.enregistrerSuggestion=function(){
+            Suggestions.post({content:$scope.suggestion,user_id:user_id}).then(function(d){
+                $scope.suggestion="";
+                $("#closeSuggestion").trigger("click");
+                ToastApi.success({msg:$translate.instant("HEADER.ARG_7")});
+            },function(q){
+                ToastApi.error({msg:$translate.instant("HEADER.ARG_8")});
+            });
+
+        };
     })
     .controller("FooterCtrl",function($scope){
         $scope.current=new Date();
-        $scope.enregistrerSuggestion=function(){
-            console.log($scope.suggestion);
-            $("#closeSuggestion").trigger("click");
-        };
-    })
+
+    });

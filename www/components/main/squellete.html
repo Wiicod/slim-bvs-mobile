@@ -14,14 +14,14 @@
                 <div class="panel-heading" translate>SQUELLETE.ARG_2</div>
                 <div class="panel-body">
                     <button class="btn btn-raised btn-lg btn-primary" ui-sref="statistique">
-                        23 000 000 Fcfa
+                        {{ca}} Fcfa
                     </button>
                 </div>
             </div>
         </div>
         <div class="col-lg-3 col-sm-3 col-md-3">
             <div class="panel panel-default text-center">
-                <div class="panel-heading">2 <span translate>SQUELLETE.ARG_3</span></div>
+                <div class="panel-heading">{{alertes.length}} <span translate>SQUELLETE.ARG_3</span></div>
                 <div class="panel-body">
                     <button class="btn btn-raised btn-lg btn-primary" ui-sref="alertes" translate>SQUELLETE.ARG_4
                     </button>
@@ -52,7 +52,7 @@
                 <button class="btn btn-raised btn-lg btn-block btn-primary" ui-sref="statistique" translate>SQUELLETE.ARG_8
                 </button>
             </div>
-            <div class="row-fluid btn-line">
+            <div class="row-fluid btn-line hide">
                 <button class="btn btn-raised btn-lg btn-block btn-primary" ui-sref="rapport" translate>SQUELLETE.ARG_9
                 </button>
             </div>

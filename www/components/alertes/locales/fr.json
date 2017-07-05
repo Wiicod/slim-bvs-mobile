@@ -1,5 +1,8 @@
 {
   "ALERTES":{
-    "TITRE" :"Alertes"
+    "TITRE" :"Alertes",
+    "ARG_1":"Du",
+    "ARG_2":"Au",
+    "ARG_3":"Evnement périodique"
   }
 }

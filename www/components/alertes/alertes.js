@@ -4,8 +4,8 @@
 
 app
 
-    .controller("AlertesCtrl",function($scope){
+    .controller("AlertesCtrl",function($scope,$cookies){
         $scope.current=new Date();
+        $scope.alertes=$cookies.getObject("agenda");
 
-        // recuperation des modes de ventes
-    })
+    });
