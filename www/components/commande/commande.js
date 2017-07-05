@@ -181,6 +181,11 @@ app
             });
             // TODO: impression des factures e tenvoi des mail
         };
+
+        $scope.precommande=function(){
+            // envoi de la facture au client pour validation.
+            // generation du pdf de la facture
+        }
     });
 
 function prix_total(produits){

@@ -1,0 +1,11 @@
+{
+  "AGENDA":{
+    "TITRE_1" :"Options",
+    "TITRE_2" :"Time line",
+    "TITRE_3" :"Nouvel évènement",
+    "ARG_1":"Retour",
+    "ARG_2":"Vous avez ",
+    "ARG_3":"évènements",
+    "ARG_4":"Ajouter"
+  }
+}

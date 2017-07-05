@@ -16,7 +16,7 @@ resources
         return API.service('customers');
     })
     .factory('Diaries',function(API){
-        return API.service('diaries');
+        return API.service('diaries').withHttpConfig({ cache: true});
     })
     .factory('Depots',function(API){
         return API.service('depots');

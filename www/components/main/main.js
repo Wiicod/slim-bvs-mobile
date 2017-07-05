@@ -38,7 +38,6 @@ app
         var deb= now+'-01 00:00:00';
         var fin= now+'-30 23:59:59';
         Diaries.getList({seller_id:user_id,"start_at-bt":deb+","+fin}).then(function(d){
-            $cookies.putObject("agenda",d);
             $scope.alertes=d;
         },function(q){console.log(q)});
     })

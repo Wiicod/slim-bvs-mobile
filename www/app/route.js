@@ -61,6 +61,23 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
                 }
             }
         })
+        .state('agenda',{
+            url:"/agenda",
+            title:"agenda",
+            views:{
+                '':{
+                    templateUrl:   'main/index.html',
+                    controller:'AgendaCtrl'
+                },
+                'header@agenda': {
+                    templateUrl:   'main/header.html',
+                    controller: "HeaderCtrl"
+                },
+                'body@agenda': {
+                    templateUrl: 'agenda/agenda.html'
+                }
+            }
+        })
         .state('rapport',{
             url:"/rapport",
             title:"Rapports",
