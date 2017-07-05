@@ -26,7 +26,9 @@ var app = angular.module('slim', [
     'templates',
     'mm.acl',
     'ngMap',
-    'ngCordova'
+    'ngCordova',
+    'signature'
+
 ])
 
     .run(function($ionicPlatform,$localStorage,$state,$rootScope,AclService) {
