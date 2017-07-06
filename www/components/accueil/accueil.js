@@ -4,8 +4,11 @@
 
 app
 
-    .controller("AccueilCtrl",function($scope,Depots){
+    .controller("AccueilCtrl",function($scope,Depots,Auth){
         $scope.current=new Date();
+        Auth.getContext().then(function (userData) {
+            console.log(userData);
+        })
         Depots.get(1,{_includes:"saletypes"}).then(function(d){
             console.log(d);
             $scope.saletypes= d.saletypes;

@@ -8,20 +8,14 @@
         <form class="form-horizontal">
             <div class="form-group text-center">
                 <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-md-4 col-lg-4 col-sm-4">
-                    <input type="email" class="form-control text-center" ng-model="auth.email" placeholder="Nom d'utilisateur">
+                    <input type="text" class="form-control text-center" ng-model="user.email" placeholder="Nom d'utilisateur">
                 </div>
                 <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-md-4 col-lg-4 col-sm-4">
-                    Ou
-                </div>
-                <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-md-4 col-lg-4 col-sm-4">
-                    <input type="email" class="form-control text-center" ng-model="auth.user_name" placeholder="Email">
-                </div>
-                <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-md-4 col-lg-4 col-sm-4">
-                    <input type="password" class="form-control text-center" ng-model="auth.code" placeholder="Mot de passe">
+                    <input type="password" class="form-control text-center" ng-model="user.password" placeholder="Mot de passe">
                 </div>
             </div>
             <button type="button" class="btn btn-raised" id="closeAuthentification" data-dismiss="modal" translate>SQUELLETE.ARG_14</button>
-            <button type="button" class="btn btn-raised btn-primary" ng-click="authentification(code)" translate>SQUELLETE.ARG_15</button>
+            <button type="button" class="btn btn-raised btn-primary" ng-click="login()" translate>SQUELLETE.ARG_15</button>
         </form>
     </div>
 
