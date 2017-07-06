@@ -43,10 +43,19 @@
                         <div class="categorie liste-categorie" ng-class="{'active':F.c_id==undefined}" ng-click="F.c_id=undefined;">
                             TOUS
                         </div>
-                        <div class="categorie liste-categorie" ng-class="{'active':F.c_id==c.id}"
-                             ng-repeat="c in categories|filter:search_commande" ng-click="F.c_id= c.id">
-                            {{c.name}}
+                        <div infinite-scroll='nextPage()'
+                             infinite-scroll-disabled='inf_cat.busy'
+                             infinite-scroll-container="'.scroll-categorie'"
+                             infinite-scroll-distance='0.05'
+                             infinite-scroll-parent="true">
+                            <div class="categorie liste-categorie" ng-class="{'active':F.c_id==c.id}"
+                                 ng-repeat="c in categories|filter:search_commande" ng-click="F.c_id= c.id">
+                                {{c.name}}
+                            </div>
+                            <div class="text-center loading" ng-show='inf_cat.busy'><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></div>
+                            <div class="text-center value" ng-show='inf_cat.finish'>Aucune données supplémentaire</div>
                         </div>
+
                     </div>
                 </fieldset>
             </div>
@@ -69,6 +78,7 @@
                             <div class="col-lg-1 col-sm-1 col-md-1">{{p.pivot.quantity}}</div>
                             <div class="col-lg-3 col-sm-3 col-md-3 text-right">{{p.price}}</div>
                         </div>
+
                     </div>
                 </fieldset>
             </div>
@@ -142,7 +152,7 @@
                         <div class="row-fluid">
                             <div class="col-lg-3 col-md-3 col-sm-3" translate>COMMANDE.ARG_13</div>
                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                <input type="number" class="form-control" placeholder="Mot de passe">
+                                <input type="number" ng-model="code" class="form-control" placeholder="Mot de passe">
                             </div>
                         </div>
                     </fieldset>
@@ -150,7 +160,7 @@
                 <div class="modal-footer" style="text-align: center">
                     <button type="button" class="btn btn-raised btn-danger" translate ng-click="supprimer_produit(produit)">COMMANDE.ARG_14</button>
                     <button type="button" class="btn btn-raised" id="close_detail_produit" data-dismiss="modal" translate>COMMANDE.ARG_15</button>
-                    <button type="button" class="btn btn-raised btn-primary" ng-click="authentification(code)" translate>COMMANDE.ARG_16</button>
+                    <button type="button" class="btn btn-raised btn-primary" ng-click="modifier_produit(code)" translate>COMMANDE.ARG_16</button>
                 </div>
             </div>
         </div>

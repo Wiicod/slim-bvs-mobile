@@ -13,7 +13,7 @@
             </div>
 
             <div class="col-lg-3 col-sm-3 col-md-3" style="padding-left: 25px;padding-right: 8px">
-                <input class="form-control" ng-model="search_commande" placeholder="Rechercher un événement" type="text">
+                <input class="form-control" ng-model="search_event" placeholder="Rechercher un événement" type="text">
             </div>
 
 
@@ -37,12 +37,12 @@
                 <legend translate>AGENDA.TITRE_2</legend>
                 <div class="scroll-categorie">
                     <ul class="timeline">
-                        <li ng-repeat="a in agendas" ng-class="{'timeline-inverted':$index%2==0}">
+                        <li ng-repeat="a in agendas|orderBy:'-created_at':true|filter:search_event" ng-class="{'timeline-inverted':$index%2==0}">
                             <div class="timeline-badge"><i class="glyphicon glyphicon-check"></i></div>
                             <div class="timeline-panel">
                                 <div class="timeline-heading">
                                     <h4 class="timeline-title">{{a.title}}</h4>
-                                    <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i> 11 hours ago via Twitter</small></p>
+                                    <p><small class="text-muted value"><i class="glyphicon glyphicon-time"></i> {{a.start_at}} - {{a.end_at}}</small></p>
                                 </div>
                                 <div class="timeline-body">
                                     <p>{{a.description}}</p>
@@ -55,40 +55,89 @@
 
         </div>
     </div>
-</div>
-<div class="modal" id="ajouter_evenement">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h4 class="modal-title" translate>AGENDA.TITRE_3</h4>
-            </div>
-            <div class="modal-body">
-                <fieldset>
-                    <legend translate>COMMANDE.TITRE_4</legend>
+    <div class="modal" id="ajouter_evenement">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" translate>AGENDA.TITRE_3</h4>
+                </div>
+                <div class="modal-body">
                     <div class="row-fluid">
-                        <div class="col-lg-3 col-md-3 col-sm-3" translate>COMMANDE.ARG_12</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3" translate>Titre</div>
                         <div class="col-lg-8 col-md-8 col-sm-8">
-                            <input type="number" class="form-control" ng-model="produit.command_quantity" min="1" max="{{produit.pivot.quantity}}">
+                            <input type="text" class="form-control" ng-model="a.titre">
                         </div>
                     </div>
                     <div class="row-fluid">
-                        <div class="col-lg-3 col-md-3 col-sm-3" translate>COMMANDE.ARG_10</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3" translate>Du</div>
                         <div class="col-lg-8 col-md-8 col-sm-8">
-                            <input type="number" class="form-control" ng-model="remise" min="0" max="0.1" step="0.01">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target=".dropdown-start-parent"
+                                        >
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control" data-ng-model="dateRangeStart">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="dateRangeStart"
+                                                    data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed',startView:'day', minView:'day' }"
+                                                    data-on-set-time="startDateOnSetTime()"
+                                                    data-before-render="startDateBeforeRender($dates)"></datetimepicker>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                     <div class="row-fluid">
-                        <div class="col-lg-3 col-md-3 col-sm-3" translate>COMMANDE.ARG_13</div>
+                        <div class="col-lg-3 col-md-3 col-sm-3" translate>Au</div>
                         <div class="col-lg-8 col-md-8 col-sm-8">
-                            <input type="number" class="form-control" placeholder="Mot de passe">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle" id="dropdownEnd" role="button" data-toggle="dropdown" data-target=".dropdown-end-parent"
+                                        >
+                                    <div class="input-group date">
+                                        <input type="text" class="form-control" data-ng-model="dateRangeEnd">
+                                        <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
+                                    </div>
+                                </a>
+                                <ul class="dropdown-menu" style="left: -50%;" role="menu" aria-labelledby="dLabel">
+                                    <datetimepicker data-ng-model="dateRangeEnd"
+                                                    data-datetimepicker-config="{ dropdownSelector: '#dropdownEnd', renderOn: 'start-date-changed',startView:'day', minView:'day' }"
+                                                    data-on-set-time="endDateOnSetTime()"
+                                                    data-before-render="endDateBeforeRender($view, $dates, $leftDate, $upDate, $rightDate)"></datetimepicker>
+                                </ul>
+                            </div>
                         </div>
                     </div>
-                </fieldset>
-            </div>
-            <div class="modal-footer" style="text-align: center">
-                <button type="button" class="btn btn-raised btn-danger" translate ng-click="supprimer_produit(produit)">COMMANDE.ARG_14</button>
-                <button type="button" class="btn btn-raised" id="close_detail_produit" data-dismiss="modal" translate>COMMANDE.ARG_15</button>
-                <button type="button" class="btn btn-raised btn-primary" ng-click="authentification(code)" translate>COMMANDE.ARG_16</button>
+                    <div class="row-fluid">
+                        <div class="col-lg-3 col-md-3 col-sm-3" translate>Type</div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <select ng-model="a.type" class="form-control">
+                                <option value="">Type</option>
+                                <option value="client">Client</option>
+                                <option value="produit">Produit</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="col-lg-3 col-md-3 col-sm-3" translate>Concerne</div>
+                        <div class="col-lg-8 col-md-8 col-sm-8">
+                            <select ng-model="a.concerne_id" class="form-control" ng-options="c.id as c.value for c in concernes">
+                                <option value="">Concerne</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <fieldset>
+                        <legend translate>Informations supplementaires</legend>
+                        <div class="row-fluid">
+                            <textarea ng-model="a.content" class="form-control"></textarea>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="modal-footer" style="text-align: center">
+                    <button type="button" class="btn btn-raised btn-default" id="close_ajouter_evenement" data-dismiss="modal" translate>COMMANDE.ARG_15</button>
+                    <button type="button" class="btn btn-raised btn-primary" ng-click="enregistrer_evenement(a)" translate>COMMANDE.ARG_16</button>
+                </div>
             </div>
         </div>
     </div>

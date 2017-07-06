@@ -4,7 +4,7 @@
 resources
 
     .factory('Bills',function(API){
-        return API.service('bills');
+        return API.service('bills').withHttpConfig({ cache: true});
     })
     .factory('BillProductSaleTypes',function(API){
         return API.service('bill_product_saletypes');

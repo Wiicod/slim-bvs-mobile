@@ -1,8 +1,9 @@
 {
   "ALERTES":{
-    "TITRE" :"Alertes",
-    "ARG_1":"Du",
-    "ARG_2":"Au",
-    "ARG_3":"Evnement périodique"
+    "TITRE_1" :"Factures échues",
+    "ARG_1":"Délai",
+    "ARG_2":"Fcfa",
+    "ARG_3":"Oups !",
+    "ARG_4":"Aucune facture échue !"
   }
 }

@@ -13,6 +13,7 @@ app
         $scope.statutAuth=true;
         $scope.code="0000";
         $scope.commande_memo=$cookies.getObject("commande_memo");
+        console.log("c",$scope.commande_memo);
 
         //authentification pour ouverture de la caisse
         $scope.authentification=function(code){
@@ -35,11 +36,9 @@ app
 
         // recuperation des agendas du mois
 
-        var deb= now+'-01 00:00:00';
-        var fin= now+'-30 23:59:59';
-        Diaries.getList({seller_id:user_id,"start_at-bt":deb+","+fin}).then(function(d){
-            $scope.alertes=d;
-        },function(q){console.log(q)});
+        Bills.getList({seller_id:user_id,status:0,_includes:"customer","deadline-lt":new Date()}).then(function(b){
+            $scope.factures=b;
+        });
     })
 
     .controller("HeaderCtrl",function($scope,Suggestions,ToastApi){

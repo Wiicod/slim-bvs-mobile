@@ -2,7 +2,7 @@
     <div class="well well-lg text-center">
         <img src="images/logo_bvs_or.png" alt="" class="image_logo">
         <div class="">
-            <button ng-repeat="s in saletypes" ui-sref="commande({mode:s.pivot.id})"  title="{{s.description}}"
+            <button ng-repeat="s in saletypess" ui-sref="commande({mode:s.pivot.id})"  title="{{s.description}}"
                     class="btn btn-lg btn-raised btn-primary text-uppercase">
                 {{s.name}}
             </button>

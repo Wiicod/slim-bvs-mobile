@@ -3,7 +3,7 @@
  */
 
 app
-    .controller("CommandeCtrl",function($scope,$stateParams,$state,Bills,BillProductSaleTypes,DepotSaletypes,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
+    .controller("CommandeCtrl",function($scope,$stateParams,$state,Bills,BillProductSaleTypes,DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
         $scope.current=new Date();
         var mode=$stateParams.mode;
         $scope.commande={total:0,produits:[],mode_vente:mode};
@@ -13,16 +13,27 @@ app
             var commande_memo_id=parseInt($stateParams.commande_memo_id);
         }
         // depot_saletypes?_includes=depot,saletype.products
+        /*$scope.inf = new InfiniteLoad(DepotSaletypes,{"_includes":"depot.product_saletypes.product"});
+        $scope.nextPage = function () {
+            $scope.inf.nextPage().then(function (data) {
+                    $scope.produits = data.depot.product_saletypes;
+                }
+            );
+        };*/
         DepotSaletypes.get(mode,{"_includes":"depot.product_saletypes.product"}).then(function(p){
-            $scope.produits= p.depot.product_saletypes;
+            $scope.produits= p.data.depot.product_saletypes;
         },function(q){
             console.log(q);
         });
-        Categories.getList().then(function(c){
-            $scope.categories=c;
-        },function(q){
-            console.log(q);
-        });
+
+        $scope.inf_cat = new InfiniteLoad(Categories,{});
+        $scope.nextPage = function () {
+            $scope.inf_cat.nextPage().then(function (data) {
+                    $scope.categories = data;
+                }
+            );
+        };
+
         Customers.getList({"_includes":"customer_type","town_id":2}).then(function(c){
             $scope.clients=c;
         },function(q){
@@ -52,6 +63,12 @@ app
             $scope.commande.total=prix_total($scope.commande.produits);
         });
 
+        $scope.modifier_produit=function(code){
+            if(code!=undefined){
+
+            }
+            $("#close_detail_produit").trigger('click');
+        };
 
         $scope.detail_produit=function(p){
             $scope.produit=p;
@@ -164,13 +181,10 @@ app
             bill.statut=$scope.echeance==undefined?1:0;
 
             // enregistrement de la facture
-            console.log("Facture",bill);
             Bills.post(bill).then(function(f){
-                console.log(f);
                 // enregistrement du bill_product_saletype
                 angular.forEach($scope.commande.produits,function(v,k){
-                    BillProductSaleTypes.post({quantity:v.command_quantity,bill_id:f.id,product_saletype_id:v.pivot.product_saletype_id}).then(function(b){
-                        console.log(b);
+                    BillProductSaleTypes.post({quantity:v.command_quantity,bill_id:f.data.id,product_saletype_id:v.pivot.product_saletype_id}).then(function(b){
                     },function(q){console.log(q)});
                 });
                 $scope.commande={total:0,produits:[],mode_vente:mode};

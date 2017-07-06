@@ -12,7 +12,7 @@ app
 
 
         var j=new Date();
-        var deb= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-01';
+        var deb= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-'+ j.getDate()+" 00:00:00";
         var fin= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-'+ j.getDate()+" 23:59:59";
         var user_id=1;
 
@@ -22,7 +22,7 @@ app
             _includes: 'product_saletypes.product,customer.customer_type,seller'
         };
 
-        charger_factures(InfiniteLoad,Bills,options,$scope,ToastApi,$translate);
+        charger_factures(InfiniteLoad,Bills,options,$scope);
 
 
         function startDateOnSetTime () {
@@ -66,7 +66,7 @@ app
                     _includes: 'product_saletypes.product,customer.customer_type,seller'
                 };
 
-                charger_factures(InfiniteLoad,Bills,options,$scope,ToastApi,$translate);
+                charger_factures(InfiniteLoad,Bills,options,$scope);
 
             }
             else{
@@ -100,9 +100,6 @@ function charger_factures(InfiniteLoad,resource,options,scope,toast,translate){
     scope.nextPage = function () {
         scope.inf.nextPage().then(function (data) {
                 scope.factures = data;
-            },function(q){
-                toast.error({msg:translate.instant("HISTORIQUE.ARG_27")+ q.data.error+"  |   "+ q.data.reason});
-                console.log(q);
             }
         );
     }

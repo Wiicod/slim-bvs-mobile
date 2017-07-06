@@ -1,22 +1,26 @@
 <div id="alertes" class="row-fluid">
     <div class="well">
-        <h5><span translate>ALERTES.TITRE</span></h5>
-        <div class="list-group scroll-alertes">
-            <div ng-repeat="a in alertes|orderBy:'-start_at':true">
-                <div class="list-group-item">
-                    <div class="row-content">
-                        <h4 class="list-group-item-heading">{{a.title}}</h4>
-                        <blockquote class="value">
-                            <p class="list-group-item-text">{{a.description}}</p>
-                        </blockquote>
-                        <div class="least-contents">
-                            <span translate>ALERTES.ARG_1</span> {{a.start_at}} <span translate>ALERTES.ARG_2</span> {{a.end_at}} <span ng-if="a.periodicity" translate>ALERTES.ARG_3</span>
-                        </div>
+        <h5><span translate>ALERTES.TITRE_1</span></h5>
+        <div class="clearfix"></div>
+        <div class="scroll-historique">
+            <div ng-if="factures.length!=undefined && factures.length>0" class="row categorie" ng-repeat="f in factures |orderBy:'-deadline':false"
+                 ui-sref="commande({mode:'c.mode_vente',commande_memo_id:c.id})">
+                <div class="row-fluid">
+                    <div class="col-lg-5 col-sm-5 col-md-5">
+                        {{f.customer.name}}
+                    </div>
+                    <div class="col-lg-4 col-sm-4 col-md-4 text-right value">
+                        <span translate>ALERTES.ARG_1</span> : {{f.deadline}}
+                    </div>
+                    <div class="col-lg-3 col-sm-3 col-md-3 text-right">
+                        {{f.amount}} <span translate>ALERTES.ARG_2</span>
                     </div>
                 </div>
-                <div class="list-group-separator"></div>
             </div>
-
+            <div class="text-center" ng-if="factures.length==undefined">
+                <h3 translate>ALERTES.ARG_3</h3>
+                <h5 translate>ALERTES.ARG_4</h5>
+            </div>
         </div>
     </div>
 </div>
