@@ -36,20 +36,56 @@ service
                 })
                 .addResponseInterceptor(function (data, operation, what, url, response, deferred) {
 
-                    if (response.headers('X-Page-Total')) {
-                        data.metadata = {
-                            total: response.headers('X-Page-Total'),
-                            per_page: response.headers('X-Per-Page')
-                        };
-
-                        return data;
+                    if (operation === 'getList') {
+                        if (response.data.per_page == undefined) {
+                            return response;
+                        }
+                        var newResponse = response.data.data;
+                        newResponse.metadata = _.omit(response.data, 'data');
+                        // newResponse.error = response.error
+                        return newResponse
                     }
-                    return data
+
+                    return response
                 })
         })
 
     })
 
+    .factory('InfiniteLoad', function($q) {
+        var InfiniteLoad = function(resource,params) {
+            this.items = [];
+            this.busy = false;
+            this.finish = false;
+            this.after = '';
+            this.page = 1;
+            this.params  = params;
+            this.resource  = resource;
+
+        };
+
+        InfiniteLoad.prototype.nextPage = function() {
+            var defer = $q.defer();
+            if (this.busy || this.finish ) defer.reject();
+            this.busy = !this.finish;
+            var that = this;
+            this.params.page = this.page;
+            this.resource.getList(this.params).then(function (data) {
+                for (var i = 0; i < data.length; i++) {
+                    that.items.push(data[i]);
+                }
+                that.finish=that.page>=data.metadata.last_page;
+                that.page++;
+                that.busy = false;
+                defer.resolve(that.items);
+            });
+
+            return defer.promise;
+        }
+
+        return InfiniteLoad
+
+    })
 
     .factory('ToastApi', function (ionicToast, $document, $translate) {
 

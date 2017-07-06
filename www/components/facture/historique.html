@@ -52,29 +52,42 @@
                 </div>
             </div>
             <div class="clearfix"></div>
+
             <div class="scroll-historique">
-                <div  ng-if="factures.length>0" class="row categorie"
-                      ng-repeat="f in factures|filter:filtre|orderBy:'-created_at':false"
-                      ng-click="detail_facture(f)">
-                    <div class="row-fluid">
-                        <div class="col-lg-1 col-sm-1 col-md-1">
-                            {{f.id}}
-                        </div>
-                        <div class="col-lg-6 col-sm-6 col-md-6">
-                            {{f.customer.name}}
-                        </div>
-                        <div class="col-lg-3 col-sm-3 col-md-3">
-                            {{f.created_at}}
-                        </div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 text-right">
-                            {{f.amount| roundCoin : 1 : true}} Fcfa
+                <div  infinite-scroll='nextPage()'
+                      infinite-scroll-disabled='inf.busy'
+                      infinite-scroll-container="'.scroll-historique'"
+                      infinite-scroll-distance='0.05'
+                      infinite-scroll-parent="true"
+                >
+                    <div
+                            ng-if="factures.length>0" class="row categorie"
+                            ng-repeat="f in factures|filter:filtre|orderBy:'-created_at':false"
+
+                            ng-click="detail_facture(f)">
+                        <div class="row-fluid">
+                            <div class="col-lg-1 col-sm-1 col-md-1">
+                                {{f.id}}
+                            </div>
+                            <div class="col-lg-6 col-sm-6 col-md-6">
+                                {{f.customer.name}}
+                            </div>
+                            <div class="col-lg-3 col-sm-3 col-md-3">
+                                {{f.created_at}}
+                            </div>
+                            <div class="col-lg-2 col-sm-2 col-md-2 text-right">
+                                {{f.amount| roundCoin : 1 : true}} Fcfa
+                            </div>
                         </div>
                     </div>
+                    <div class="text-center" ng-show='inf.busy'>Loading data...</div>
+                    <div class="text-center" ng-show='inf.finish'>No more data !!!</div>
+                    <div class="text-center" ng-if="factures.length==0">
+                        <h3 translate>HISTORIQUE.ARG_25</h3>
+                        <h5 translate>HISTORIQUE.ARG_26</h5>
+                    </div>
                 </div>
-                <div class="text-center" ng-if="factures.length==0">
-                    <h3 translate>HISTORIQUE.ARG_25</h3>
-                    <h5 translate>HISTORIQUE.ARG_26</h5>
-                </div>
+
             </div>
         </div>
     </div>

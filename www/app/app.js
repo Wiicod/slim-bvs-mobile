@@ -27,7 +27,8 @@ var app = angular.module('slim', [
     'mm.acl',
     'ngMap',
     'ngCordova',
-    'signature'
+    'signature',
+    'infinite-scroll'
 
 ])
 
