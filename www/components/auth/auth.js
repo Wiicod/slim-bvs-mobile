@@ -4,6 +4,9 @@
 
 app
 
-    .controller("LoginCtrl",function($scope){
+    .controller("LoginCtrl",function($scope,$cookies){
+        $scope.login=function(){
+            console.log($scope.auth);
+        }
 
     });

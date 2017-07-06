@@ -10,6 +10,7 @@
 @import "www/components/commande/commande";
 @import "www/components/facture/facture";
 @import "www/components/main/main";
+@import "www/components/agenda/agenda";
 @import "www/components/rapport/rapport";
 @import "www/components/statistique/statistique";
 
@@ -357,4 +358,11 @@ fieldset{
 
 .value{
   color:$slim_text_color_2;
+}
+
+.bg-primary{
+  background: $slim_primary;
+}
+.bg-secondary{
+  background: $slim_text_color;
 }
