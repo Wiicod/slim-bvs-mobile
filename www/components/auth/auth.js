@@ -4,9 +4,12 @@
 
 app
 
-    .controller("LoginCtrl",function($scope,$cookies){
+    .controller("LoginCtrl",function($scope,Auth,$state){
+        $scope.user = {};
         $scope.login=function(){
-            console.log($scope.auth);
+            Auth.login($scope.user).then(function (data) {
+                $state.go('accueil');
+            });
         }
 
     });

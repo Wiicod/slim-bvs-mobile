@@ -6,6 +6,7 @@ app
 
     .controller("AppCtrl",function($scope,$cookies,Diaries,Bills){
         $scope.current=new Date();
+
         var user_id=1;
         var j=new Date();
         var now=(j.getYear()+1900)+'-'+(j.getMonth()+1);
@@ -41,9 +42,12 @@ app
         });
     })
 
-    .controller("HeaderCtrl",function($scope,Suggestions,ToastApi){
+    .controller("HeaderCtrl",function($scope,Suggestions,ToastApi,Auth,$state){
         $scope.current=new Date();
-        var user_id=1;
+        Auth.getContext(function (userData) {
+            console.log(userData);
+        })
+        var user_id =1;
         $scope.enregistrerSuggestion=function(){
             Suggestions.post({content:$scope.suggestion,user_id:user_id}).then(function(d){
                 $scope.suggestion="";
@@ -54,6 +58,11 @@ app
             });
 
         };
+        $scope.logout = function () {
+            Auth.logout().then(function () {
+                $state.go('login');
+            });
+        }
     })
     .controller("FooterCtrl",function($scope){
         $scope.current=new Date();

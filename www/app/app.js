@@ -2,10 +2,11 @@
 
 // Declare app level module which depends on views, and components
 
-var config = angular.module('slim.config',["ui.router",'ionic','pascalprecht.translate', 'satellizer','restangular']);
+var config = angular.module('slim.config',["ui.router",'ionic','pascalprecht.translate', 'satellizer','restangular','mm.acl']);
 var filter =  angular.module('slim.filter',["ui.router"]);
 var service=angular.module('slim.service',["ui.router"]);
 var resources=angular.module('slim.resources',["ui.router"]);
+var auth=angular.module('slim.auth',["ui.router"]);
 var height=$(window).height();
 var ratio=540/720;
 var tab_w=962;
@@ -14,6 +15,7 @@ var tab_h=577;
 // Declare app level module which depends on views, and components
 var app = angular.module('slim', [
     'ui.router',
+    'slim.auth',
     'slim.filter',
     'slim.config',
     'slim.service',
@@ -28,7 +30,10 @@ var app = angular.module('slim', [
     'ngMap',
     'ngCordova',
     'signature',
-    'infinite-scroll'
+    'infinite-scroll',
+    'satellizer',
+    'mm.acl'
+
 
 ])
 

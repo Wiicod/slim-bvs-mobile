@@ -34,15 +34,22 @@ config
 
     })
 
+    .config( function (AclServiceProvider) {
+        var myConfig = {
+            storage: 'localStorage',
+            storageKey: 'AppAcl'
+        };
+        AclServiceProvider.config(myConfig);
+    })
     .config(function ($authProvider, BASE_URL) {
 
         $authProvider.httpInterceptor = function () {
             return true
         };
 
-        $authProvider.loginUrl = BASE_URL.apiEndpoint + 'signin';
-        $authProvider.signupUrl = BASE_URL.apiEndpoint + 'signup';
-        $authProvider.tokenRoot = ''; // compensates success response macro
+        $authProvider.loginUrl = BASE_URL.apiEndpoint + '/auth/login';
+        $authProvider.signupUrl = BASE_URL.apiEndpoint + '/signup';
+        $authProvider.tokenRoot = 'data'; // compensates success response macro
     })
 
 
