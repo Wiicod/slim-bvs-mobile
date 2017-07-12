@@ -4,10 +4,26 @@
 
 app
 
-    .controller("AppCtrl",function($scope,$cookies,Diaries,Bills){
+    .controller("AppCtrl",function($scope,$cookies,Diaries,Bills,Auth){
         $scope.current=new Date();
 
-        var user_id=1;
+        Auth.getContext().then(function (userData) {
+            $scope.user=userData.data.data;
+
+            // calcul du chiffre d'affaire de la journée
+            Bills.getList({seller_id:$scope.user.seller.id,"created_at-bt":today}).then(function(f){
+                $scope.ca= _.reduce(f,function(memo, num){
+                    return memo+num.amount;
+                },0);
+                $cookies.putObject("facture",f);
+            });
+
+            // recuperation des agendas du mois
+
+            Bills.getList({seller_id:$scope.user.seller.id,status:0,_includes:"customer","deadline-lt":new Date()}).then(function(b){
+                $scope.factures=b;
+            });
+        });
         var j=new Date();
         var now=(j.getYear()+1900)+'-'+(j.getMonth()+1);
         var today=now+"-"+ j.getDate()+" 00:00:00,"+now+"-"+j.getDate()+" 23:59:59";
@@ -27,37 +43,28 @@ app
             }
         };
 
-        // calcul du chiffre d'affaire de la journée
-        Bills.getList({seller_id:user_id,"created_at-bt":today}).then(function(f){
-            $scope.ca= _.reduce(f,function(memo, num){
-                return memo+num.amount;
-            },0);
-            $cookies.putObject("facture",f);
-        });
 
-        // recuperation des agendas du mois
-
-        Bills.getList({seller_id:user_id,status:0,_includes:"customer","deadline-lt":new Date()}).then(function(b){
-            $scope.factures=b;
-        });
     })
 
     .controller("HeaderCtrl",function($scope,Suggestions,ToastApi,Auth,$state){
         $scope.current=new Date();
-        Auth.getContext(function (userData) {
-            console.log(userData);
-        })
-        var user_id =1;
-        $scope.enregistrerSuggestion=function(){
-            Suggestions.post({content:$scope.suggestion,user_id:user_id}).then(function(d){
-                $scope.suggestion="";
-                $("#closeSuggestion").trigger("click");
-                ToastApi.success({msg:$translate.instant("HEADER.ARG_7")});
-            },function(q){
-                ToastApi.error({msg:$translate.instant("HEADER.ARG_8")});
-            });
+        Auth.getContext().then(function (userData) {
+            $scope.user=userData.data.data;
+            console.log($scope.user);
 
-        };
+            $scope.enregistrerSuggestion=function(){
+                Suggestions.post({content:$scope.suggestion,user_id:$scope.user.id}).then(function(d){
+                    $scope.suggestion="";
+                    $("#closeSuggestion").trigger("click");
+                    ToastApi.success({msg:$translate.instant("HEADER.ARG_7")});
+                },function(q){
+                    ToastApi.error({msg:$translate.instant("HEADER.ARG_8")});
+                });
+
+            };
+        });
+
+
         $scope.logout = function () {
             Auth.logout().then(function () {
                 $state.go('login');

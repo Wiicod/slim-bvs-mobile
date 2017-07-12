@@ -195,6 +195,6 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
 
     ;
 
-    $urlRouterProvider.otherwise( '/accueil');
+    $urlRouterProvider.otherwise( '/login');
 
 }]);

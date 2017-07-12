@@ -10,16 +10,18 @@
                 SLIM
             </a>
         </div>
+        <div>
+
+        </div>
         <div class="navbar-collapse collapse navbar-responsive-collapse hide">
             <ul class="nav navbar-nav navbar-right">
                 <li class="dropdown">
-                    <a data-target="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-bars fa-lg"></i></a>
+                    <a data-target="#" class="dropdown-toggle" data-toggle="dropdown"><strong style="margin-right: 10px">{{user.person.first_name}} {{user.person.last_name}}</strong> <i class="fa fa-bars fa-lg"></i></a>
                     <ul class="dropdown-menu">
-                        <li><a href="javascript:void(0)">Edward NANDA</a></li>
                         <li><a data-toggle="modal" data-target="#suggestion" translate>HEADER.ARG_1</a></li>
                         <li><a ng-click="logout()" translate>HEADER.ARG_2</a></li>
                         <li class="divider"></li>
-                        <li><a href="javascript:void(0)" translate>HEADER.ARG_3</a></li>
+                        <li><a data-toggle="modal" data-target="#apropos" translate>HEADER.ARG_3</a></li>
                     </ul>
                 </li>
             </ul>
@@ -46,6 +48,29 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-default btn-raised" data-dismiss="modal" id="closeSuggestion" translate>HEADER.ARG_5</button>
                 <button type="button" class="btn btn-primary btn-raised" ng-click="enregistrerSuggestion()" translate>HEADER.ARG_6</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal" id="apropos">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" translate>HEADER.ARG_1</h4>
+            </div>
+            <div class="modal-body">
+                <p>Par</p>
+                <div class="row-fluid text-center">
+                    <a href="http://www.wiicod.com">
+                        <img src="images/logo_wiicod.jpg" alt="" style="width: 44%">
+                    </a>
+                    <h5>contact@wiicod.com</h5>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default btn-raised" data-dismiss="modal" id="closeApropos" translate>HEADER.ARG_5</button>
             </div>
         </div>
     </div>

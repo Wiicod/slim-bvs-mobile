@@ -3,8 +3,10 @@
  */
 
 app
-    .controller("CommandeCtrl",function($scope,$stateParams,$state,Bills,BillProductSaleTypes,DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
-        $scope.current=new Date();
+    .controller("CommandeCtrl",function($scope,Auth,$stateParams,$state,Bills,BillProductSaleTypes,DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
+        Auth.getContext().then(function (userData) {
+            $scope.user=userData.data.data;
+        });
         var mode=$stateParams.mode;
         $scope.commande={total:0,produits:[],mode_vente:mode};
         $scope.remise=0;
@@ -12,14 +14,7 @@ app
         if($stateParams.commande_memo_id!=undefined){
             var commande_memo_id=parseInt($stateParams.commande_memo_id);
         }
-        // depot_saletypes?_includes=depot,saletype.products
-        /*$scope.inf = new InfiniteLoad(DepotSaletypes,{"_includes":"depot.product_saletypes.product"});
-        $scope.nextPage = function () {
-            $scope.inf.nextPage().then(function (data) {
-                    $scope.produits = data.depot.product_saletypes;
-                }
-            );
-        };*/
+
         DepotSaletypes.get(mode,{"_includes":"depot.product_saletypes.product"}).then(function(p){
             $scope.produits= p.data.depot.product_saletypes;
         },function(q){
@@ -157,7 +152,7 @@ app
             var c=$scope.commande;
             if(c.client!=undefined){
                 if(c.produits.length>0){
-                    // impression du bon de preparation identique à la facture mais avec la mention bon de preparation
+                    // TODO impression du bon de preparation identique à la facture mais avec la mention bon de preparation
                     $("#btn_facturer").trigger("click");
                 }
                 else{
@@ -177,7 +172,7 @@ app
             bill.discount= c.remise;
             bill.customer_id= c.client.id;
             bill.paymentmethod_id= c.mode_paiement.id;
-            bill.seller_id=1;
+            bill.seller_id=$scope.user.seller.id;
             bill.statut=$scope.echeance==undefined?1:0;
 
             // enregistrement de la facture

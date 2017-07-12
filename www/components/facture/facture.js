@@ -4,21 +4,23 @@
 
 app
 
-    .controller("HistoriqueCtrl",function($scope,Bills,ToastApi,$translate,InfiniteLoad){
+    .controller("HistoriqueCtrl",function($scope,Bills,ToastApi,$translate,InfiniteLoad,Auth){
         $scope.endDateBeforeRender = endDateBeforeRender;
         $scope.endDateOnSetTime = endDateOnSetTime;
         $scope.startDateBeforeRender = startDateBeforeRender;
         $scope.startDateOnSetTime = startDateOnSetTime;
 
+        Auth.getContext().then(function (userData) {
+            $scope.user=userData.data.data;
+        });
 
         var j=new Date();
         var deb= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-'+ j.getDate()+" 00:00:00";
         var fin= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-'+ j.getDate()+" 23:59:59";
-        var user_id=1;
 
         var options  ={
             "created_at-bt": deb+","+fin,
-            "seller_id":user_id,
+            "seller_id":$scope.user.seller.id,
             _includes: 'product_saletypes.product,customer.customer_type,seller'
         };
 
@@ -59,10 +61,9 @@ app
 
         $scope.actualiser_facture=function(){
             if($scope.dateRangeStart!=undefined && $scope.dateRangeEnd!=undefined){
-                // charger_factures(format_date("d",$scope.dateRangeStart)+","+format_date("f",$scope.dateRangeEnd),$scope,Bills,ToastApi,$translate,user_id);
                 var options  ={
                     "created_at-bt": format_date("d",$scope.dateRangeStart)+","+format_date("f",$scope.dateRangeEnd),
-                    "seller_id":user_id,
+                    "seller_id":$scope.user.seller.id,
                     _includes: 'product_saletypes.product,customer.customer_type,seller'
                 };
 
@@ -95,7 +96,7 @@ function format_date(e,d){
         return 1900+ d.getYear()+"-"+(1+ d.getMonth())+"-"+ d.getDate()+" 23:59:59";
 }
 
-function charger_factures(InfiniteLoad,resource,options,scope,toast,translate){
+function charger_factures(InfiniteLoad,resource,options,scope){
     scope.inf = new InfiniteLoad(resource,options);
     scope.nextPage = function () {
         scope.inf.nextPage().then(function (data) {

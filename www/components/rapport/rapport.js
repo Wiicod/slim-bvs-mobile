@@ -5,8 +5,11 @@
 app
 
 
-    .controller("RapportsFormulaireCtrl",['$scope','Restangular','$filter','$cookies',function($scope,Restangular,$filter,$cookies){
-        var user=$cookies.getObject("user");
+    .controller("RapportsFormulaireCtrl",function($scope,Restangular,$filter,$cookies,Auth){
+
+        Auth.getContext().then(function (userData) {
+            $scope.user=userData.data.data;
+        });
 
         $scope.ventes=[];
         $scope.ventes[0]={produits:[],besoins:[]};
@@ -129,15 +132,15 @@ app
             });
             alert("Rapports enregistr�");
         };
-    }])
+    })
 
 
-    .controller("RapportsCtrl",['$scope',function($scope){
+    .controller("RapportsCtrl",function($scope){
         $scope.current=new Date();
-    }])
-    .controller("StatistiqueCtrl",['$scope',function($scope){
+    })
+    .controller("StatistiqueCtrl",function($scope){
         $scope.current=new Date();
-    }])
+    })
 
 
 ;

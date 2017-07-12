@@ -3,7 +3,10 @@
  */
 
 app
-    .controller("AgendaCtrl",function($scope,Diaries){
+    .controller("AgendaCtrl",function($scope,Diaries,Auth){
+        Auth.getContext().then(function (userData) {
+            $scope.user=userData.data.data;
+        });
         $scope.endDateBeforeRender = endDateBeforeRender;
         $scope.endDateOnSetTime = endDateOnSetTime;
         $scope.startDateBeforeRender = startDateBeforeRender;
@@ -40,12 +43,12 @@ app
             }
         }
 
-        var user_id=1;
+
         var j=new Date();
         var now=(j.getYear()+1900)+'-'+(j.getMonth()+1);
         var deb= now+'-01 00:00:00';
         var fin= now+'-30 23:59:59';
-        Diaries.getList({seller_id:user_id,"start_at-bt":deb+","+fin}).then(function(d){
+        Diaries.getList({seller_id:$scope.user.seller.id,"start_at-bt":deb+","+fin}).then(function(d){
             $scope.agendas=d;
         },function(q){console.log(q)});
 

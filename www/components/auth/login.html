@@ -1,22 +1,13 @@
 <div id="login" class="bg-primary">
-    <div class="bg-secondary">
-        <p class="text-center">
-            <span translate>SQUELLETE.ARG_12</span>
-            <br>
-            <span translate>SQUELLETE.ARG_13</span>
-        </p>
-        <form class="form-horizontal">
-            <div class="form-group text-center">
-                <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-md-4 col-lg-4 col-sm-4">
-                    <input type="text" class="form-control text-center" ng-model="user.email" placeholder="Nom d'utilisateur">
-                </div>
-                <div class="col-lg-offset-4 col-md-offset-4 col-sm-offset-4 col-md-4 col-lg-4 col-sm-4">
-                    <input type="password" class="form-control text-center" ng-model="user.password" placeholder="Mot de passe">
-                </div>
-            </div>
-            <button type="button" class="btn btn-raised" id="closeAuthentification" data-dismiss="modal" translate>SQUELLETE.ARG_14</button>
-            <button type="button" class="btn btn-raised btn-primary" ng-click="login()" translate>SQUELLETE.ARG_15</button>
-        </form>
-    </div>
+    <form class="form-signin">
+        <h2 class="form-signin-heading text-center">
+            <img src="images/logo_cnc.png" alt="" style="width: 100%">
+        </h2>
+        <label for="inputEmail" class="sr-only">Email ou Login</label>
+        <input type="text" id="inputEmail" ng-model="user.email" class="form-control text-center" placeholder="Email ou Login" required autofocus>
+        <label for="inputPassword" class="sr-only">Mot de passe</label>
+        <input type="password" id="inputPassword" class="form-control text-center" ng-model="user.password" placeholder="Mot de passe" required>
+        <button class="btn btn-lg btn-default btn-block btn-raised"  ng-click="login()" type="submit">Connexion</button>
+    </form>
 
 </div>

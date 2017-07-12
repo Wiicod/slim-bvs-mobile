@@ -8,11 +8,12 @@ app
         $scope.current=new Date();
         Auth.getContext().then(function (userData) {
             console.log(userData);
-        })
-        Depots.get(1,{_includes:"saletypes"}).then(function(d){
-            console.log(d);
-            $scope.saletypess= d.data.saletypes;
-        },function(q){
-            console.log(q);
+            $scope.user=userData.data.data;
+            Depots.get($scope.user.seller.depot.id,{_includes:"saletypes"}).then(function(d){
+                console.log(d);
+                $scope.saletypess= d.data.saletypes;
+            },function(q){
+                console.log(q);
+            });
         });
     });

@@ -4,8 +4,10 @@
 
 app
 
-    .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Customers,NgMap){
-
+    .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Customers,NgMap,Auth){
+        Auth.getContext().then(function (userData) {
+            $scope.user=userData.data.data;
+        });
         $scope.current=new Date();
         // douala 4.0526383,9.6973306
         $scope.position=null;
@@ -14,7 +16,7 @@ app
         $scope.choix=false;
 
         // recuperation des clients
-        Customers.getList({_includes:"company,customer_type,town.region.country,bills",town_id:2}).then(function(c){
+        Customers.getList({_includes:"company,customer_type,town.region.country,bills",town_id:$scope.user.seller.depot.town_id}).then(function(c){
            console.log("client",c);
             $scope.clients=c;
         },function(q){

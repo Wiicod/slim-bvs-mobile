@@ -4,12 +4,13 @@
 
 app
 
-    .controller("AlertesCtrl",function($scope,Bills){
-        $scope.current=new Date();
-        var user_id=1;
+    .controller("AlertesCtrl",function($scope,Bills,Auth){
+        Auth.getContext().then(function (userData) {
+            $scope.user=userData.data.data;
+        });
         var j=new Date();
         var deb= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-'+ j.getDate()+" 00:00:00";
-        Bills.getList({seller_id:user_id,status:0,_includes:"customer","deadline-lt":deb}).then(function(b){
+        Bills.getList({seller_id:$scope.user.seller.id,status:0,_includes:"customer","deadline-lt":deb}).then(function(b){
             $scope.factures=b;
         });
     });

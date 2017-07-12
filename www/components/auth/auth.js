@@ -9,6 +9,8 @@ app
         $scope.login=function(){
             Auth.login($scope.user).then(function (data) {
                 $state.go('accueil');
+            },function(q){
+                console.log(q);
             });
         }
 

@@ -46,19 +46,38 @@ $dark:                            #444 !default;
     border-bottom: 2px dotted #000000;
     padding-bottom: 5px; }
 
-#login .login-box, #login .register-box {
-  width: 360px;
-  margin: 7% auto; }
-
-#login .bg-secondary {
-  width: 400px;
-  margin: auto; }
+#login {
+  padding: 12.95%; }
+  #login .form-signin {
+    max-width: 300px;
+    padding: 15px;
+    margin: 0 auto;
+    border: 3px solid #997f51; }
+  #login .form-signin .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+    color: #fff; }
+  #login .form-signin .form-control:focus {
+    z-index: 2; }
+  #login .form-signin input[type="email"] {
+    margin-bottom: -9px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0; }
+  #login .form-signin input[type="password"] {
+    margin-bottom: 10px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0; }
 
 #client .detail .col-md-3:first-child {
   font-weight: bold; }
 
 #client .detail .col-md-9 {
-  color: #961e0e; }
+  color: #e30101; }
 
 #client .detail .row-fluid {
   margin-bottom: 7px; }
@@ -420,7 +439,7 @@ fieldset {
   font-weight: bold !important; }
 
 .value {
-  color: #961e0e; }
+  color: #e30101; }
 
 .bg-primary {
   background: #000000; }
@@ -497,7 +516,7 @@ fieldset {
   color: #000000; }
 
 .text-grey {
-  color: #961e0e; }
+  color: #e30101; }
 
 .navbar .dropdown-menu li > a:hover, .navbar.navbar-default .dropdown-menu li > a:hover {
   background: #997f51;
