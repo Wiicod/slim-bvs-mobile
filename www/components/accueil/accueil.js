@@ -8,7 +8,8 @@ app
         $scope.current=new Date();
         Auth.getContext().then(function (userData) {
             console.log(userData);
-            $scope.user=userData.data.data;
+            $scope.user=userData;
+            // verife si c un seller dabord, sinon tu le lui dit
             Depots.get($scope.user.seller.depot.id,{_includes:"saletypes"}).then(function(d){
                 console.log(d);
                 $scope.saletypess= d.data.saletypes;
