@@ -4,12 +4,35 @@
 
 app
 
-    .controller("AppCtrl",function($scope,$cookies,Diaries,Bills,Auth){
+    .controller("HeaderCtrl",function($scope,Suggestions,ToastApi,Auth,$state,$rootScope){
         $scope.current=new Date();
-
         Auth.getContext().then(function (userData) {
             $scope.user=userData.data.data;
+            $rootScope.user=$scope.user;
+        });
+        $scope.enregistrerSuggestion=function(){
+            Suggestions.post({content:$scope.suggestion,user_id:$scope.user.id}).then(function(d){
+                $scope.suggestion="";
+                $("#closeSuggestion").trigger("click");
+                ToastApi.success({msg:$translate.instant("HEADER.ARG_7")});
+            },function(q){
+                ToastApi.error({msg:$translate.instant("HEADER.ARG_8")});
+            });
 
+        };
+
+        $scope.logout = function () {
+            Auth.logout().then(function () {
+                $state.go('login');
+            });
+        }
+    })
+
+    .controller("AppCtrl",function($scope,$cookies,Diaries,Bills,Auth,$rootScope){
+        $scope.current=new Date();
+        Auth.getContext().then(function (userData) {
+            $scope.user=userData.data.data;
+            $rootScope.user=$scope.user;
             // calcul du chiffre d'affaire de la journée
             Bills.getList({seller_id:$scope.user.seller.id,"created_at-bt":today}).then(function(f){
                 $scope.ca= _.reduce(f,function(memo, num){
@@ -30,7 +53,6 @@ app
         $scope.statutAuth=true;
         $scope.code="0000";
         $scope.commande_memo=$cookies.getObject("commande_memo");
-        console.log("c",$scope.commande_memo);
 
         //authentification pour ouverture de la caisse
         $scope.authentification=function(code){
@@ -46,31 +68,6 @@ app
 
     })
 
-    .controller("HeaderCtrl",function($scope,Suggestions,ToastApi,Auth,$state){
-        $scope.current=new Date();
-        Auth.getContext().then(function (userData) {
-            $scope.user=userData.data.data;
-            console.log($scope.user);
-
-            $scope.enregistrerSuggestion=function(){
-                Suggestions.post({content:$scope.suggestion,user_id:$scope.user.id}).then(function(d){
-                    $scope.suggestion="";
-                    $("#closeSuggestion").trigger("click");
-                    ToastApi.success({msg:$translate.instant("HEADER.ARG_7")});
-                },function(q){
-                    ToastApi.error({msg:$translate.instant("HEADER.ARG_8")});
-                });
-
-            };
-        });
-
-
-        $scope.logout = function () {
-            Auth.logout().then(function () {
-                $state.go('login');
-            });
-        }
-    })
     .controller("FooterCtrl",function($scope){
         $scope.current=new Date();
 

@@ -34,7 +34,10 @@
     "ARG_27":"Impossible d'effectuer cette action, veuillez contacter le support. Erreur : ",
     "ARG_28":"Payée",
     "ARG_29":"Echue",
-    "ARG_30":"Echeance de la facture"
+    "ARG_30":"Echeance de la facture",
+    "ARG_31":"En attente approbation client",
+    "ARG_32":"En attente approbation caisse",
+    "ARG_33":"Extournée"
   },
   "MEMO":{
     "TITRE_1" :"Factures en mémo",

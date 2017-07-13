@@ -80,8 +80,8 @@
                             </div>
                         </div>
                     </div>
-                    <div class="text-center" ng-show='inf.busy'>Loading data...</div>
-                    <div class="text-center" ng-show='inf.finish'>No more data !!!</div>
+                    <div class="text-center loading" ng-show='inf.busy'><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></div>
+                    <div class="text-center value" ng-show='inf.finish'>Aucune données supplémentaire</div>
                     <div class="text-center" ng-if="factures.length==0">
                         <h3 translate>HISTORIQUE.ARG_25</h3>
                         <h5 translate>HISTORIQUE.ARG_26</h5>
@@ -98,7 +98,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        {{facture.customer.name}} | {{facture.customer.customer_type.name}} | {{facture.discount}}%
+                        {{facture.customer.name}} | {{facture.customer.customer_type.name}} | {{facture.discount*100}}%
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -119,15 +119,15 @@
                                     <div class="montant">
                                         <div class="row" >
                                             <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_6</div>
-                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.amount| roundCoin : 1 : true}} Fcfa</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.prix_sans_remise| roundCoin : 1 : true}} Fcfa</div>
                                         </div>
                                         <div class="row" >
                                             <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_7</div>
-                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.amount*(facture.discount/100)| roundCoin : 1 : true}} Fcfa</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.prix_remise| roundCoin : 1 : true}} Fcfa</div>
                                         </div>
                                         <div class="row" >
                                             <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_8</div>
-                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.amount*(1-(facture.discount/100))| roundCoin : 1 : true}} Fcfa</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.amount| roundCoin : 1 : true}} Fcfa</div>
                                         </div>
                                     </div>
                                 </div>
@@ -136,19 +136,19 @@
                         <div class="col-lg-6 col-sm-6 col-md-6">
                             <fieldset style="margin-bottom: 20%">
                                 <legend translate>HISTORIQUE.TITRE_3</legend>
-                                <div class="row-fluid">
+                                <div class="row-fluid clearfix">
                                     <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_9
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
-                                        <span translate ng-if="facture.status=='paided'">HISTORIQUE.ARG_28</span>
-                                        <span translate ng-if="facture.status=='not_paided'">HISTORIQUE.ARG_29</span>
+                                        <span>{{facture.status|billStatus}}</span>
+
                                     </div>
                                 </div>
                                 <div class="row-fluid clearfix">
                                     <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_10
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
-                                        {{facture.amount*(1-(facture.discount/100))| roundCoin : 1 : true}} Fcfa
+                                        {{facture.amount| roundCoin : 1 : true}} Fcfa
                                     </div>
                                 </div>
                                 <div class="row-fluid clearfix">
@@ -170,9 +170,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-raised" ng-click="notifier_client()" translate>HISTORIQUE.ARG_13</button>
-                    <button type="button" class="btn btn-raised btn-info" ng-click="notifier_client()" translate>HISTORIQUE.ARG_14</button>
-                    <button type="button" class="btn btn-raised btn-danger" data-toggle="modal" data-target="#extourne" translate>HISTORIQUE.ARG_15</button>
+                    <button type="button" class="btn btn-raised" ng-click="imprimer()" ng-if="facture.status=='paided'" translate>HISTORIQUE.ARG_13</button>
+                    <button type="button" class="btn btn-raised btn-info" ng-click="notifier_client()" ng-if="facture.status=='waiting_customer_approval'" translate>HISTORIQUE.ARG_14</button>
+                    <button type="button" class="btn btn-raised btn-danger" data-toggle="modal"  ng-if="facture.status=='paided'" data-target="#extourne" translate>HISTORIQUE.ARG_15</button>
                     <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal" translate>HISTORIQUE.ARG_16</button>
                 </div>
             </div>
