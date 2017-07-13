@@ -6,7 +6,7 @@ app
 
     .controller("AlertesCtrl",function($scope,Bills,Auth){
         Auth.getContext().then(function (userData) {
-            $scope.user=userData.data.data;
+            $scope.user=userData;
         });
         var j=new Date();
         var deb= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-'+ j.getDate()+" 00:00:00";
