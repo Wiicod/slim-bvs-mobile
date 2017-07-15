@@ -174,7 +174,8 @@ app
             bill.customer_id= c.client.id;
             bill.paymentmethod_id= c.mode_paiement.id;
             bill.seller_id=$scope.user.seller.id;
-            bill.statut=$scope.echeance==undefined?0:3;
+            bill.statut=$scope.echeance==undefined?0:1;
+            bill.statut=1;
 
             // enregistrement de la facture
             Bills.post(bill).then(function(f){
