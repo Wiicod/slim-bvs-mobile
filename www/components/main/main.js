@@ -6,6 +6,7 @@ app
 
     .controller("HeaderCtrl",function($scope,Suggestions,ToastApi,Auth,$state,$rootScope){
         $scope.current=new Date();
+        console.log($rootScope.me);
 
         Auth.getContext().then(function (userData) {
             // la variable est aussi stocke dans $rootscope.me

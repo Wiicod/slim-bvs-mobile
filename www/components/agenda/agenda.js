@@ -3,10 +3,8 @@
  */
 
 app
-    .controller("AgendaCtrl",function($scope,Diaries,Auth){
-        Auth.getContext().then(function (userData) {
-            $scope.user=userData;
-        });
+    .controller("AgendaCtrl",function($scope,Diaries,$rootScope){
+        $scope.user=$rootScope.me;
         $scope.endDateBeforeRender = endDateBeforeRender;
         $scope.endDateOnSetTime = endDateOnSetTime;
         $scope.startDateBeforeRender = startDateBeforeRender;

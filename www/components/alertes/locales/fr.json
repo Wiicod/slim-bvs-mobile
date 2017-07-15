@@ -3,7 +3,7 @@
     "TITRE_1" :"Factures échues",
     "ARG_1":"Délai",
     "ARG_2":"Fcfa",
-    "ARG_3":"Oups !",
+    "ARG_3":"OUPS !",
     "ARG_4":"Aucune facture échue !"
   }
 }

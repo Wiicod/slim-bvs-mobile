@@ -3,10 +3,13 @@
  */
 
 app
-    .controller("CommandeCtrl",function($scope,Auth,$stateParams,$state,Bills,BillProductSaleTypes,DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
-        Auth.getContext().then(function (userData) {
+    .controller("CommandeCtrl",function($scope,Auth,$stateParams,$rootScope,$state,Bills,BillProductSaleTypes,DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
+
+        console.log($rootScope.me);
+        $scope.user=$rootScope.me;
+        /*Auth.getContext().then(function (userData) {
             $scope.user=userData;
-        });
+        });*/
         var mode=$stateParams.mode;
         $scope.commande={total:0,produits:[],mode_vente:mode};
         $scope.remise=0;
