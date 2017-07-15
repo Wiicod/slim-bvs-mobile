@@ -8,7 +8,7 @@ app
     .controller("RapportsFormulaireCtrl",function($scope,Restangular,$filter,$cookies,Auth){
 
         Auth.getContext().then(function (userData) {
-            $scope.user=userData.data.data;
+            $scope.user=userData;
         });
 
         $scope.ventes=[];

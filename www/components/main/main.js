@@ -6,9 +6,11 @@ app
 
     .controller("HeaderCtrl",function($scope,Suggestions,ToastApi,Auth,$state,$rootScope){
         $scope.current=new Date();
+
         Auth.getContext().then(function (userData) {
-            $scope.user=userData.data.data;
-            $rootScope.user=$scope.user;
+            // la variable est aussi stocke dans $rootscope.me
+            $scope.user=userData;
+
         });
         $scope.enregistrerSuggestion=function(){
             Suggestions.post({content:$scope.suggestion,user_id:$scope.user.id}).then(function(d){
@@ -31,8 +33,8 @@ app
     .controller("AppCtrl",function($scope,$cookies,Diaries,Bills,Auth,$rootScope){
         $scope.current=new Date();
         Auth.getContext().then(function (userData) {
-            $scope.user=userData.data.data;
-            $rootScope.user=$scope.user;
+            $scope.user=userData;
+           // verifie d abord si un seller
             // calcul du chiffre d'affaire de la journée
             Bills.getList({seller_id:$scope.user.seller.id,"created_at-bt":today}).then(function(f){
                 $scope.ca= _.reduce(f,function(memo, num){

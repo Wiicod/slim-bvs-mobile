@@ -35,13 +35,26 @@ auth
                 return defer.promise;
             },
 
-            getContext: function () {
+            getContext: function (fresh) {
+                fresh = fresh || false;
+                var defer = $q.defer();
                 if ($auth.isAuthenticated()) {
                     var UserData = API.service('me', API.all('users'));
 
-                    return UserData.one().get();
+                    if($rootScope.me&&!fresh){
+                        defer.resolve($rootScope.me);
+                    }else{
+                        UserData.one().get().then(function (data) {
+                            $rootScope.me = data.data.data;
+                            defer.resolve($rootScope.me);
+                        })
+                    }
+                    return defer.promise;
+
+
                 } else {
-                    return null;
+                    defer.reject('not logge')
+                    return defer.promise;
                 }
             },
 

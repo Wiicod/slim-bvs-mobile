@@ -5,7 +5,7 @@
 app
     .controller("AgendaCtrl",function($scope,Diaries,Auth){
         Auth.getContext().then(function (userData) {
-            $scope.user=userData.data.data;
+            $scope.user=userData;
         });
         $scope.endDateBeforeRender = endDateBeforeRender;
         $scope.endDateOnSetTime = endDateOnSetTime;

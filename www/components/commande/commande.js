@@ -5,7 +5,7 @@
 app
     .controller("CommandeCtrl",function($scope,Auth,$stateParams,$state,Bills,BillProductSaleTypes,DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
         Auth.getContext().then(function (userData) {
-            $scope.user=userData.data.data;
+            $scope.user=userData;
         });
         var mode=$stateParams.mode;
         $scope.commande={total:0,produits:[],mode_vente:mode};

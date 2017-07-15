@@ -6,7 +6,7 @@ app
 
     .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Customers,NgMap,Auth){
         Auth.getContext().then(function (userData) {
-            $scope.user=userData.data.data;
+            $scope.user=userData;
         });
         $scope.current=new Date();
         // douala 4.0526383,9.6973306

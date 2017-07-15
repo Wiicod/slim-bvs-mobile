@@ -6,7 +6,7 @@ app
 
     .controller("StatistiqueCtrl",function($scope,Bills,BillProductSaleTypes,SaleTargets,Auth){
         Auth.getContext().then(function (userData) {
-            $scope.user=userData.data.data;
+            $scope.user=userData;
 
 
             // recuperation des objectifs par catégories
