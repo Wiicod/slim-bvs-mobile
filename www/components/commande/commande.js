@@ -5,11 +5,10 @@
 app
     .controller("CommandeCtrl",function($scope,Auth,$stateParams,$rootScope,$state,Bills,BillProductSaleTypes,DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
 
-        console.log($rootScope.me);
         $scope.user=$rootScope.me;
-        /*Auth.getContext().then(function (userData) {
-            $scope.user=userData;
-        });*/
+        if($scope.user==undefined){
+            $state.go("accueil");
+        }
         var mode=$stateParams.mode;
         $scope.commande={total:0,produits:[],mode_vente:mode};
         $scope.remise=0;
@@ -32,7 +31,7 @@ app
             );
         };
 
-        Customers.getList({"_includes":"customer_type","town_id":2}).then(function(c){
+        Customers.getList({"_includes":"customer_type","town_id":$scope.user.seller.depot.town_id}).then(function(c){
             $scope.clients=c;
         },function(q){
             console.log(q);
@@ -169,16 +168,21 @@ app
 
         $scope.payer=function(){
             var c=$scope.commande;
-
             var bill={};
             var d =new Date();
-            bill.deadline= $scope.echeance==undefined?1900+ d.getYear()+"-"+(1+ d.getMonth())+"-"+ d.getDate()+" 00:00:00":$scope.echeance;
+            if(c.mode_paiement.name=="En compte"){
+                bill.deadline= $scope.echeance==undefined?1900+ d.getYear()+"-"+(2+ d.getMonth())+"-"+ d.getDate()+" 00:00:00":$scope.echeance;
+            }
+            else{
+                bill.deadline= $scope.echeance==undefined?1900+ d.getYear()+"-"+(1+ d.getMonth())+"-"+ d.getDate()+" 00:00:00":$scope.echeance;
+            }
+
             bill.discount= c.remise;
             bill.customer_id= c.client.id;
             bill.paymentmethod_id= c.mode_paiement.id;
             bill.seller_id=$scope.user.seller.id;
             bill.statut=$scope.echeance==undefined?0:1;
-            bill.statut=1;
+            bill.statut=0;
 
             // enregistrement de la facture
             Bills.post(bill).then(function(f){
@@ -188,6 +192,7 @@ app
                     },function(q){console.log(q)});
                 });
                 $scope.commande={total:0,produits:[],mode_vente:mode};
+                $scope.mode_paiement="";
                 $("#btn-facturer-close").trigger("click");
                 ToastApi.success({msg:$translate.instant("COMMANDE.ARG_28")});
             },function(q){

@@ -90,7 +90,6 @@ app
                 };
 
                 charger_factures(InfiniteLoad,Bills,options,$scope);
-
             }
             else{
                 ToastApi.error({msg:$translate.instant("HISTORIQUE.ARG_24")});

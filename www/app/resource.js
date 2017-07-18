@@ -33,6 +33,9 @@ resources
     .factory('SaleTargets',function(API){
         return API.service('saletargets').withHttpConfig({ cache: true});
     })
+    .factory('Sellers',function(API){
+        return API.service('sellers').withHttpConfig({ cache: true});
+    })
     .factory('Stocks',function(API){
         return API.service('stocks').withHttpConfig({ cache: true});
     })

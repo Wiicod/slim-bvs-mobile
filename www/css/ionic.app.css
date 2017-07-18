@@ -150,6 +150,9 @@ $dark:                            #444 !default;
     resize: vertical !important;
     min-height: 100px !important; }
 
+#agenda textarea {
+  min-height: 100px; }
+
 #statistiques .scroll-historique {
   max-height: 373px;
   overflow-y: auto; }

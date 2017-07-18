@@ -240,25 +240,6 @@
                                 </div>
                             </fieldset>
 
-                            <fieldset ng-if="commande.mode_paiement.title=='Compte client'">
-                                <legend translate>COMMANDE.ARG_30</legend>
-                                <div class="">
-                                    <div class="dropdown">
-                                        <a class="dropdown-toggle" id="dropdownStart" role="button" data-toggle="dropdown" data-target=".dropdown-start-parent"
-                                                >
-                                            <div class="input-group date">
-                                                <input type="text" class="form-control" data-ng-model="echance">
-                                                <span class="input-group-addon"><i class="glyphicon glyphicon-calendar"></i></span>
-                                            </div>
-                                        </a>
-                                        <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                            <datetimepicker data-ng-model="echance"
-                                                            data-datetimepicker-config="{ dropdownSelector: '#dropdownStart', renderOn: 'end-date-changed',startView:'day', minView:'day' }"
-                                                            ></datetimepicker>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </fieldset>
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4">
                             <fieldset>
