@@ -53,9 +53,7 @@
                                 {{c.name}}
                             </div>
                             <div class="text-center loading" ng-show='inf_cat.busy'><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></div>
-                            <div class="text-center value" ng-show='inf_cat.finish'>Aucune données supplémentaire</div>
                         </div>
-
                     </div>
                 </fieldset>
             </div>
@@ -203,7 +201,7 @@
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">
-                        {{commande.client.name}} | {{commande.client.customer_types.name}}  | {{commande.client.customer_types.discount}}
+                        {{commande.client.name}} | {{commande.client.customer_type.name}}  | {{commande.client.customer_type.discount}}
                     </h4>
                 </div>
                 <div class="modal-body">
@@ -255,7 +253,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-raised btn-danger" data-dismiss="modal" id="btn-facturer-close" translate>COMMANDE.ARG_1</button>
                     <button type="button" class="btn btn-raised btn-danger" ng-click="precommande()" translate>COMMANDE.ARG_29</button>
-                    <button type="button" class="btn btn-raised btn-primary" ng-click="payer()" translate>COMMANDE.ARG_20</button>
+                    <button type="button" class="btn btn-raised btn-primary" ng-click="check_payer()" translate>COMMANDE.ARG_20</button>
                 </div>
             </div>
         </div>

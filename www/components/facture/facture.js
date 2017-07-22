@@ -10,6 +10,9 @@ app
         $scope.startDateBeforeRender = startDateBeforeRender;
         $scope.startDateOnSetTime = startDateOnSetTime;
         $scope.user=$rootScope.me;
+        if($scope.user==undefined){
+            $state.go("accueil");
+        }
         var j=new Date();
         var deb= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-'+ j.getDate()+" 00:00:00";
         var fin= (j.getYear()+1900)+'-'+(j.getMonth()+1)+'-'+ j.getDate()+" 23:59:59";
@@ -82,13 +85,14 @@ app
         }
 
         $scope.actualiser_facture=function(){
+            console.log($scope.dateRangeStart);
             if($scope.dateRangeStart!=undefined && $scope.dateRangeEnd!=undefined){
                 var options  ={
                     "created_at-bt": format_date("d",$scope.dateRangeStart)+","+format_date("f",$scope.dateRangeEnd),
                     "seller_id":$scope.user.seller.id,
                     _includes: 'product_saletypes.product,customer.customer_type,seller'
                 };
-
+                console.log(options);
                 charger_factures(InfiniteLoad,Bills,options,$scope);
             }
             else{
@@ -98,7 +102,7 @@ app
 
 
         $scope.detail_facture=function(f){
-            console.log(f);
+            console.log("f",f);
             f.prix_remise=(f.amount/(1-f.discount))*f.discount;
             f.prix_sans_remise= f.prix_remise+ f.amount;
             $scope.facture=f;
@@ -120,10 +124,12 @@ function format_date(e,d){
 }
 
 function charger_factures(InfiniteLoad,resource,options,scope){
+    console.log("ici");
     scope.inf = new InfiniteLoad(resource,options);
     scope.nextPage = function () {
         scope.inf.nextPage().then(function (data) {
-                scope.factures = data;
+                console.log(data);
+                scope.factures_historique = data;
             }
         );
     }

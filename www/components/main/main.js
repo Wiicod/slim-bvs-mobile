@@ -46,7 +46,7 @@ app
 
             // recuperation des agendas du mois
 
-            Bills.getList({seller_id:$scope.user.seller.id,status:0,_includes:"customer","deadline-lt":new Date()}).then(function(b){
+            Bills.getList({seller_id:$scope.user.seller.id,status:5,_includes:"customer","deadline-lt":new Date()}).then(function(b){
                 $scope.factures=b;
             });
         });

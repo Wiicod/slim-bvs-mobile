@@ -62,7 +62,7 @@
                 >
                     <div
                             ng-if="factures.length>0" class="row categorie"
-                            ng-repeat="f in factures|filter:filtre|orderBy:'-created_at':false"
+                            ng-repeat="f in factures_historique|filter:filtre|orderBy:'-created_at':false"
 
                             ng-click="detail_facture(f)">
                         <div class="row-fluid">
@@ -81,7 +81,6 @@
                         </div>
                     </div>
                     <div class="text-center loading" ng-show='inf.busy'><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></div>
-                    <div class="text-center value" ng-show='inf.finish'>Aucune données supplémentaire</div>
                     <div class="text-center" ng-if="factures.length==0">
                         <h3 translate>HISTORIQUE.ARG_25</h3>
                         <h5 translate>HISTORIQUE.ARG_26</h5>

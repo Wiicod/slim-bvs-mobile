@@ -9,6 +9,7 @@ app
         if($scope.user==undefined){
             $state.go("accueil");
         }
+        $scope.if_payer=true;
         var mode=$stateParams.mode;
         $scope.commande={total:0,produits:[],mode_vente:mode};
         $scope.remise=0;
@@ -108,27 +109,34 @@ app
         };
 
         $scope.ajouter_produit=function(p){
-            var t= _.find($scope.commande.produits,function(produit){
-                if(p.id==produit.id){
-                    return p;
-                }
-            });
+            if(p.pivot.quantity>0){
+                var t= _.find($scope.commande.produits,function(produit){
+                    if(p.id==produit.id){
+                        return p;
+                    }
+                });
 
-            if(t==null){
-                //nouveau produits comme
-                p.command_quantity=1;
-                $scope.commande.produits.push(p);
-            }
-            else{
-                if(t.pivot.quantity>t.command_quantity)
-                {
-                    t.command_quantity+=1;
+                if(t==null){
+                    //nouveau produits comme
+                    p.command_quantity=1;
+                    $scope.commande.produits.push(p);
                 }
                 else{
-                    ToastApi.error({msg:$translate.instant("COMMANDE.ARG_23")});
+                    if(t.pivot.quantity>t.command_quantity)
+                    {
+                        t.command_quantity+=1;
+                    }
+                    else{
+                        ToastApi.error({msg:$translate.instant("COMMANDE.ARG_23")});
+                    }
                 }
+                $scope.commande.total=prix_total($scope.commande.produits);
+                $scope.if_payer=true;
             }
-            $scope.commande.total=prix_total($scope.commande.produits);
+            else{
+                ToastApi.error({msg:$translate.instant("COMMANDE.ARG_23")});
+            }
+
         };
 
         $scope.choix_client=function(c){
@@ -152,6 +160,7 @@ app
 
         $scope.facturer=function(){
             var c=$scope.commande;
+            console.log(c.client);
             if(c.client!=undefined){
                 if(c.produits.length>0){
                     // TODO impression du bon de preparation identique à la facture mais avec la mention bon de preparation
@@ -166,24 +175,37 @@ app
             }
         };
 
+        $scope.check_payer=function(){
+            console.log("i");
+            if($scope.if_payer){
+                console.log("payer");
+                $scope.payer();
+                $scope.if_payer=false;
+            }
+            else{
+                console.log("peut pas payer");
+            }
+        };
+
         $scope.payer=function(){
             var c=$scope.commande;
             var bill={};
             var d =new Date();
-            if(c.mode_paiement.name=="En compte"){
+
+            if(c.mode_paiement.title=="En compte"){
                 bill.deadline= $scope.echeance==undefined?1900+ d.getYear()+"-"+(2+ d.getMonth())+"-"+ d.getDate()+" 00:00:00":$scope.echeance;
+                bill.status=1;
             }
             else{
                 bill.deadline= $scope.echeance==undefined?1900+ d.getYear()+"-"+(1+ d.getMonth())+"-"+ d.getDate()+" 00:00:00":$scope.echeance;
+                bill.status=2;
             }
 
             bill.discount= c.remise;
             bill.customer_id= c.client.id;
             bill.paymentmethod_id= c.mode_paiement.id;
             bill.seller_id=$scope.user.seller.id;
-            bill.statut=$scope.echeance==undefined?0:1;
-            bill.statut=0;
-
+            console.log(bill);
             // enregistrement de la facture
             Bills.post(bill).then(function(f){
                 // enregistrement du bill_product_saletype
@@ -193,6 +215,14 @@ app
                 });
                 $scope.commande={total:0,produits:[],mode_vente:mode};
                 $scope.mode_paiement="";
+                $scope.remise=0;
+                $scope.if_payer=true;
+                // rafraichissement des produits
+                DepotSaletypes.get(mode,{"_includes":"depot.product_saletypes.product"}).then(function(p){
+                    $scope.produits= p.data.depot.product_saletypes;
+                },function(q){
+                    console.log(q);
+                });
                 $("#btn-facturer-close").trigger("click");
                 ToastApi.success({msg:$translate.instant("COMMANDE.ARG_28")});
             },function(q){
