@@ -10,9 +10,19 @@
                     </div>
                     <div class="clearfix"></div>
                     <div class="scroll-categorie">
-                        <div class="categorie" ng-repeat="c in clients|filter:search_client|orderBy:'-name':true" ng-click="choix_client(c)">
-                            {{c.name}}
+                        <div infinite-scroll='nextPage()'
+                             infinite-scroll-disabled='inf_cat.busy'
+                             infinite-scroll-container="'.scroll-categorie'"
+                             infinite-scroll-distance='0.05'
+                             infinite-scroll-parent="true">
+                            <div class="categorie" ng-repeat="c in clients|filter:search_client|orderBy:'-name':true"
+                                 ng-class="{'active':F.id==c.id}"
+                                 ng-click="choix_client(c)">
+                                {{c.name}}
+                            </div>
+                            <div class="text-center loading" ng-show='inf_cus.busy'><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></div>
                         </div>
+
                     </div>
                 </fieldset>
             </div>
@@ -34,7 +44,7 @@
 
                             <!-- Tab panes -->
                             <div class="tab-content">
-                                <div role="tabpanel" class="tab-pane active" id="detail">
+                                <div role="tabpanel" class="tab-pane " id="detail">
                                     <div class="row-fluid detail">
                                         <div class="col-lg-6 col-sm-6 col-md-6">
                                             <div class="row-fliud clearfix">
@@ -132,7 +142,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="historique">
+                                <div role="tabpanel" class="tab-pane active" id="historique">
                                     <div class="row-fluid hide">
                                         <div class="col-lg-1 col-sm-1 col-md-1">
                                             <h5 translate>UNIVERS_CLIENT.ARG_24</h5>
@@ -156,7 +166,9 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-lg-9 col-sm-8 col-md-9 scroll-historique">
-                                        <div class="row categorie" ng-repeat="f in client.bills | orderBy : '-created_at':true">
+                                        <div class="row categorie" ng-repeat="f in client.bills | orderBy : '-created_at':true"
+                                             ng-class="{'bg-secondary':f.status=='expired','bg-primary':f.status=='waiting_customer_approval','bg-text':f.status=='canceled'}"
+                                             ng-click="detail_facture(f)" >
                                             <div class="row-fluid">
                                                 <div class="col-lg-1 col-sm-1 col-md-1">
                                                     {{f.id}}
@@ -212,6 +224,94 @@
                         </div>
                     </div>
                 </fieldset>
+            </div>
+        </div>
+    </div>
+
+    <button id="btn_detail_facture" data-toggle="modal" data-target="#detail_facture" class="hide"></button>
+    <div class="modal" id="detail_facture">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">
+                        {{facture.customer.name}} | {{facture.customer.customer_type.name}} | {{facture.discount*100}}%
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-lg-6 col-sm-6 col-md-6">
+                            <fieldset>
+                                <legend translate>HISTORIQUE.TITRE_2</legend>
+                                <div class="commande">
+                                    <div class="scroll-commande">
+                                        <div class="row-fluid">
+                                            <div class="col-lg-9 col-sm-9 col-md-9" translate>HISTORIQUE.ARG_4</div>
+                                        </div>
+                                        <div class="clearfix"></div>
+                                        <div class="categorie row" ng-repeat="p in facture.product_saletypes" ng-click="detail_produit(n)">
+                                            <div class="col-lg-9 col-sm-9 col-md-9 no-padding-lr">{{p.pivot.quantity}} {{p.product.name}}</div>
+                                            <div class="col-lg-3 col-sm-3 col-md-3 no-padding-lr">{{p.pivot.quantity*p.pivot.product_price_was}}</div>
+                                        </div>
+                                    </div>
+                                    <div class="montant">
+                                        <div class="row" >
+                                            <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_6</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.prix_sans_remise| roundCoin : 1 : true}} Fcfa</div>
+                                        </div>
+                                        <div class="row" >
+                                            <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_7</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.prix_remise| roundCoin : 1 : true}} Fcfa</div>
+                                        </div>
+                                        <div class="row" >
+                                            <div class="col-lg-3 col-sm-3 col-md-3" translate>HISTORIQUE.ARG_8</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9 text-right">{{facture.amount| roundCoin : 1 : true}} Fcfa</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                        <div class="col-lg-6 col-sm-6 col-md-6">
+                            <fieldset style="margin-bottom: 20%">
+                                <legend translate>HISTORIQUE.TITRE_3</legend>
+                                <div class="row-fluid clearfix">
+                                    <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_9
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-md-6">
+                                        <span>{{facture.status|billStatus}}</span>
+
+                                    </div>
+                                </div>
+                                <div class="row-fluid clearfix">
+                                    <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_10
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-md-6">
+                                        {{facture.amount| roundCoin : 1 : true}} Fcfa
+                                    </div>
+                                </div>
+                                <div class="row-fluid clearfix">
+                                    <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_11
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-md-6">
+                                        {{facture.deadline}}
+                                    </div>
+                                </div>
+                                <div class="row-fluid clearfix">
+                                    <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_12
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-md-6">
+                                        {{facture.created_at}}
+                                    </div>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-raised" ng-click="imprimer()" ng-if="facture.status=='paided'" translate>HISTORIQUE.ARG_13</button>
+                    <button type="button" class="btn btn-raised btn-info" ng-click="notifier_client()" ng-if="facture.status=='waiting_customer_approval'" translate>HISTORIQUE.ARG_14</button>
+                    <button type="button" class="btn btn-raised btn-danger" data-toggle="modal"  ng-if="facture.status=='paided'" data-target="#extourne" translate>HISTORIQUE.ARG_15</button>
+                    <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal" translate>HISTORIQUE.ARG_16</button>
+                </div>
             </div>
         </div>
     </div>

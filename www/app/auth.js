@@ -17,9 +17,9 @@ auth
                         AclService.attachRole(value)
                     });
 
-                    AclService.setAbilities(data.abilities)
-                    $auth.setToken(response.data)
-                    defer.resolve(response.data)
+                    AclService.setAbilities(data.abilities);
+                    $auth.setToken(response.data);
+                    defer.resolve(response.data);
                 },function(error){
                     if(error.status==401){
                         var errors = error.data.errors;

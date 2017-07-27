@@ -4,10 +4,10 @@
 
 app
 
-    .controller("HeaderCtrl",function($scope,Suggestions,ToastApi,Auth,$state,$rootScope){
+    .controller("HeaderCtrl",function($scope,Suggestions,ToastApi,Auth,$state,$rootScope,$localStorage){
         $scope.current=new Date();
         console.log($rootScope.me);
-
+        console.log($localStorage);
         Auth.getContext().then(function (userData) {
             // la variable est aussi stocke dans $rootscope.me
             $scope.user=userData;
@@ -46,10 +46,12 @@ app
 
             // recuperation des agendas du mois
 
-            Bills.getList({seller_id:$scope.user.seller.id,status:5,_includes:"customer","deadline-lt":new Date()}).then(function(b){
+            Bills.getList({seller_id:$scope.user.seller.id,status:'expired',_includes:"customer","deadline-lt":new Date()}).then(function(b){
                 $scope.factures=b;
+                console.log(b);
             });
         });
+
         var j=new Date();
         var now=(j.getYear()+1900)+'-'+(j.getMonth()+1);
         var today=now+"-"+ j.getDate()+" 00:00:00,"+now+"-"+j.getDate()+" 23:59:59";

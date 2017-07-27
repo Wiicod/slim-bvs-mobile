@@ -4,10 +4,13 @@
 
 app
 
-    .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Customers,NgMap,$rootScope){
-
+    .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Customers,NgMap,$state,InfiniteLoad){
+        //console.log(convert_date("2017-07-27 17:34:34"));
         $scope.user=$rootScope.me;
-        $scope.current=new Date();
+        if($scope.user==undefined){
+            $state.go("accueil");
+        }
+        $scope.F={};
         // douala 4.0526383,9.6973306
         $scope.position=null;
         $scope.lat=null;
@@ -15,28 +18,57 @@ app
         $scope.choix=false;
 
         // recuperation des clients
-        Customers.getList({_includes:"company,customer_type,town.region.country,bills",town_id:$scope.user.seller.depot.town_id}).then(function(c){
+        var options={
+            _includes:"company,customer_type,town.region.country,bills",
+            town_id:$scope.user.seller.depot.town_id
+        };
+        $scope.inf_cus = new InfiniteLoad(Customers,options);
+        $scope.nextPage = function () {
+            $scope.inf_cus.nextPage().then(function (data) {
+                    $scope.clients = data;
+                }
+            );
+        };
+        /*Customers.getList({_includes:"company,customer_type,town.region.country,bills",town_id:$scope.user.seller.depot.town_id}).then(function(c){
            console.log("client",c);
             $scope.clients=c;
         },function(q){
             console.log(q);
-        });
+        });*/
 
         $scope.choix_client=function(c){
             $scope.choix=true;
+            $scope.F.id= c.id;
             c.echue=0;
             c.ca=0;
             console.log(c);
 
             // recuperation des factures echues et du chiffre d'affaire
             angular.forEach(c.bills,function(v,k){
-                if(v.status=='not_paided'){
-                    c.echue++;
+                if(convert_date(v.deadline)<new Date() && v.seller_id==$scope.user.seller.id){
+                    if(v.status=='expired'){
+                        console.log(v.seller_id,convert_date(v.deadline),"q", v.id,new Date());
+                        c.echue++;
+                    }
                 }
+                /*if(v.status=='expired' && convert_date(v.deadline)<new Date()){
+                    c.echue++;
+                }*/
                 c.ca+= v.amount;
             });
             // recuperation du ciffre d'affaire
             $scope.client=c;
+        };
+
+
+        $scope.detail_facture=function(f){
+            console.log("f",f);
+            console.log(f.deadline);
+            f.prix_remise=(f.amount/(1-f.discount))*f.discount;
+            f.prix_sans_remise= f.prix_remise+ f.amount;
+            $scope.facture=f;
+            $scope.facture.customer=$scope.client;
+            $("#btn_detail_facture").trigger("click");
         };
 
         NgMap.getMap().then(function(map) {
@@ -64,3 +96,10 @@ app
             map.setCenter(center);
         });
     });
+
+function convert_date(d){
+    var tab= d.split(" ");
+    var tab_1=tab[0].split("-");
+    var tab_2=tab[1].split(":");
+    return new Date(tab_1[0],parseInt(tab_1[1])-1,tab_1[2],parseInt(tab_2[0])+1,tab_2[1],tab_2[2]);
+}
