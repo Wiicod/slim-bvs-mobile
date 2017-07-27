@@ -486,6 +486,9 @@ fieldset {
   background: #000000;
   color: white; }
 
+.toast-error {
+  background: #997f51 !important; }
+
 .btn.btn-raised.btn-primary {
   background: #000000;
   color: #997f51; }

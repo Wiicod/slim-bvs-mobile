@@ -5,7 +5,7 @@
 
 auth
 
-    .factory('Auth', function (API, $auth, AclService,$q,$rootScope) {
+    .factory('Auth', function (API,ToastApi, $auth, AclService,$q,$rootScope) {
 
         return {
             login: function (credentials) {
@@ -20,7 +20,22 @@ auth
                     AclService.setAbilities(data.abilities)
                     $auth.setToken(response.data)
                     defer.resolve(response.data)
-                })
+                },function(error){
+                    if(error.status==401){
+                        var errors = error.data.errors;
+                        for (var key in errors) {
+                            if (errors.hasOwnProperty(key)) {
+                                var txt = errors[key][0];
+                                for (var i = 1; i < errors[key].length; i++) {
+                                    txt += "<br>" + errors[key][i];
+                                }
+                                key = key.split("_").join(" ");
+                                ToastApi.error({'msg': txt})
+                            }
+                        }
+                    }
+                    defer.reject(error)
+                });
                 return defer.promise;
             },
             logout: function () {

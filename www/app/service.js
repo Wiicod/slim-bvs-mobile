@@ -21,7 +21,7 @@ service
                         // return ToastService.error(response.data.errors[error][0])
                         // }
                         console.log(response)
-                        ToastApi.api_errors(response.data);
+                        ToastApi.api_errors(response.data.errors);
                     }
                     if (response.status === 401) {
                         $state.go('home');
@@ -107,8 +107,8 @@ service
 
                     wrappedResult[0].removeClass(this.class[i]);
                 }
-                console.log(wrappedResult)
-                console.log(param)
+               /* console.log(wrappedResult)
+                console.log(param)*/
                 wrappedResult.addClass(param.background);
             },
             success: function (param) {
@@ -134,13 +134,14 @@ service
             api_errors: function (errors) {
 
                 for (var key in errors) {
+
                     if (errors.hasOwnProperty(key)) {
                         var txt = errors[key][0];
                         for (var i = 1; i < errors[key].length; i++) {
                             txt += "<br>" + errors[key][i];
                         }
                         key = key.split("_").join(" ");
-                        this.error({'msg': key + ' : ' + txt})
+                        this.error({'msg': txt})
                     }
                 }
             }
