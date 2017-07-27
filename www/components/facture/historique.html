@@ -61,7 +61,8 @@
                       infinite-scroll-parent="true"
                 >
                     <div
-                            ng-if="factures.length>0" class="row categorie"
+                            ng-if="factures_historique.length>0" class="row categorie"
+                            ng-class="{'bg-secondary':f.status=='expired','bg-primary':f.status=='waiting_customer_approval','bg-text':f.status=='canceled'}"
                             ng-repeat="f in factures_historique|filter:filtre|orderBy:'-created_at':false"
 
                             ng-click="detail_facture(f)">
@@ -81,7 +82,7 @@
                         </div>
                     </div>
                     <div class="text-center loading" ng-show='inf.busy'><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></div>
-                    <div class="text-center" ng-if="factures.length==0">
+                    <div class="text-center" ng-if="factures_historique.length==0">
                         <h3 translate>HISTORIQUE.ARG_25</h3>
                         <h5 translate>HISTORIQUE.ARG_26</h5>
                     </div>
@@ -112,7 +113,8 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="categorie row" ng-repeat="p in facture.product_saletypes" ng-click="detail_produit(n)">
-                                            <div class="col-lg-12 col-sm-12 col-md-12 no-padding-lr">{{p.pivot.quantity}} {{p.product.name}}</div>
+                                            <div class="col-lg-9 col-sm-9 col-md-9 no-padding-lr">{{p.pivot.quantity}} {{p.product.name}}</div>
+                                            <div class="col-lg-3 col-sm-3 col-md-3 no-padding-lr">{{p.pivot.quantity*p.pivot.product_price_was}}</div>
                                         </div>
                                     </div>
                                     <div class="montant">

@@ -192,14 +192,15 @@ app
             var bill={};
             var d =new Date();
 
+            bill.status=0;
             if(c.mode_paiement.title=="En compte"){
                 bill.deadline= $scope.echeance==undefined?1900+ d.getYear()+"-"+(2+ d.getMonth())+"-"+ d.getDate()+" 00:00:00":$scope.echeance;
-                bill.status=1;
             }
             else{
-                bill.deadline= $scope.echeance==undefined?1900+ d.getYear()+"-"+(1+ d.getMonth())+"-"+ d.getDate()+" 00:00:00":$scope.echeance;
-                bill.status=2;
+                bill.deadline= d;
             }
+            bill.status=5;
+            bill.deadline="2017-07-07 00:00:00";
 
             bill.discount= c.remise;
             bill.customer_id= c.client.id;
@@ -208,10 +209,26 @@ app
             console.log(bill);
             // enregistrement de la facture
             Bills.post(bill).then(function(f){
+                console.log(f);
                 // enregistrement du bill_product_saletype
+                var i=0;
                 angular.forEach($scope.commande.produits,function(v,k){
                     BillProductSaleTypes.post({quantity:v.command_quantity,bill_id:f.data.id,product_saletype_id:v.pivot.product_saletype_id}).then(function(b){
+                        i++;
+                        if(i==$scope.commande.produits.length){
+                            // changement du statut de la facture
+                            if(c.mode_paiement.title=="En compte"){
+                                f.status=1;
+                            }
+                            else{
+                                f.status=2;
+                            }
+                            f.update().then(function(f){
+                                console.log("update",f);
+                            });
+                        }
                     },function(q){console.log(q)});
+
                 });
                 $scope.commande={total:0,produits:[],mode_vente:mode};
                 $scope.mode_paiement="";

@@ -366,6 +366,10 @@ fieldset{
 .bg-secondary{
   background: $slim_text_color;
 }
+.bg-text{
+  background: $slim_text_color_2;
+  color:#fff;
+}
 
 .loading{
   margin-top:30px;

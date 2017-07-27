@@ -17,21 +17,21 @@ auth
                         AclService.attachRole(value)
                     });
 
-                    AclService.setAbilities(data.abilities)
-                    $auth.setToken(response.data)
-                    defer.resolve(response.data)
-                })
+                    AclService.setAbilities(data.abilities);
+                    $auth.setToken(response.data);
+                    defer.resolve(response.data);
+                });
                 return defer.promise;
             },
             logout: function () {
                 var defer = $q.defer();
 
                 $auth.logout().then(function () {
-                    delete $rootScope.me
-                    AclService.flushRoles()
-                    AclService.setAbilities({})
+                    delete $rootScope.me;
+                    AclService.flushRoles();
+                    AclService.setAbilities({});
                     defer.resolve(true);
-                })
+                });
                 return defer.promise;
             },
 
@@ -53,7 +53,7 @@ auth
 
 
                 } else {
-                    defer.reject('not logge')
+                    defer.reject('not logge');
                     return defer.promise;
                 }
             },

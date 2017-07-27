@@ -17,4 +17,13 @@
       }
     }
   }
+
+  .scroll-categorie{
+    .categorie{
+      &.active{
+        background: $slim_primary;
+        color: $slim_text_color;
+      }
+    }
+  }
 }
