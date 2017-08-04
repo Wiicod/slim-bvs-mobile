@@ -11,7 +11,7 @@ app
             $scope.user=userData;
             // verife si c un seller dabord, sinon tu le lui dit
             Depots.get($scope.user.seller.depot.id,{_includes:"saletypes"}).then(function(d){
-                console.log(d);
+                console.log('depot',d);
                 $scope.saletypess= d.data.saletypes;
             },function(q){
                 console.log(q);

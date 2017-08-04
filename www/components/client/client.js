@@ -4,7 +4,7 @@
 
 app
 
-    .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Customers,NgMap,$state,InfiniteLoad){
+    .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Sellers,Customers,NgMap,$state,InfiniteLoad){
         //console.log(convert_date("2017-07-27 17:34:34"));
         $scope.user=$rootScope.me;
         if($scope.user==undefined){
@@ -17,10 +17,11 @@ app
         $scope.lng=null;
         $scope.choix=false;
 
-        // recuperation des clients
+        /*/ recuperation des clients
         var options={
-            _includes:"company,customer_type,town.region.country,bills",
-            town_id:$scope.user.seller.depot.town_id
+            _includes:"company,customer_type,town.region.country,bills,customer_type_seller",
+            //town_id:$scope.user.seller.depot.town_id,
+            seller_id:$scope.user.seller.id
         };
         $scope.inf_cus = new InfiniteLoad(Customers,options);
         $scope.nextPage = function () {
@@ -28,13 +29,23 @@ app
                     $scope.clients = data;
                 }
             );
-        };
-        /*Customers.getList({_includes:"company,customer_type,town.region.country,bills",town_id:$scope.user.seller.depot.town_id}).then(function(c){
+        };*/
+        //api/sellers/id?_includes='customer_types.customers'
+        $scope.clients=[];
+        Sellers.get($scope.user.seller.id,{_includes:"customer_types.customers"}).then(function(c){
            console.log("client",c);
-            $scope.clients=c;
+            angular.forEach(c.data.customer_types,function(v,k){
+                angular.forEach(v.customers,function(cc,kk){
+                    if(cc.town_id==$scope.user.seller.depot.town_id) {
+                        $scope.clients.push(cc);
+                    }
+                });
+            });
+            console.log("f",$scope.clients);
+           // $scope.clients= c.customer_types.compagnies ;
         },function(q){
             console.log(q);
-        });*/
+        });
 
         $scope.choix_client=function(c){
             $scope.choix=true;
@@ -42,22 +53,23 @@ app
             c.echue=0;
             c.ca=0;
             console.log(c);
-
-            // recuperation des factures echues et du chiffre d'affaire
-            angular.forEach(c.bills,function(v,k){
-                if(convert_date(v.deadline)<new Date() && v.seller_id==$scope.user.seller.id){
-                    if(v.status=='expired'){
-                        console.log(v.seller_id,convert_date(v.deadline),"q", v.id,new Date());
-                        c.echue++;
+            Customers.get(c.id,{_includes:"company,customer_type,town.region.country,bills"}).then(function(data){
+                c=data.data;
+                angular.forEach(c.bills,function(v,k){
+                    if(convert_date(v.deadline)<new Date() && v.seller_id==$scope.user.seller.id){
+                        if(v.status=='expired'){
+                            console.log(v.seller_id,convert_date(v.deadline),"q", v.id,new Date());
+                            c.echue++;
+                        }
                     }
-                }
-                /*if(v.status=='expired' && convert_date(v.deadline)<new Date()){
-                    c.echue++;
-                }*/
-                c.ca+= v.amount;
+                    /*if(v.status=='expired' && convert_date(v.deadline)<new Date()){
+                     c.echue++;
+                     }*/
+                    c.ca+= v.amount;
+                });
+                $scope.client=c;
             });
-            // recuperation du ciffre d'affaire
-            $scope.client=c;
+
         };
 
 

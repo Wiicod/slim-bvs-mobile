@@ -4,15 +4,19 @@
 
 app
 
-    .controller("StatistiqueCtrl",function($scope,Bills,BillProductSaleTypes,SaleTargets,$rootScope,$state){
+    .controller("StatistiqueCtrl",function($scope,Bills,BillProductSaleTypes,SaleTargets,$rootScope,$state,InfiniteLoad){
         $scope.user=$rootScope.me;
         if($scope.user==undefined){
             $state.go("accueil");
         }
+        $scope.inf_cat = new InfiniteLoad(SaleTargets,{seller_id:$scope.user.seller.id,_includes:"category"});
+        $scope.nextPage = function () {
+            $scope.inf_cat.nextPage().then(function (data) {
+                    $scope.objectifs = data;
+                }
+            );
+        };
 
-        SaleTargets.getList({seller_id:$scope.user.seller.id,_includes:"category"}).then(function(o){
-            $scope.objectifs=o;
-        });
         Bills.getList({seller_id : $scope.user.seller.id, _fields: 'id,discount'}).then(
             function(results){
                 //console.log("result",results);

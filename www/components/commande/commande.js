@@ -3,7 +3,7 @@
  */
 
 app
-    .controller("CommandeCtrl",function($scope,Auth,$stateParams,$rootScope,$state,Bills,BillProductSaleTypes,DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
+    .controller("CommandeCtrl",function($scope,Auth,$stateParams,Sellers,$rootScope,$state,Bills,BillProductSaleTypes,DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
 
         $scope.user=$rootScope.me;
         if($scope.user==undefined){
@@ -32,11 +32,29 @@ app
             );
         };
 
-        Customers.getList({"_includes":"customer_type","town_id":$scope.user.seller.depot.town_id}).then(function(c){
+        /*Customers.getList({"_includes":"customer_type","town_id":$scope.user.seller.depot.town_id}).then(function(c){
             $scope.clients=c;
         },function(q){
             console.log(q);
+        });*/
+        //https://www.youtube.com/watch?v=Auc61qSC3SY&index=1&list=PLIiQ4B5FSupiQYLX6kERPV0OhMC7tTbBE
+        $scope.clients=[];;
+        Sellers.get($scope.user.seller.id,{_includes:"customer_types.customers",town_id:$scope.user.seller.depot.town_id}).then(function(c){
+            angular.forEach(c.data.customer_types,function(v,k){
+                angular.forEach(v.customers,function(cc,kk){
+                    cc.customer_type={name: v.name,discount: v.discount};
+                    if(cc.town_id==$scope.user.seller.depot.town_id)
+                    {
+                        $scope.clients.push(cc);
+                    }
+
+                });
+            });
+            console.log("f",$scope.clients);
+        },function(q){
+            console.log(q);
         });
+
         PaymentMethods.getList().then(function(p){
             $scope.mode_paiements=p;
         },function(q){
@@ -199,8 +217,8 @@ app
             else{
                 bill.deadline= d;
             }
-            bill.status=5;
-            bill.deadline="2017-07-07 00:00:00";
+            //bill.status=5;
+            //bill.deadline="2017-07-07 00:00:00";
 
             bill.discount= c.remise;
             bill.customer_id= c.client.id;

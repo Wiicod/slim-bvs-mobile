@@ -5,19 +5,27 @@
 
             <div class="clearfix"></div>
             <div class="scroll-historique">
-                <div class="row categorie" ng-repeat="o in objectifs|orderBy:'-name':true">
-                    <div class="row-fluid">
-                        <div class="col-lg-4 col-sm-4 col-md-4">
-                            {{o.category.name}}
-                        </div>
+                <div infinite-scroll='nextPage()'
+                     infinite-scroll-disabled='inf_cat.busy'
+                     infinite-scroll-container="'.scroll-historique'"
+                     infinite-scroll-distance='0.05'
+                     infinite-scroll-parent="true">
+                    <div class="row categorie" ng-repeat="o in objectifs|orderBy:'-name':true">
+                        <div class="row-fluid">
                             <div class="col-lg-4 col-sm-4 col-md-4">
-                            <span translate>STATISTIQUES.ARG_1</span> : <span class="value">{{o.objectif | roundCoin : 1 : true}} Fcfa ({{(o.objectif/o.value)*100}}%)</span>
-                        </div>
-                        <div class="col-lg-4 col-sm-4 col-md-4">
-                            <span translate>STATISTIQUES.ARG_2</span> : <span class="value">{{o.value}} Fcfa</span>
+                                {{o.category.name}}
+                            </div>
+                            <div class="col-lg-4 col-sm-4 col-md-4">
+                                <span translate>STATISTIQUES.ARG_1</span> : <span class="value">{{o.objectif | roundCoin : 1 : true}} Fcfa ({{(o.objectif/o.value)*100}}%)</span>
+                            </div>
+                            <div class="col-lg-4 col-sm-4 col-md-4">
+                                <span translate>STATISTIQUES.ARG_2</span> : <span class="value">{{o.value}} Fcfa</span>
+                            </div>
                         </div>
                     </div>
+                    <div class="text-center loading" ng-show='inf_cat.busy'><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></div>
                 </div>
+
             </div>
         </div>
     </div>

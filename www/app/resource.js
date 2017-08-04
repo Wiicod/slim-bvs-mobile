@@ -15,6 +15,9 @@ resources
     .factory('Customers',function(API){
         return API.service('customers').withHttpConfig({ cache: true});
     })
+    .factory('CustomerTypeSellers',function(API){
+        return API.service('customer_type_sellers').withHttpConfig({ cache: true});
+    })
     .factory('Diaries',function(API){
         return API.service('diaries').withHttpConfig({ cache: true});
     })

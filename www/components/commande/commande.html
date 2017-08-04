@@ -49,7 +49,7 @@
                              infinite-scroll-distance='0.05'
                              infinite-scroll-parent="true">
                             <div class="categorie liste-categorie" ng-class="{'active':F.c_id==c.id}"
-                                 ng-repeat="c in categories|filter:search_commande" ng-click="F.c_id= c.id">
+                                 ng-repeat="c in categories|filter:search_commande|orderBy:'-name':true" ng-click="F.c_id= c.id">
                                 {{c.name}}
                             </div>
                             <div class="text-center loading" ng-show='inf_cat.busy'><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></div>
@@ -68,7 +68,7 @@
                             <div class="col-lg-3 col-sm-3 col-md-3 text-center" translate>COMMANDE.ARG_8</div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="produit row" ng-repeat="p in produits|filter:search_commande|filter:{product:{category_id:F.c_id}}:true" ng-click="ajouter_produit(p)">
+                        <div class="produit row" ng-repeat="p in produits|filter:search_commande|orderBy:'-product.name':true|filter:{product:{category_id:F.c_id}}:true" ng-click="ajouter_produit(p)">
                             <div class="col-lg-7 col-sm-7 col-md-7">
                                 {{p.product.name}}
                             </div>
@@ -76,7 +76,6 @@
                             <div class="col-lg-1 col-sm-1 col-md-1">{{p.pivot.quantity}}</div>
                             <div class="col-lg-3 col-sm-3 col-md-3 text-right">{{p.price}}</div>
                         </div>
-
                     </div>
                 </fieldset>
             </div>
@@ -217,8 +216,8 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="categorie row" ng-repeat="p in commande.produits">
-                                            <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.product.name}}</div>
-                                            <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.price}}</div>
+                                            <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.command_quantity}} {{p.product.name}}</div>
+                                            <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.command_quantity*p.price}}</div>
                                         </div>
                                     </div>
                                 </div>
