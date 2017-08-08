@@ -92,7 +92,6 @@ app
                     "seller_id":$scope.user.seller.id,
                     _includes: 'product_saletypes.product,customer.customer_type,seller'
                 };
-                console.log(options);
                 charger_factures(InfiniteLoad,Bills,options,$scope);
             }
             else{
@@ -102,7 +101,6 @@ app
 
 
         $scope.detail_facture=function(f){
-            console.log("f",f);
             f.prix_remise=(f.amount/(1-f.discount))*f.discount;
             f.prix_sans_remise= f.prix_remise+ f.amount;
             $scope.facture=f;
@@ -127,6 +125,7 @@ function charger_factures(InfiniteLoad,resource,options,scope){
     console.log("ici");
     scope.inf = new InfiniteLoad(resource,options);
     scope.nextPage = function () {
+        console.log("s");
         scope.inf.nextPage().then(function (data) {
                 console.log(data);
                 scope.factures_historique = data;
