@@ -23,11 +23,17 @@ app
         },function(q){
             console.log(q);
         });
+        Categories.getList().then(function(p){
+           // console.log(p);
+        },function(q){
+            console.log(q);
+        });
 
-        $scope.inf_cat = new InfiniteLoad(Categories,{});
+        $scope.inf_cat = new InfiniteLoad(Categories,{"per_page":10,"_sort":"name"});
         $scope.nextPage = function () {
             $scope.inf_cat.nextPage().then(function (data) {
                     $scope.categories = data;
+                    //console.log(data);
                 }
             );
         };
@@ -228,12 +234,15 @@ app
             // enregistrement de la facture
             Bills.post(bill).then(function(f){
                 console.log(f);
+                f.id= f.data.id;
                 // enregistrement du bill_product_saletype
                 var i=0;
+                var temp=$scope.commande.produits;
                 angular.forEach($scope.commande.produits,function(v,k){
                     BillProductSaleTypes.post({quantity:v.command_quantity,bill_id:f.data.id,product_saletype_id:v.pivot.product_saletype_id}).then(function(b){
                         i++;
-                        if(i==$scope.commande.produits.length){
+                        console.log(i,temp);
+                        if(i==temp.length){
                             // changement du statut de la facture
                             if(c.mode_paiement.title=="En compte"){
                                 f.status=1;
@@ -241,8 +250,10 @@ app
                             else{
                                 f.status=2;
                             }
-                            f.update().then(function(f){
+                            f.put().then(function(f){
                                 console.log("update",f);
+                            },function(q){
+                                console.log(q);
                             });
                         }
                     },function(q){console.log(q)});

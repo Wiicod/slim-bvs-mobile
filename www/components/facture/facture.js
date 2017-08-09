@@ -20,6 +20,9 @@ app
         var options  ={
             "created_at-bt": deb+","+fin,
             "seller_id":$scope.user.seller.id,
+            "per_page":20,
+            "_sort":"created_at",
+            "_sortDir":"desc",
             _includes: 'product_saletypes.product,customer.customer_type,seller'
         };
 
@@ -93,6 +96,7 @@ app
                     _includes: 'product_saletypes.product,customer.customer_type,seller'
                 };
                 charger_factures(InfiniteLoad,Bills,options,$scope);
+                $scope.nextPage();
             }
             else{
                 ToastApi.error({msg:$translate.instant("HISTORIQUE.ARG_24")});
@@ -124,6 +128,7 @@ function format_date(e,d){
 function charger_factures(InfiniteLoad,resource,options,scope){
     console.log("ici");
     scope.inf = new InfiniteLoad(resource,options);
+    console.log(scope.inf);
     scope.nextPage = function () {
         console.log("s");
         scope.inf.nextPage().then(function (data) {

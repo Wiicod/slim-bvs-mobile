@@ -49,7 +49,7 @@
                              infinite-scroll-distance='0.05'
                              infinite-scroll-parent="true">
                             <div class="categorie liste-categorie" ng-class="{'active':F.c_id==c.id}"
-                                 ng-repeat="c in categories|filter:search_commande|orderBy:'-name':true" ng-click="F.c_id= c.id">
+                                 ng-repeat="c in categories|filter:search_commande" ng-click="F.c_id= c.id">
                                 {{c.name}}
                             </div>
                             <div class="text-center loading" ng-show='inf_cat.busy'><i class="fa fa-spinner fa-pulse fa-2x fa-fw"></i></div>

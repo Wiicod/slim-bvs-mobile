@@ -63,7 +63,7 @@
                     <div
                             ng-if="factures_historique.length>0" class="row categorie"
                             ng-class="{'bg-secondary':f.status=='expired','bg-primary':f.status=='waiting_customer_approval','bg-text':f.status=='canceled'}"
-                            ng-repeat="f in factures_historique|filter:filtre|orderBy:'-created_at':false"
+                            ng-repeat="f in factures_historique|filter:filtre"
 
                             ng-click="detail_facture(f)">
                         <div class="row-fluid">

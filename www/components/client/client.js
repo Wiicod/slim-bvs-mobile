@@ -33,7 +33,6 @@ app
         //api/sellers/id?_includes='customer_types.customers'
         $scope.clients=[];
         Sellers.get($scope.user.seller.id,{_includes:"customer_types.customers"}).then(function(c){
-           console.log("client",c);
             angular.forEach(c.data.customer_types,function(v,k){
                 angular.forEach(v.customers,function(cc,kk){
                     if(cc.town_id==$scope.user.seller.depot.town_id) {
