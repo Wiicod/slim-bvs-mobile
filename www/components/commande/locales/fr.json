@@ -34,6 +34,7 @@
     "ARG_26":"Aucun client associé",
     "ARG_27":"Aucun produit associé",
     "ARG_28":"Commande enregistrée",
-    "ARG_29":"Envoyer au client"
+    "ARG_29":"Envoyer au client",
+    "ARG_30":"Aucun mode de paiement associé"
   }
 }

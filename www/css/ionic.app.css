@@ -52,7 +52,7 @@ $dark:                            #444 !default;
     max-width: 300px;
     padding: 15px;
     margin: 0 auto;
-    border: 3px solid #997f51; }
+    border: 3px solid #debc6e; }
   #login .form-signin .form-control {
     position: relative;
     height: auto;
@@ -86,7 +86,7 @@ $dark:                            #444 !default;
 
 #client .scroll-categorie .categorie.active {
   background: #000000;
-  color: #997f51; }
+  color: #debc6e; }
 
 #commande .mode {
   padding: 9px;
@@ -94,11 +94,11 @@ $dark:                            #444 !default;
   font-size: 15px; }
   #commande .mode.active {
     background: #000000;
-    color: #997f51; }
+    color: #debc6e; }
 
 #commande .liste-categorie.active {
   background: #000000;
-  color: #997f51; }
+  color: #debc6e; }
 
 #historique .scroll-historique {
   max-height: 300px;
@@ -131,7 +131,7 @@ $dark:                            #444 !default;
 .entete {
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   background-color: #000000;
-  color: #997f51;
+  color: #debc6e;
   padding: 5px 10px;
   line-height: 28px;
   font-weight: bold; }
@@ -142,11 +142,11 @@ $dark:                            #444 !default;
   font-size: 15px; }
   #agenda .mode.active {
     background: #000000;
-    color: #997f51; }
+    color: #debc6e; }
 
 #agenda .liste-categorie.active {
   background: #000000;
-  color: #997f51; }
+  color: #debc6e; }
 
 #agenda #ajouter_evenement .modal-dialog {
   width: 400px; }
@@ -221,7 +221,7 @@ $dark:                            #444 !default;
   text-align: center;
   box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 3px 1px -2px rgba(0, 0, 0, 0.2), 0 1px 5px 0 rgba(0, 0, 0, 0.12);
   background-color: #000000;
-  color: #997f51;
+  color: #debc6e;
   border-radius: 2px;
   position: relative;
   padding: 15px 30px;
@@ -252,7 +252,7 @@ legend {
   font-weight: bold;
   margin-bottom: 0px !important;
   background: #000000;
-  color: #997f51;
+  color: #debc6e;
   width: 65%;
   padding: 2px 10px;
   margin-left: 10px;
@@ -403,7 +403,7 @@ legend {
   transform: scale(1); }
 
 .tab-nav > li > a::after {
-  background: #997f51 none repeat scroll 0% 0%;
+  background: #debc6e none repeat scroll 0% 0%;
   color: #fff; }
 
 .tab-pane {
@@ -452,7 +452,7 @@ fieldset {
   background: #000000; }
 
 .bg-secondary {
-  background: #997f51; }
+  background: #debc6e; }
 
 .bg-text {
   background: #e30101;
@@ -460,7 +460,7 @@ fieldset {
 
 .loading {
   margin-top: 30px;
-  color: #997f51; }
+  color: #debc6e; }
 
 .col-xs-1, .col-sm-1, .col-md-1, .col-lg-1, .col-xs-2, .col-sm-2, .col-md-2, .col-lg-2, .col-xs-3, .col-sm-3, .col-md-3, .col-lg-3, .col-xs-4, .col-sm-4, .col-md-4, .col-lg-4, .col-xs-5, .col-sm-5, .col-md-5, .col-lg-5, .col-xs-6, .col-sm-6, .col-md-6, .col-lg-6, .col-xs-7, .col-sm-7, .col-md-7, .col-lg-7, .col-xs-8, .col-sm-8, .col-md-8, .col-lg-8, .col-xs-9, .col-sm-9, .col-md-9, .col-lg-9, .col-xs-10, .col-sm-10, .col-md-10, .col-lg-10, .col-xs-11, .col-sm-11, .col-md-11, .col-lg-11, .col-xs-12, .col-sm-12, .col-md-12, .col-lg-12 {
   padding-left: 5px;
@@ -481,13 +481,13 @@ fieldset {
   text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25); }
 
 .datetimepicker .current, .datetimepicker .current:hover, .datetimepicker .current.disabled, .datetimepicker .current.disabled:hover {
-  background-color: #997f51; }
+  background-color: #debc6e; }
 
 .well blockquote {
   padding: 4px 20px;
   margin: 0;
   font-size: inherit;
-  border-left: 5px solid #997f51; }
+  border-left: 5px solid #debc6e; }
 
 .custom-marker {
   padding: 7px;
@@ -495,57 +495,57 @@ fieldset {
   color: white; }
 
 .toast-error {
-  background: #997f51 !important; }
+  background: #debc6e !important; }
 
 .btn.btn-raised.btn-primary {
   background: #000000;
-  color: #997f51; }
+  color: #debc6e; }
 
 .navbar, .navbar.navbar-default, .btn-group-raised .btn.btn-primary {
   background: #000000 !important;
-  color: #997f51; }
+  color: #debc6e; }
 
 .btn.btn-raised.btn-primary:hover, .btn.btn-raised.btn-primary:focus {
-  background: #997f51 !important;
+  background: #debc6e !important;
   color: #000000; }
 
 .btn.btn-raised.btn-danger {
-  background: #997f51 !important;
+  background: #debc6e !important;
   color: #000000; }
 
 .btn-default {
-  background: #997f51 !important;
+  background: #debc6e !important;
   color: #000000; }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-  color: #997f51 !important;
-  border-color: #997f51 !important; }
+  color: #debc6e !important;
+  border-color: #debc6e !important; }
 
 .nav-tabs > li.active > a, .nav-tabs > li > a:hover {
-  color: #997f51 !important;
-  border-color: #997f51 !important; }
+  color: #debc6e !important;
+  border-color: #debc6e !important; }
 
 .datetimepicker .current {
-  background: #997f51;
+  background: #debc6e;
   color: #000000; }
 
 .text-grey {
   color: #e30101; }
 
 .navbar .dropdown-menu li > a:hover, .navbar.navbar-default .dropdown-menu li > a:hover {
-  background: #997f51;
+  background: #debc6e;
   color: #000000; }
 
 .form-control:focus {
-  border-color: #997f51;
+  border-color: #debc6e;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.07), 0 0 8px rgba(152, 126, 81, 0.6); }
 
 .form-control, .form-group .form-control {
   border: 0;
-  background-image: -webkit-gradient(linear, left top, left bottom, from(#997f51), to(#997f51)), -webkit-gradient(linear, left top, left bottom, from(#D2D2D2), to(#D2D2D2)) !important;
-  background-image: -webkit-linear-gradient(#997f51, #997f51), -webkit-linear-gradient(#D2D2D2, #D2D2D2) !important;
-  background-image: -o-linear-gradient(#997f51, #997f51), -o-linear-gradient(#D2D2D2, #D2D2D2) !important;
-  background-image: linear-gradient(#997f51, #997f51), linear-gradient(#D2D2D2, #D2D2D2) !important; }
+  background-image: -webkit-gradient(linear, left top, left bottom, from(#debc6e), to(#debc6e)), -webkit-gradient(linear, left top, left bottom, from(#D2D2D2), to(#D2D2D2)) !important;
+  background-image: -webkit-linear-gradient(#debc6e, #debc6e), -webkit-linear-gradient(#D2D2D2, #D2D2D2) !important;
+  background-image: -o-linear-gradient(#debc6e, #debc6e), -o-linear-gradient(#D2D2D2, #D2D2D2) !important;
+  background-image: linear-gradient(#debc6e, #debc6e), linear-gradient(#D2D2D2, #D2D2D2) !important; }
 
 .timeline {
   list-style: none;
@@ -558,7 +558,7 @@ fieldset {
   position: absolute;
   content: " ";
   width: 3px;
-  background: #997f51;
+  background: #debc6e;
   left: 50%;
   margin-left: -1.5px; }
 
@@ -615,7 +615,7 @@ fieldset {
   content: " "; }
 
 .timeline > li > .timeline-badge {
-  color: #997f51;
+  color: #debc6e;
   width: 50px;
   height: 50px;
   line-height: 50px;

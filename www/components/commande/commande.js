@@ -201,14 +201,20 @@ app
 
         $scope.check_payer=function(){
             console.log("i");
-            if($scope.if_payer){
-                console.log("payer");
-                $scope.payer();
-                $scope.if_payer=false;
+            if($scope.commande.mode_paiement.title!=undefined){
+                if($scope.if_payer){
+                    console.log("payer");
+                    $scope.payer();
+                    $scope.if_payer=false;
+                }
+                else{
+                    console.log("peut pas payer");
+                }
             }
             else{
-                console.log("peut pas payer");
+                ToastApi.error({msg:$translate.instant("COMMANDE.ARG_30")});
             }
+
         };
 
         $scope.payer=function(){

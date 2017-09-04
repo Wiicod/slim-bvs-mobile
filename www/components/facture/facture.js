@@ -10,6 +10,8 @@ app
         $scope.startDateBeforeRender = startDateBeforeRender;
         $scope.startDateOnSetTime = startDateOnSetTime;
         $scope.user=$rootScope.me;
+        $scope.codes="";
+        $scope.motifs="";
         if($scope.user==undefined){
             $state.go("accueil");
         }
@@ -109,6 +111,22 @@ app
             f.prix_sans_remise= f.prix_remise+ f.amount;
             $scope.facture=f;
             $("#btn_detail_facture").trigger("click");
+        };
+        $scope.e={};
+
+        $scope.extourner_facture=function(e){
+            console.log(e);
+            // verification du code
+            if(e.codes=="admin"){
+                $scope.facture.status=4;
+                $scope.facture.put().then(function(data){
+                    console.log(data);
+                    $scope.erreur=$translate.instant("HISTORIQUE.ARG_35");
+                },function(q){console.log(q);})
+            }
+            else{
+                $scope.erreur=$translate.instant("HISTORIQUE.ARG_34");
+            }
         };
     })
 

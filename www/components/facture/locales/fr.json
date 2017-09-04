@@ -37,7 +37,9 @@
     "ARG_30":"Echeance de la facture",
     "ARG_31":"En attente approbation client",
     "ARG_32":"En attente approbation caisse",
-    "ARG_33":"Extournée"
+    "ARG_33":"Extournée",
+    "ARG_34":"Vous n'êtes pas autorisé à éffectuer cette action",
+    "ARG_35":"Facture extournée"
   },
   "MEMO":{
     "TITRE_1" :"Factures en mémo",

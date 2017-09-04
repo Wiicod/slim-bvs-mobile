@@ -17,7 +17,11 @@
     "gulp-ng-annotate": "^2.0.0",
     "gulp-useref": "^3.1.2",
     "gulp-util": "^2.2.14",
-    "shelljs": "^0.3.0"
+    "shelljs": "^0.3.0",
+    "cordova-uglify": "^0.2.8",
+    "mv": "^2.1.1",
+    "ng-annotate": "^1.2.1",
+    "uglify-js": "^2.8.8"
   },
   "cordovaPlugins": [
     "cordova-plugin-whitelist",

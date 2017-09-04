@@ -63,7 +63,7 @@
                     <div
                             ng-if="factures_historique.length>0" class="row categorie"
                             ng-class="{'bg-secondary':f.status=='expired','bg-primary':f.status=='waiting_customer_approval','bg-text':f.status=='canceled'}"
-                            ng-repeat="f in factures_historique|filter:filtre"
+                            ng-repeat="f in factures_historique|filter:filtrei"
 
                             ng-click="detail_facture(f)">
                         <div class="row-fluid">
@@ -171,8 +171,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-raised" ng-click="imprimer()" ng-if="facture.status=='paided'" translate>HISTORIQUE.ARG_13</button>
-                    <button type="button" class="btn btn-raised btn-info" ng-click="notifier_client()" ng-if="facture.status=='waiting_customer_approval'" translate>HISTORIQUE.ARG_14</button>
+                    <button type="button" class="btn btn-raised " ng-click="imprimer()" ng-if="facture.status=='paided'" translate>HISTORIQUE.ARG_13</button>
+                    <button type="button" class="btn btn-raised btn-primary" ng-click="notifier_client()" ng-if="facture.status=='waiting_customer_approval'" translate>HISTORIQUE.ARG_14</button>
                     <button type="button" class="btn btn-raised btn-danger" data-toggle="modal"  ng-if="facture.status=='paided'" data-target="#extourne" translate>HISTORIQUE.ARG_15</button>
                     <button type="button" class="btn btn-raised btn-primary" data-dismiss="modal" translate>HISTORIQUE.ARG_16</button>
                 </div>
@@ -191,23 +191,25 @@
                         <span translate>HISTORIQUE.ARG_18</span>
                         <br>
                         <span translate>HISTORIQUE.ARG_19</span>
+                        <br>
+                        <span class="value">{{erreur}}</span>
                     </p>
                     <form class="form-horizontal">
                         <div class="form-group text-center">
                             <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-md-6 col-lg-6 col-sm-6">
-                                <input type="text" class="form-control text-center" ng-model="motif" placeholder="Motif de l'extourne" translate>
+                                <input type="text" class="form-control text-center" ng-model="e.motifs" placeholder="Motif de l'extourne" translate>
                             </div>
                         </div>
                         <div class="form-group text-center">
                             <div class="col-lg-offset-3 col-md-offset-3 col-sm-offset-3 col-md-6 col-lg-6 col-sm-6">
-                                <input type="password" class="form-control text-center" ng-model="code" placeholder="Votre mot de passe" translate>
+                                <input type="password" class="form-control text-center" ng-model="e.codes" placeholder="Votre mot de passe" translate>
                             </div>
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-raised" id="close_extourne" data-dismiss="modal" translate>HISTORIQUE.ARG_22</button>
-                    <button type="button" class="btn btn-raised btn-primary" ng-click="extourner_facture(code,motif)" translate>HISTORIQUE.ARG_15</button>
+                    <button type="button" class="btn btn-raised btn-primary" ng-click="extourner_facture(e)" translate>HISTORIQUE.ARG_15</button>
                 </div>
             </div>
         </div>

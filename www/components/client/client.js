@@ -4,7 +4,7 @@
 
 app
 
-    .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Sellers,Customers,NgMap,$state,InfiniteLoad){
+    .controller("UniversCtrl",function($scope,$rootScope,$cordovaGeolocation,Sellers,Customers,NgMap,$state,InfiniteLoad,ToastApi,$translate){
         //console.log(convert_date("2017-07-27 17:34:34"));
         $scope.user=$rootScope.me;
         if($scope.user==undefined){
@@ -40,7 +40,7 @@ app
                     }
                 });
             });
-            console.log("f",$scope.clients);
+            console.log("f",$scope.clients.length);
            // $scope.clients= c.customer_types.compagnies ;
         },function(q){
             console.log(q);
@@ -50,27 +50,52 @@ app
             $scope.choix=true;
             $scope.F.id= c.id;
             c.echue=0;
-            c.ca=0;
-            console.log(c);
             Customers.get(c.id,{_includes:"company,customer_type,town.region.country,bills"}).then(function(data){
                 c=data.data;
+                c.ca=0;
+                console.log("client",c);
+                if(c.latitude==null || c.longitude==null || c.latitude==0 || c.longitude==0){
+                    $scope.plan=false;
+                }
+                else{
+                    $scope.plan=true;
+                }
                 angular.forEach(c.bills,function(v,k){
                     if(convert_date(v.deadline)<new Date() && v.seller_id==$scope.user.seller.id){
                         if(v.status=='expired'){
-                            console.log(v.seller_id,convert_date(v.deadline),"q", v.id,new Date());
                             c.echue++;
                         }
                     }
-                    /*if(v.status=='expired' && convert_date(v.deadline)<new Date()){
-                     c.echue++;
-                     }*/
                     c.ca+= v.amount;
                 });
                 $scope.client=c;
             });
-
         };
 
+        $scope.coordonnees_client=function(c){
+            Customers.get(c.id).then(function(data){
+                data.id=data.data.id;
+                $cordovaGeolocation
+                    .getCurrentPosition({timeout: 10000, enableHighAccuracy: false})
+                    .then(function (position) {
+                        var pos = {
+                            lat: position.coords.latitude,
+                            lng: position.coords.longitude
+                        };
+                        data.latitude=pos.lat;
+                        data.longitude=pos.lng;
+                        data.put().then(function(data){
+                            console.log("ok",data);
+                            ToastApi.success({msg:$translate.instant("CLIENT.ARG_31")});
+                        },function(q){console.log(q)});
+
+                    }, function(err) {
+                        // error
+                    });
+            });
+          //recupération des coordonnées d'un client
+
+        };
 
         $scope.detail_facture=function(f){
             console.log("f",f);

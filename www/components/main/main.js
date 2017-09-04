@@ -4,12 +4,25 @@
 
 app
 
-    .controller("HeaderCtrl",function($scope,Suggestions,ToastApi,Auth,$state,$rootScope,$localStorage){
-        $scope.current=new Date();
+    .controller("HeaderCtrl",function($scope,Suggestions,ToastApi,Auth,$state,$cookies,$localStorage,$interval,Bills){
+
+        var j=new Date();
+        var now=(j.getYear()+1900)+'-'+(j.getMonth()+1);
+        var today=now+"-"+ j.getDate()+" 00:00:00,"+now+"-"+j.getDate()+" 23:59:59";
 
         Auth.getContext().then(function (userData) {
             // la variable est aussi stocke dans $rootscope.me
             $scope.user=userData;
+            // mise à jour du CA chaque 1 minutes
+            $interval(function(){
+                Bills.getList({seller_id:$scope.user.seller.id,"status-bt":"1,3","created_at-bt":today}).then(function(f){
+                    $scope.ca= _.reduce(f,function(memo, num){
+                        return memo+num.amount;
+                    },0);
+                    $cookies.putObject("facture",f);
+                });
+                console.log("CA mis à jours");
+            },60000);
 
         });
         $scope.enregistrerSuggestion=function(){
@@ -22,6 +35,8 @@ app
             });
 
         };
+
+
 
         $scope.logout = function () {
             Auth.logout().then(function () {
@@ -36,7 +51,7 @@ app
             $scope.user=userData;
            // verifie d abord si un seller
             // calcul du chiffre d'affaire de la journée
-            Bills.getList({seller_id:$scope.user.seller.id,"created_at-bt":today}).then(function(f){
+            Bills.getList({seller_id:$scope.user.seller.id,"status-bt":"1,3","created_at-bt":today}).then(function(f){
                 $scope.ca= _.reduce(f,function(memo, num){
                     return memo+num.amount;
                 },0);
