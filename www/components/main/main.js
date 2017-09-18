@@ -49,6 +49,8 @@ app
         $scope.current=new Date();
         Auth.getContext().then(function (userData) {
             $scope.user=userData;
+            //verification si la caisse du depot est ouverte
+            $scope.open=$scope.user.seller.depot.is_open;
            // verifie d abord si un seller
             // calcul du chiffre d'affaire de la journée
             Bills.getList({seller_id:$scope.user.seller.id,"status-bt":"1,3","created_at-bt":today}).then(function(f){

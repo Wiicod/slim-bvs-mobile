@@ -2,7 +2,7 @@
   "SQUELLETE":{
     "TITRE_1" :"Authentification",
     "ARG_1" :"Ouvrir caisse",
-    "ARG_2" :"Chiffre d'affaire",
+    "ARG_2" :"Chiffre d'affaire journalier",
     "ARG_3" :"Facture(s) échue(s)",
     "ARG_4" :"Consulter",
     "ARG_5" :"Facture(s) en mémo",
@@ -16,7 +16,9 @@
     "ARG_13" :"Personnes habilitées à ouvrir la caisse : Area Manager et Chef Boutique",
     "ARG_14" :"Fermer",
     "ARG_15" :"Connexion",
-    "ARG_16" :"Annuler"
+    "ARG_16" :"Annuler",
+    "ARG_17" :"Caisse ouverte",
+    "ARG_18" :"Caisse fermée"
   },
   "HEADER":{
     "TITRE_1" :"A propos",

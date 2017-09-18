@@ -31,18 +31,16 @@ app
                 BillProductSaleTypes.getList({"bill_id-in": bill_ids,_includes: 'product_saletype.product',
                     _fields : 'bill_id,quantity,product_price_was,product_saletype_id'}).then(
                     function(results2){
-                        //console.log("resul",results2);
                         var prix_par_category = _.reduce(results2 , function(result, val, key)
                         {
-                            //console.log(result,val);
+                            console.log("a",result[val.product_saletype.product.category_id]);
                             if(result.hasOwnProperty(val.product_saletype.product.category_id)){
                                 result[val.product_saletype.product.category_id]+=
-                                    val.product_price_was*val.quantity*bill_by_id[val.bill_id].discount;
+                                    val.product_price_was*val.quantity;//*bill_by_id[val.bill_id].discount;
                             }else {
                                 result[val.product_saletype.product.category_id]=
                                     val.product_price_was*val.quantity*bill_by_id[val.bill_id].discount;
                             }
-                            //console.log("i",result[val.product_saletype.product.category_id]);
                             return result;
                         },[]);
                         //console.log(prix_par_category);

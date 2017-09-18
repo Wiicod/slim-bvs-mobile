@@ -71,11 +71,11 @@ service
             var that = this;
             this.params.page = this.page;
             this.resource.getList(this.params).then(function (data) {
-                console.log("a",data);
+               // console.log("a",data);
                 for (var i = 0; i < data.length; i++) {
                     that.items.push(data[i]);
                 }
-                console.log("p",that.items);
+                //console.log("p",that.items);
                 that.finish=that.page>=data.metadata.last_page;
                 that.page++;
                 that.busy = false;

@@ -1,11 +1,16 @@
 <div id="content" class="row-fluid">
     <div class="well well-lg text-center">
         <img src="images/logo_bvs_or.png" alt="" class="image_logo">
-        <div class="">
+        <div class="" ng-if="open==1">
             <button ng-repeat="s in saletypess" ui-sref="commande({mode:s.pivot.id})"  title="{{s.description}}"
                     class="btn btn-lg btn-raised btn-primary text-uppercase">
                 {{s.name}}
             </button>
+        </div>
+        <div ng-if="open!=1">
+            Vous ne pouvez pas effectuer de vente en dehors de la plage horaire ci-dessous :
+            <br>
+            <span class="value">{{sell_time}}</span>
         </div>
     </div>
 </div>
