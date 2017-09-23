@@ -45,7 +45,7 @@ config.config(['$stateProvider','$urlRouterProvider',function($stateProvider,$ur
             }
         })
         .state('commande',{
-            url:"/commande/:mode/:commande_memo_id?",
+            url:"/commande/:depot/:saletype/:commande_memo_id?",
             title:"commande",
             views:{
                 '':{

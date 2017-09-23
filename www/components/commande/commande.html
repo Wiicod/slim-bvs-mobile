@@ -9,7 +9,7 @@
             <div class="col-lg-7 col-sm-7 col-md-7">
                 <div class="row entete" ng-if="commande.client!=undefined">
                     <div class="col-lg-9 col-sm-9 col-md-9">
-                        <span translate>COMMANDE.ARG_2</span> : {{commande.client.name |limitTo: 30}} | {{commande.client.customer_type.name|limitTo: 15}} {{commande.client.customer_type.discount}}%
+                        <span translate>COMMANDE.ARG_2</span> : {{commande.client.name |limitTo: 30}} | {{commande.client.customer_type.name|limitTo: 15}} | {{commande.client.customer_type.discount}}%
                     </div>
                     <div class="col-lg-3 col-md-3 col-sm-3">
                         <button class="btn btn-raised btn-sm btn-default" data-toggle="modal" data-target="#ajouter_client" style="margin: 0;" translate>
@@ -68,13 +68,17 @@
                             <div class="col-lg-3 col-sm-3 col-md-3 text-center" translate>COMMANDE.ARG_8</div>
                         </div>
                         <div class="clearfix"></div>
-                        <div class="produit row" ng-repeat="p in produits|filter:search_commande|orderBy:'-product.name':true|filter:{product:{category_id:F.c_id}}:true" ng-click="ajouter_produit(p)">
+                        <div class="produit row"
+                             ng-repeat="s in stocks|filter:search_commande
+                             |orderBy:'-product_saletype.product.name':true|
+                             filter:{product_saletype: {product:{category_id:F.c_id}}}:true"
+                             ng-click="ajouter_produit(s)">
                             <div class="col-lg-7 col-sm-7 col-md-7">
-                                {{p.product.name}}
+                                {{s.product_saletype.product.name}}
                             </div>
-                            <div class="col-lg-1 col-sm-1 col-md-1">{{p.unit}}</div>
-                            <div class="col-lg-1 col-sm-1 col-md-1">{{p.pivot.quantity}}</div>
-                            <div class="col-lg-3 col-sm-3 col-md-3 text-right">{{p.price}}</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">{{s.product_saletype.unit}}</div>
+                            <div class="col-lg-1 col-sm-1 col-md-1">{{s.quantity}}</div>
+                            <div class="col-lg-3 col-sm-3 col-md-3 text-right">{{s.product_saletype.price}}</div>
                         </div>
                     </div>
                 </fieldset>
@@ -90,8 +94,8 @@
                             </div>
                             <div class="clearfix"></div>
                             <div class="categorie row" ng-repeat="p in commande.produits" ng-click="detail_produit(p)">
-                                <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.command_quantity}} {{p.product.name}}</div>
-                                <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.command_quantity*p.price}}</div>
+                                <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.command_quantity}} {{p.product_saletype.product.name}}</div>
+                                <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.command_quantity*p.product_saletype.price}}</div>
                             </div>
                         </div>
                         <div class="montant">
@@ -137,7 +141,7 @@
                         <div class="row-fluid">
                             <div class="col-lg-3 col-md-3 col-sm-3" translate>COMMANDE.ARG_12</div>
                             <div class="col-lg-8 col-md-8 col-sm-8">
-                                <input type="number" class="form-control" ng-model="produit.command_quantity" min="1" max="{{produit.pivot.quantity}}">
+                                <input type="number" class="form-control" ng-model="produit.command_quantity" min="1" max="{{produit.quantity}}">
                             </div>
                         </div>
                         <div class="row-fluid">
@@ -216,8 +220,8 @@
                                         </div>
                                         <div class="clearfix"></div>
                                         <div class="categorie row" ng-repeat="p in commande.produits">
-                                            <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.command_quantity}} {{p.product.name}}</div>
-                                            <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.command_quantity*p.price}}</div>
+                                            <div class="col-lg-8 col-sm-8 col-md-8 no-padding-lr">{{p.product_saletype.product.name}} ({{p.command_quantity}})</div>
+                                            <div class="col-lg-4 col-sm-4 col-md-4 no-padding-lr text-right">{{p.command_quantity*p.product_saletype.price}}</div>
                                         </div>
                                     </div>
                                 </div>
@@ -227,7 +231,7 @@
                             <fieldset style="margin-bottom: 20%">
                                 <legend translate>COMMANDE.ARG_18</legend>
                                 <div class="text-center">
-                                    <h3 style="margin-top: 5px" class="value">{{commande.client.account}} Fcfa</h3>
+                                    <h3 style="margin-top: 5px" class="value">{{commande.client.amount}} Fcfa</h3>
                                 </div>
                             </fieldset>
                             <fieldset style="margin-bottom: 20%">

@@ -63,18 +63,18 @@
                     <div
                             ng-if="factures_historique.length>0" class="row categorie"
                             ng-class="{'bg-secondary':f.status=='expired','bg-primary':f.status=='waiting_customer_approval','bg-text':f.status=='canceled'}"
-                            ng-repeat="f in factures_historique|filter:filtrei"
+                            ng-repeat="f in factures_historique|filter:filtre|orderBy:'-created_at':false"
 
                             ng-click="detail_facture(f)">
                         <div class="row-fluid">
                             <div class="col-lg-1 col-sm-1 col-md-1">
                                 {{f.id}}
                             </div>
-                            <div class="col-lg-6 col-sm-6 col-md-6">
+                            <div class="col-lg-7 col-sm-7 col-md-7">
                                 {{f.customer.name}}
                             </div>
-                            <div class="col-lg-3 col-sm-3 col-md-3">
-                                {{f.created_at}}
+                            <div class="col-lg-2 col-sm-2 col-md-2">
+                                {{f.created_at|limitTo:10}}
                             </div>
                             <div class="col-lg-2 col-sm-2 col-md-2 text-right">
                                 {{f.amount| roundCoin : 1 : true}} Fcfa
@@ -150,6 +150,13 @@
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
                                         {{facture.amount| roundCoin : 1 : true}} Fcfa
+                                    </div>
+                                </div>
+                                <div class="row-fluid clearfix">
+                                    <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>UNIVERS_CLIENT.ARG_32
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-md-6">
+                                        {{facture.paymentmethod.title}}
                                     </div>
                                 </div>
                                 <div class="row-fluid clearfix">

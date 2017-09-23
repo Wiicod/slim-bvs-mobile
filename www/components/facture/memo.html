@@ -6,20 +6,23 @@
             <div class="clearfix"></div>
             <div class="scroll-historique">
                 <div ng-if="commande_memo.length!=undefined && commande_memo.length>0" class="row categorie" ng-repeat="c in commande_memo |orderBy:'-date':true"
-                     ui-sref="commande({mode:'c.mode_vente',commande_memo_id:c.id})">
+                     >
                     <div class="row-fluid">
-                        <div class="col-lg-6 col-sm-6 col-md-6">
+                        <div class="col-lg-6 col-sm-6 col-md-6" ui-sref="commande({mode:'c.mode_vente',commande_memo_id:c.id})">
                             {{c.id}} {{c.client.name}}
                         </div>
-                        <div class="col-lg-2 col-sm-2 col-md-2 text-right">
+                        <div class="col-lg-2 col-sm-2 col-md-2 text-right" ui-sref="commande({mode:'c.mode_vente',commande_memo_id:c.id})">
                             {{c.mode_vente}}
                         </div>
-                        <div class="col-lg-4 col-sm-4 col-md-4 text-right">
+                        <div class="col-lg-3 col-sm-3 col-md-4 text-right" ui-sref="commande({mode:'c.mode_vente',commande_memo_id:c.id})">
                             {{c.total*(1-c.remise)|roundCoin : 1 : true}} Fcfa
+                        </div>
+                        <div class="col-lg-1 col-sm-1 col-md-1 text-right">
+                            <div class="btn btn-primary btn-raised no-space" ng-click="supprimer_memo(c)"><i class="fa fa-times"></i></div>
                         </div>
                     </div>
                 </div>
-                <div class="text-center" ng-if="commande_memo.length==undefined">
+                <div class="text-center" ng-if="commande_memo.length==undefined ||commande_memo.length==0">
                     <h3 translate>MEMO.ARG_1</h3>
                     <h5 translate>MEMO.ARG_2</h5>
                 </div>

@@ -3,26 +3,58 @@
  */
 
 app
-    .controller("CommandeCtrl",function($scope,Auth,$stateParams,Sellers,$rootScope,$state,Bills,BillProductSaleTypes,DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,PaymentMethods){
+    .controller("CommandeCtrl",function($scope,Auth,$stateParams,Sellers,$rootScope,$state,Bills,BillProductSaleTypes,
+                                        DepotSaletypes,InfiniteLoad,Customers,Categories,ToastApi,$translate,$cookies,
+                                        PaymentMethods,Saletypes,Stocks){
 
         $scope.user=$rootScope.me;
         if($scope.user==undefined){
             $state.go("accueil");
         }
         $scope.if_payer=true;
-        var mode=$stateParams.mode;
-        $scope.commande={total:0,produits:[],mode_vente:mode};
+        $scope.mode_vente=$stateParams.mode;
+        var depot_id=$stateParams.depot;
+        var saletype=$stateParams.saletype;
+        $scope.commande={total:0,produits:[]};
         $scope.remise=0;
         $scope.F={c_id:undefined};
         if($stateParams.commande_memo_id!=undefined){
             var commande_memo_id=parseInt($stateParams.commande_memo_id);
         }
 
-        DepotSaletypes.get(mode,{"_includes":"depot.product_saletypes.product"}).then(function(p){
-            $scope.produits= p.data.depot.product_saletypes;
+        if(commande_memo_id>0){
+            //recuperation de la facture en mémo
+            var commande_memo=$cookies.getObject("commande_memo");
+            $scope.commande= _.find(commande_memo,function(c){
+                if(c.id==commande_memo_id){
+                    return c;
+                }
+            });
+            depot_id=$scope.commande.depot_id;
+            saletype=$scope.commande.saletype;
+            $scope.mode_vente=$scope.commande.mode_vente;
+            $scope.remise= $scope.commande.remise;
+        }
+
+        var options = {
+            depot_id : depot_id,
+            'product_saletype-fk' : 'saletype_id='+saletype,
+            _includes: 'product_saletype.product',
+            should_paginate:false
+        };
+        Stocks.getList(options).then(function(stocks){
+            console.log(stocks);
+            $scope.stocks = stocks;
         },function(q){
             console.log(q);
         });
+
+        /*DepotSaletypes.get(mode,{"_includes":"depot.product_saletypes.product"}).then(function(p){
+            console.log("e",p);
+            //$scope.produits= p.data.depot.product_saletypes;
+        },function(q){
+            console.log(q);
+        });*/
         Categories.getList().then(function(p){
            // console.log(p);
         },function(q){
@@ -44,7 +76,7 @@ app
             console.log(q);
         });*/
         //https://www.youtube.com/watch?v=Auc61qSC3SY&index=1&list=PLIiQ4B5FSupiQYLX6kERPV0OhMC7tTbBE
-        $scope.clients=[];;
+        $scope.clients=[];
         Sellers.get($scope.user.seller.id,{_includes:"customer_types.customers",town_id:$scope.user.seller.depot.town_id}).then(function(c){
             angular.forEach(c.data.customer_types,function(v,k){
                 angular.forEach(v.customers,function(cc,kk){
@@ -56,7 +88,7 @@ app
 
                 });
             });
-            console.log("f",$scope.clients);
+            //console.log("f",$scope.clients);
         },function(q){
             console.log(q);
         });
@@ -67,16 +99,6 @@ app
             console.log(q);
         });
 
-        if(commande_memo_id>0){
-            //recuperation de la facture en mémo
-            var commande_memo=$cookies.getObject("commande_memo");
-            $scope.commande= _.find(commande_memo,function(c){
-                if(c.id==commande_memo_id){
-                    return c;
-                }
-            });
-            $scope.remise= $scope.commande.remise;
-        }
 
         $scope.$watch('produit.command_quantity',function(q){
             $scope.commande.total=prix_total($scope.commande.produits);
@@ -118,6 +140,9 @@ app
                 else{
                     $scope.commande.id=commande_memo[commande_memo.length-1].id+1;
                 }
+                $scope.commande.mode_vente=$scope.mode_vente;
+                $scope.commande.depot_id=depot_id;
+                $scope.commande.saletype=$stateParams.saletype;
                 commande_memo.push($scope.commande);
                 $cookies.putObject("commande_memo",commande_memo);
             }
@@ -133,7 +158,8 @@ app
         };
 
         $scope.ajouter_produit=function(p){
-            if(p.pivot.quantity>0){
+            console.log("a",p);
+            if(p.quantity>0){
                 var t= _.find($scope.commande.produits,function(produit){
                     if(p.id==produit.id){
                         return p;
@@ -146,7 +172,7 @@ app
                     $scope.commande.produits.push(p);
                 }
                 else{
-                    if(t.pivot.quantity>t.command_quantity)
+                    if(t.quantity>t.command_quantity)
                     {
                         t.command_quantity+=1;
                     }
@@ -165,6 +191,7 @@ app
 
         $scope.choix_client=function(c){
             $scope.commande.client=c;
+            console.log(c);
             $scope.remise= c.customer_type.discount/100;
             $scope.commande.remise= c.customer_type.discount/100;
             $("#close_ajouter_client").trigger("click");
@@ -245,7 +272,7 @@ app
                 var i=0;
                 var temp=$scope.commande.produits;
                 angular.forEach($scope.commande.produits,function(v,k){
-                    BillProductSaleTypes.post({quantity:v.command_quantity,bill_id:f.data.id,product_saletype_id:v.pivot.product_saletype_id}).then(function(b){
+                    BillProductSaleTypes.post({quantity:v.command_quantity,bill_id:f.data.id,product_saletype_id:v.product_saletype_id}).then(function(b){
                         i++;
                         console.log(i,temp);
                         if(i==temp.length){
@@ -265,13 +292,14 @@ app
                     },function(q){console.log(q)});
 
                 });
-                $scope.commande={total:0,produits:[],mode_vente:mode};
+                $scope.commande={total:0,produits:[]};
                 $scope.mode_paiement="";
                 $scope.remise=0;
                 $scope.if_payer=true;
                 // rafraichissement des produits
-                DepotSaletypes.get(mode,{"_includes":"depot.product_saletypes.product"}).then(function(p){
-                    $scope.produits= p.data.depot.product_saletypes;
+                Stocks.getList(options).then(function(stocks){
+                    console.log(stocks);
+                    $scope.stocks = stocks;
                 },function(q){
                     console.log(q);
                 });
@@ -292,7 +320,7 @@ app
 function prix_total(produits){
     var total=0;
     _.each(produits,function(p){
-        total+= p.command_quantity* p.price;
+        total+= p.command_quantity* p.product_saletype.price;
     });
     return total;
 }

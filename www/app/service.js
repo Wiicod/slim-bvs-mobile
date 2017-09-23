@@ -37,8 +37,8 @@ service
                 .addResponseInterceptor(function (data, operation, what, url, response, deferred) {
 
                     if (operation === 'getList') {
-                        if (response.data.per_page == undefined) {
-                            return response;
+                        if (angular.isUndefined(response.data.per_page)) {
+                            return response.data;
                         }
                         var newResponse = response.data.data;
                         newResponse.metadata = _.omit(response.data, 'data');

@@ -1,5 +1,6 @@
 {
   "CONTENT":{
+    "ARG_1" :"Vous ne pouvez pas effectuer de vente en dehors de la plage horaire ci-dessous :",
     "PROMO" :"PROMO"
   }
 }

@@ -4,7 +4,7 @@
 
 app
 
-    .controller("HistoriqueCtrl",function($scope,Bills,ToastApi,$translate,InfiniteLoad,Auth,$rootScope,$state){
+    .controller("HistoriqueCtrl",function($scope,Bills,ToastApi,$translate,InfiniteLoad,Auth,$rootScope,$state,Customers){
         $scope.endDateBeforeRender = endDateBeforeRender;
         $scope.endDateOnSetTime = endDateOnSetTime;
         $scope.startDateBeforeRender = startDateBeforeRender;
@@ -25,7 +25,7 @@ app
             "per_page":20,
             "_sort":"created_at",
             "_sortDir":"desc",
-            _includes: 'product_saletypes.product,customer.customer_type,seller'
+            _includes: 'paymentmethod,product_saletypes.product,customer.customer_type,seller'
         };
 
         charger_factures(InfiniteLoad,Bills,options,$scope);
@@ -115,12 +115,21 @@ app
         $scope.e={};
 
         $scope.extourner_facture=function(e){
-            console.log(e);
+            console.log($scope.facture);
             // verification du code
             if(e.codes=="admin"){
                 $scope.facture.status=4;
                 $scope.facture.put().then(function(data){
                     console.log(data);
+                    // modification solde client
+                    Customers.get($scope.facture.customer.id).then(function(c){
+                        console.log(c);
+                        c.id= c.data.id;
+                        c.amount= c.data.amount-$scope.facture.amount;
+                        c.put().then(function(a){
+                            console.log(a);
+                        },function(q){console.log(q);})
+                    });
                     $scope.erreur=$translate.instant("HISTORIQUE.ARG_35");
                 },function(q){console.log(q);})
             }
@@ -134,6 +143,13 @@ app
         // facture en mémo
         $scope.commande_memo=$cookies.getObject("commande_memo");
         $scope.current=new Date();
+
+        $scope.supprimer_memo=function(cm){
+            var index= _.indexOf($scope.commande_memo,cm);
+            $scope.commande_memo.splice(index,1);
+            // mise à jour des cookies
+            $cookies.putObject("commande_memo",$scope.commande_memo);
+        }
     });
 
 function format_date(e,d){

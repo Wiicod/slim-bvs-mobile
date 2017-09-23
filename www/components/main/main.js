@@ -21,8 +21,9 @@ app
                     },0);
                     $cookies.putObject("facture",f);
                 });
-                console.log("CA mis à jours");
+               // console.log("CA mis à jours");
             },60000);
+
 
         });
         $scope.enregistrerSuggestion=function(){
@@ -45,8 +46,9 @@ app
         }
     })
 
-    .controller("AppCtrl",function($scope,$cookies,Diaries,Bills,Auth,$rootScope){
+    .controller("AppCtrl",function($scope,$cookies,Diaries,Bills,Auth,$rootScope,$interval){
         $scope.current=new Date();
+        $scope.open=10;
         Auth.getContext().then(function (userData) {
             $scope.user=userData;
             //verification si la caisse du depot est ouverte
@@ -64,7 +66,7 @@ app
 
             Bills.getList({seller_id:$scope.user.seller.id,status:5,_includes:"customer","deadline-lt":new Date()}).then(function(b){
                 $scope.factures_ech=b;
-                console.log("ech",b);
+               // console.log("ech",b);
             });
         });
 
@@ -74,6 +76,9 @@ app
         $scope.statutAuth=true;
         $scope.code="0000";
         $scope.commande_memo=$cookies.getObject("commande_memo");
+        $interval(function(){
+            $scope.commande_memo=$cookies.getObject("commande_memo");
+        },5000);
 
         //authentification pour ouverture de la caisse
         $scope.authentification=function(code){

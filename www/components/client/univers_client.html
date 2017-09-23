@@ -108,7 +108,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane active" id="plan">
+                                <div role="tabpanel" class="tab-pane" id="plan">
                                     <div class="row-fluid" ng-if="plan!=false">
                                         <div id="map" class="col-lg-12 col-sm-12 col-md-12">
                                             <ng-map zoom="20"
@@ -142,7 +142,7 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div role="tabpanel" class="tab-pane" id="historique">
+                                <div role="tabpanel" class="tab-pane active" id="historique">
                                     <div class="row-fluid hide">
                                         <div class="col-lg-1 col-sm-1 col-md-1">
                                             <h5 translate>UNIVERS_CLIENT.ARG_24</h5>
@@ -166,6 +166,22 @@
                                     </div>
                                     <div class="clearfix"></div>
                                     <div class="col-lg-9 col-sm-8 col-md-9 scroll-historique">
+                                        <div class="row categorie" style="background: #000;color: #debc6e;">
+                                            <div class="row-fluid">
+                                                <div class="col-lg-1 col-sm-1 col-md-1">
+                                                    #
+                                                </div>
+                                                <div class="col-lg-5 col-sm-5 col-md-5">
+                                                    Statut
+                                                </div>
+                                                <div class="col-lg-2 col-sm-2 col-md-2">
+                                                    Date
+                                                </div>
+                                                <div class="col-lg-4 col-sm-4 col-md-4 text-right">
+                                                    Prix
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div class="row categorie" ng-repeat="f in client.bills | orderBy : '-created_at':true"
                                              ng-class="{'bg-secondary':f.status=='expired','bg-primary':f.status=='waiting_customer_approval','bg-text':f.status=='canceled'}"
                                              ng-click="detail_facture(f)" >
@@ -173,12 +189,11 @@
                                                 <div class="col-lg-1 col-sm-1 col-md-1">
                                                     {{f.id}}
                                                 </div>
-                                                <div class="col-lg-2 col-sm-2 col-md-2 value">
-                                                    <span translate ng-if="f.status=='paided'">HISTORIQUE.ARG_28</span>
-                                                    <span translate ng-if="f.status=='not_paided'">HISTORIQUE.ARG_29</span>
-                                                </div>
                                                 <div class="col-lg-5 col-sm-5 col-md-5">
-                                                    {{f.created_at}}
+                                                    <span>{{f.status|billStatus}}</span>
+                                                </div>
+                                                <div class="col-lg-2 col-sm-2 col-md-2">
+                                                    {{f.created_at|limitTo:10}}
                                                 </div>
                                                 <div class="col-lg-4 col-sm-4 col-md-4 text-right">
                                                     {{f.amount|roundCoin : 1 : true}} Fcfa
@@ -196,7 +211,7 @@
                                         <fieldset style="margin-bottom: 10%">
                                             <legend translate>UNIVERS_CLIENT.ARG_26</legend>
                                             <div class="text-center">
-                                                <h3 class="value">{{client.account|roundCoin : 1 : true}} Fcfa</h3>
+                                                <h3 class="value">{{client.amount|roundCoin : 1 : true}} Fcfa</h3>
                                             </div>
                                         </fieldset>
                                         <fieldset>
@@ -286,6 +301,13 @@
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
                                         {{facture.amount| roundCoin : 1 : true}} Fcfa
+                                    </div>
+                                </div>
+                                <div class="row-fluid clearfix">
+                                    <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>UNIVERS_CLIENT.ARG_32
+                                    </div>
+                                    <div class="col-lg-6 col-sm-6 col-md-6">
+                                        {{facture.paymentmethod.title}}
                                     </div>
                                 </div>
                                 <div class="row-fluid clearfix">

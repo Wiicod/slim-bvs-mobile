@@ -50,7 +50,7 @@ app
             $scope.choix=true;
             $scope.F.id= c.id;
             c.echue=0;
-            Customers.get(c.id,{_includes:"company,customer_type,town.region.country,bills"}).then(function(data){
+            Customers.get(c.id,{_includes:"company,customer_type,town.region.country,bills.paymentmethod"}).then(function(data){
                 c=data.data;
                 c.ca=0;
                 console.log("client",c);
