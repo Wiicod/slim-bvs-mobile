@@ -15,7 +15,7 @@ app
             $scope.user=userData;
             // mise à jour du CA chaque 1 minutes
             $interval(function(){
-                Bills.getList({seller_id:$scope.user.seller.id,"status-bt":"1,3","created_at-bt":today}).then(function(f){
+                Bills.getList({seller_id:$scope.user.seller.id,"status-bt":"2,3","created_at-bt":today}).then(function(f){
                     $scope.ca= _.reduce(f,function(memo, num){
                         return memo+num.amount;
                     },0);

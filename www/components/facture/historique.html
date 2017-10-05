@@ -163,14 +163,14 @@
                                     <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_11
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
-                                        {{facture.deadline}}
+                                        {{facture.deadline|limitTo:10}}
                                     </div>
                                 </div>
                                 <div class="row-fluid clearfix">
                                     <div class="col-lg-6 col-sm-6 col-md-6 bold" translate>HISTORIQUE.ARG_12
                                     </div>
                                     <div class="col-lg-6 col-sm-6 col-md-6">
-                                        {{facture.created_at}}
+                                        {{facture.created_at|limitTo:10}}
                                     </div>
                                 </div>
                             </fieldset>

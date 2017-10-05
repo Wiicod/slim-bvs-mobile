@@ -125,7 +125,7 @@ app
                     Customers.get($scope.facture.customer.id).then(function(c){
                         console.log(c);
                         c.id= c.data.id;
-                        c.amount= c.data.amount-$scope.facture.amount;
+                        //c.amount= c.data.amount-$scope.facture.amount;
                         c.put().then(function(a){
                             console.log(a);
                         },function(q){console.log(q);})

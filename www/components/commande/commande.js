@@ -11,6 +11,7 @@ app
         if($scope.user==undefined){
             $state.go("accueil");
         }
+        $scope.if_mode=false;
         $scope.if_payer=true;
         $scope.mode_vente=$stateParams.mode;
         var depot_id=$stateParams.depot;
@@ -207,6 +208,7 @@ app
         $scope.choix_mode_paiement=function(mode){
             $scope.commande.mode_paiement=mode;
             $scope.mode_paiement=mode.title;
+            $scope.if_mode=true;
         };
 
         $scope.facturer=function(){

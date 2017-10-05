@@ -20,7 +20,7 @@
                             {{f.customer.name}}
                         </div>
                         <div class="col-lg-4 col-sm-4 col-md-4 text-right value">
-                            <span translate>ALERTES.ARG_1</span> : {{f.deadline}}
+                            <span translate>ALERTES.ARG_1</span> : {{f.deadline |limitTo:10}}
                         </div>
                         <div class="col-lg-3 col-sm-3 col-md-3 text-right">
                             {{f.amount}} <span translate>ALERTES.ARG_2</span>
