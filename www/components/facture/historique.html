@@ -62,7 +62,7 @@
                 >
                     <div
                             ng-if="factures_historique.length>0" class="row categorie"
-                            ng-class="{'bg-secondary':f.status=='expired','bg-primary':f.status=='waiting_customer_approval','bg-text':f.status=='canceled'}"
+                            ng-class="{'bg-secondary':f.status=='expired','bg-primary':f.status=='waiting_customer_approval','bg-text':f.status=='canceled','bg-grey':f.status=='waiting_cashier_approval'}"
                             ng-repeat="f in factures_historique|filter:filtre|orderBy:'-created_at':false"
 
                             ng-click="detail_facture(f)">
@@ -85,6 +85,20 @@
                     <div class="text-center" ng-if="factures_historique.length==0">
                         <h3 translate>HISTORIQUE.ARG_25</h3>
                         <h5 translate>HISTORIQUE.ARG_26</h5>
+                    </div>
+                    <div style="margin-top:10px;" class="text-center" ng-if="factures_historique.length>0">
+                        <div class="col-lg-3 col-sm-3 col-md-3 bg-secondary" translate>
+                            HISTORIQUE.ARG_29
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-md-3 bg-primary" translate>
+                            HISTORIQUE.ARG_31
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-md-3 bg-grey" translate>
+                            HISTORIQUE.ARG_32
+                        </div>
+                        <div class="col-lg-3 col-sm-3 col-md-3 bg-text" translate>
+                            HISTORIQUE.ARG_33
+                        </div>
                     </div>
                 </div>
 

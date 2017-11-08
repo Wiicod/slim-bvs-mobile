@@ -114,6 +114,9 @@ $dark:                            #444 !default;
     border-bottom: 2px dotted #000000;
     padding-bottom: 5px; }
 
+#historique .bg-grey {
+  background: #eeeeee; }
+
 #memo .scroll-historique {
   max-height: 345px;
   overflow-y: auto; }

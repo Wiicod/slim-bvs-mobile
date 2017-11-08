@@ -13,16 +13,7 @@ app
         Auth.getContext().then(function (userData) {
             // la variable est aussi stocke dans $rootscope.me
             $scope.user=userData;
-            // mise à jour du CA chaque 1 minutes
-            $interval(function(){
-                Bills.getList({seller_id:$scope.user.seller.id,"status-bt":"2,3","created_at-bt":today}).then(function(f){
-                    $scope.ca= _.reduce(f,function(memo, num){
-                        return memo+num.amount;
-                    },0);
-                    $cookies.putObject("facture",f);
-                });
-               // console.log("CA mis à jours");
-            },60000);
+
 
 
         });
@@ -53,14 +44,26 @@ app
             $scope.user=userData;
             //verification si la caisse du depot est ouverte
             $scope.open=$scope.user.seller.depot.is_open;
+            console.log($scope.open,"open");
            // verifie d abord si un seller
             // calcul du chiffre d'affaire de la journée
-            Bills.getList({seller_id:$scope.user.seller.id,"status-bt":"1,3","created_at-bt":today}).then(function(f){
+            Bills.getList({seller_id:$scope.user.seller.id,"status-bt":"2,3","created_at-bt":today}).then(function(f){
                 $scope.ca= _.reduce(f,function(memo, num){
                     return memo+num.amount;
                 },0);
                 $cookies.putObject("facture",f);
             });
+
+            // mise à jour du CA chaque 15 secondes
+            $interval(function(){
+                Bills.getList({seller_id:$scope.user.seller.id,"status-bt":"2,3","created_at-bt":today}).then(function(f){
+                    $scope.ca= _.reduce(f,function(memo, num){
+                        return memo+num.amount;
+                    },0);
+                    $cookies.putObject("facture",f);
+                });
+                // console.log("CA mis à jours");
+            },15000);
 
             // recuperation des agendas du mois
 

@@ -90,9 +90,10 @@ app
         }
 
         $scope.actualiser_facture=function(){
+            var options={};
             console.log($scope.dateRangeStart);
             if($scope.dateRangeStart!=undefined && $scope.dateRangeEnd!=undefined){
-                var options  ={
+                options  ={
                     "created_at-bt": format_date("d",$scope.dateRangeStart)+","+format_date("f",$scope.dateRangeEnd),
                     "seller_id":$scope.user.seller.id,
                     _includes: 'product_saletypes.product,customer.customer_type,seller'
@@ -101,7 +102,17 @@ app
                 $scope.nextPage();
             }
             else{
-                ToastApi.error({msg:$translate.instant("HISTORIQUE.ARG_24")});
+                options  ={
+                    "created_at-bt": deb+","+fin,
+                    "seller_id":$scope.user.seller.id,
+                    "per_page":20,
+                    "_sort":"created_at",
+                    "_sortDir":"desc",
+                    _includes: 'paymentmethod,product_saletypes.product,customer.customer_type,seller'
+                };
+
+                charger_factures(InfiniteLoad,Bills,options,$scope);
+                //ToastApi.error({msg:$translate.instant("HISTORIQUE.ARG_24")});
             }
         };
 
@@ -120,7 +131,6 @@ app
             if(e.codes=="admin"){
                 $scope.facture.status=4;
                 $scope.facture.put().then(function(data){
-                    console.log(data);
                     // modification solde client
                     Customers.get($scope.facture.customer.id).then(function(c){
                         console.log(c);
