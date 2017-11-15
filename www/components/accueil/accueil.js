@@ -7,6 +7,7 @@ app
     .controller("AccueilCtrl",function($scope,Depots,Auth){
         $scope.current=new Date();
         $scope.open=10;
+
         Auth.getContext().then(function (userData) {
             console.log(userData);
             $scope.user=userData;

@@ -3,6 +3,8 @@
         <h2 class="form-signin-heading text-center">
             <img src="images/logo_cnc.png" alt="" style="width: 100%">
         </h2>
+        <button class="btn btn-lg btn-primary btn-block btn-raised" ng-click="connect('192.168.1.110',9100)">Connection</button>
+        <button class="btn btn-lg btn-default btn-block btn-raised" ng-click="printEscCommand()">Print EscCommand</button>
         <label for="inputEmail" class="sr-only">Email ou Login</label>
         <input type="text" id="inputEmail" ng-model="user.email" class="form-control text-center" placeholder="Email ou Login" required autofocus>
         <label for="inputPassword" class="sr-only">Mot de passe</label>
